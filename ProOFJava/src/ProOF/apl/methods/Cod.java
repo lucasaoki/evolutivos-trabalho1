@@ -42,16 +42,11 @@ public class Cod extends Codification {
         ind = new double[size];
         _size = size;
     }
-
-    
-    public double getInd(int n) {
-        return ind[n];
-    }
     
     @Override
     public void Copy(Problem prob, Codification source) throws Exception {        
         for( int i=0; i < _size; i++ ){
-            ind[i] = ((Cod)source).getInd(i);
+            ind[i] = ((Cod)source).getIndVal(i);
         }
     }
 
