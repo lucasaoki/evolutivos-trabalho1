@@ -1,0 +1,21 @@
+    Inicialização:
+        Os individuos tem suas variaveis escolhidas randomicamente.
+
+    Crossing over:
+	Selecionamos 40% dos melhores individuos e 10% aleatorios.
+    
+        3 crossing:
+            50% do pai, 50% da mae.
+            Intercalando.
+            Ponderada do melhor pai(tem chance maior de capturar o gene do melhor adaptado).
+        
+        Para cada pai e mae cria-se 1 filho.
+        Os 25% restantes gera-se aleatoriamente.
+        
+    Mutação:
+        3 mutação:
+            Cada elemento do vetor tem chance de alterar seu valor
+            mudar de posicao de algum elemento do vetor
+            inverter o vetor
+
+
