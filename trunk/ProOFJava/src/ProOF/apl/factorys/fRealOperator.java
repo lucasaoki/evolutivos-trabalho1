@@ -5,6 +5,9 @@
 package ProOF.apl.factorys;
 
 
+import ProOF.apl.methods.Cross;
+import ProOF.apl.methods.Init;
+import ProOF.apl.methods.Mutat;
 import ProOF.com.language.Factory;
 import ProOF.gen.codification.Real.iRealCrossAvg;
 import ProOF.gen.codification.Real.iRealCrossBLX;
@@ -49,6 +52,11 @@ public class fRealOperator extends Factory<Operator>{
             case  9: return new iRealMovInvert();
                 
             case 10: return new iRealInitRandom();
+                
+                //
+            case 11: return new Cross();
+            case 12: return new Mutat();
+            case 13: return new Init();
         }
         return null;
     }

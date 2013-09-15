@@ -7,6 +7,7 @@ package ProOF.apl.methods;
 import ProOF.gen.operator.oInitializer;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.codification.Codification;
+import java.util.Random;
 
 /**
  *
@@ -14,14 +15,17 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  */
 public class Init extends oInitializer {
 
+    Random rand;
+
     @Override
     public void initialize(Problem mem, Codification ind) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //INIT PORCOO!!!
+        rand = new Random(System.currentTimeMillis());
+        ((Cod) ind).setIndVal(Math.random(), 0);
     }
 
     @Override
     public String name() {
         return "Init";
     }
-    
 }
