@@ -37,6 +37,10 @@ public class Cod extends Codification {
         return ind[p];
     }
     
+    public int getSize(){
+        return _size;
+    }
+    
     
     public Cod(int size) {
         ind = new double[size];
