@@ -15,13 +15,11 @@ import java.util.Random;
  */
 public class Init extends oInitializer {
 
-    Random rand;
-
     @Override
     public void initialize(Problem mem, Codification ind) throws Exception {
-        //INIT PORCOO!!!
-        rand = new Random(System.currentTimeMillis());
-        ((Cod) ind).setIndVal(Math.random(), 0);
+        for (int i = 0; i < ((Cod) ind).getSize(); i++) {
+            ((Cod) ind).setIndVal(Math.random(), i);
+        }
     }
 
     @Override

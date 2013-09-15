@@ -16,12 +16,24 @@ public class Mutat extends oMutation {
 
     @Override
     public void mutation(Problem mem, Codification ind) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Cada elemento do vetor tem chance de alterar seu valor
+        int idx = 0 + (int) (Math.random() * (10 + 0));
+
+        switch (idx) {
+            case 0: {
+                for (int i = 0; i < 10; i++) {
+                    int rand = 0 + (int) (Math.random() * (1 + 1));
+
+                }
+            }
+        }
+
+        //  mudar de posicao de algum elemento do vetor
+        //inverter o vetor
     }
 
     @Override
     public String name() {
         return "Mut";
     }
-    
 }
