@@ -16,20 +16,48 @@ public class Mutat extends oMutation {
 
     @Override
     public void mutation(Problem mem, Codification ind) throws Exception {
-        //Cada elemento do vetor tem chance de alterar seu valor
-        int idx = 0 + (int) (Math.random() * (10 + 0));
+
+        int idx = 0 + (int) (Math.random() * (2 + 1));
 
         switch (idx) {
+            //Cada elemento do vetor tem chance de alterar seu valor
             case 0: {
                 for (int i = 0; i < 10; i++) {
-                    int rand = 0 + (int) (Math.random() * (1 + 1));
-
+                    double rand = Math.random();
+                    if (rand < 0.3) {
+                        ((Cod) ind).setIndVal(((Prob) mem).ob.getMin() + (int) (Math.random() * (((Prob) mem).ob.getMax() + 1)), i);
+                    }
                 }
+            }
+            //  mudar de posicao de algum elemento do vetor
+            case 1: {
+                int p1 = 0 + (int) (Math.random() * (((Cod) ind).getSize() + 0));
+                int p2 = 0 + (int) (Math.random() * (((Cod) ind).getSize() + 0));
+
+                double tmp = ((Cod) ind).getIndVal(p1);
+                ((Cod) ind).setIndVal(((Cod) ind).getIndVal(p2), p1);
+                ((Cod) ind).setIndVal(tmp, p2);
+            }
+            //inverter o vetor
+            case 2: {
+                int p1 = 0;
+                int p2 = ((Cod) ind).getSize() - 1;
+
+                double tmp;
+
+                for (int i = 0; i < ((Cod) ind).getSize() / 2; i++) {
+                    tmp = ((Cod) ind).getIndVal(p1);
+                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(p2), p1);
+                    ((Cod) ind).setIndVal(tmp, p2);
+                    p1++;
+                    p2--;
+                }
+
             }
         }
 
-        //  mudar de posicao de algum elemento do vetor
-        //inverter o vetor
+
+
     }
 
     @Override
