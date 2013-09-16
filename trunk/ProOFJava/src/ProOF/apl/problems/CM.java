@@ -13,46 +13,42 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class ACK extends SingleObjective<Problem, Codification, SingleObjective> {
-
-    private double max;
-    private double min;
-
-    public ACK() throws Exception {
-        this.max = 30;
-        this.min = -30;
+public class CM extends SingleObjective<Problem, Codification, SingleObjective>{
+    private double _max[];
+    private double _min[];
+    
+    public CM()throws Exception{
+        //this._max = 1;
+        //this._min = -1;
     }
-
+ 
+    public double getMax(){
+        return _max[0];
+    }
+    
+    public double getMin(){
+        return _min[0];
+    }
+    
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new ACK();
+        return new CM();
     }
-
+    
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] tmp = ((Cod) codif).getInd();
         double sum1 = 0;
         double sum2 = 0;
         double eval = 0;
-        int x = 0;
+        int i = 0;
         int size = ((Cod) codif).getSize();
-        
-        for(x = 0 ; x < size ; x++){
-            sum1 += Math.sqrt(tmp[x]);
-            sum2 += Math.cos(2*Math.PI*tmp[x]);
+
+        for(i = 0 ; i < size ; i++){
+            sum1 += Math.cos(5*Math.PI*tmp[i]);
+            sum2 += Math.sqrt(tmp[i]);
         }
-        eval = -20.0*Math.exp(-0.02*Math.sqrt(sum1/size)) - Math.exp(sum2/size) + 20 + Math.E;
+        eval = 0.1*sum1 - sum2;
         ((Cod) codif).setFitness(eval);
-    }
-
-    public double getMin() {
-        return min;
-    }
-
-    public double getMax() {
-        return max;
-    }
+    } 
 }
-
-
-
