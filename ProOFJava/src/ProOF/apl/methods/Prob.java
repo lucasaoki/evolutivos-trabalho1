@@ -4,13 +4,12 @@
  */
 package ProOF.apl.methods;
 
+import ProOF.apl.problems.ACK;
 import ProOF.com.LinkerNodes;
-import ProOF.com.LinkerResults;
 import ProOF.gen.best.BestSol;
 import ProOF.opt.abst.problem.meta.Best;
 import ProOF.opt.abst.problem.meta.Objective;
 import ProOF.opt.abst.problem.meta.Problem;
-import ProOF.opt.abst.problem.meta.Solution;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
@@ -19,12 +18,12 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  */
 public class Prob extends Problem {
 
-    public Obj  ob;
+    public ACK  ob;
     private BestSol b;
     
     public Prob() throws Exception {
         this.b = new BestSol();
-        ob = new Obj();
+        ob = new ACK();
     }
     
     @Override

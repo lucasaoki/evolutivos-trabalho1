@@ -7,6 +7,8 @@ import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.metaheuristic.MetaHeuristic;
+import sun.misc.Compare;
+import sun.misc.Sort;
 
 public class GA extends MetaHeuristic {
 
@@ -40,61 +42,75 @@ public class GA extends MetaHeuristic {
         Cod[] pop = new Cod[pop_size];
         int p1;
         int stop = 0;
-        
+
         init = new Init();
         cross = new Cross();
         mut = new Mutat();
-        
-        
+
+
         System.out.println(pop_size);
         System.out.println(ind_size);
         System.out.println("Iniciando ----------");
-        
+
         for (int i = 0; i < pop_size; i++) {
             pop[i] = new Cod(ind_size);
             init.initialize(prob, pop[i]);
         }
 
-        while (stop < 100000) {
+        while (stop < 10) {
             stop++;
-            
-            for (int i = 0; i < pop_size; i++) {
-                System.out.println(pop[i].getIndVal(0));
-            }
-           
+
+
             for (int i = 0; i < pop_size; i++) {
                 prob.ob.Evaluate(prob, pop[i]);
             }
+            System.out.println("INTERATION " + stop);
+            System.out.println("PREQUICK");
+            for (int i = 0; i < pop_size; i++) {
+                System.out.println("[" + i + "] " + pop[i].getFitness());
+            }
 
-            p1 = tour(pop);
+            pop = tour(pop);
             
-            System.out.println("Best: " + pop[p1].getIndVal(0) + ", " + stop);
-            
-            //Mutation PORCO!!!
-            p1 = 0 + (int)(Math.random() * (10 + 0));
-            pop[p1].setIndVal(Math.random(), 0);
-            
+            System.out.println("POSTQUICK");
+            for (int i = 0; i < pop_size; i++) {
+                System.out.println("[" + i + "] " + pop[i].getFitness());
+            }
+
+            System.out.println("Best: " + pop[0].getFitness());
+            System.out.println("Last: " + pop[pop_size - 1].getFitness());
+
+            for (int i = ((int) 0.4 * pop_size); i < (int) (0.5 * pop_size); i++) {
+                init.initialize(prob, pop[i]);
+            }
+            for (int i = 0; i < (int) (0.5 * pop_size); i += 2) {
+                pop[((int) (0.5 * pop_size)) + i / 2] = (Cod) cross.crossover(prob, pop[i], pop[i + 1]);
+            }
+
+            for (int i = (int) (0.75 * pop_size); i < pop_size; i++) {
+                init.initialize(prob, pop[i]);
+            }
+
         }
 
     }
 
-    private int tour(Cod[] pop) {
-        int p1 = 0 + (int)(Math.random() * (10 + 0));
-        int p2 = 0 + (int)(Math.random() * (10 + 0));
-
-            //Crossover PORCO!!!
-            if (pop[p1].getFitness() > pop[p2].getFitness()) {
-                pop[p2].setIndVal((pop[p1].getIndVal(0)+pop[p2].getIndVal(0))/2, 0);
-                return p1;
-            } else {
-                pop[p1].setIndVal((pop[p1].getIndVal(0)+pop[p2].getIndVal(0))/2, 0);
-                return p2;
-            }
-
+    private Cod[] tour(Cod[] pop) {
+        Comp cp = new Comp();
+        Sort.quicksort(pop, 0, pop_size - 1, cp);
+        return pop;
     }
 
     @Override
     public String name() {
         return "GA";
+    }
+}
+
+class Comp implements Compare {
+
+    @Override
+    public int doCompare(Object o, Object o1) {
+        return (int) (((Cod) o).getFitness() - ((Cod) o1).getFitness());
     }
 }
