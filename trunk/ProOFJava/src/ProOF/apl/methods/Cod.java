@@ -17,6 +17,11 @@ public class Cod extends Codification {
     private int _size;
     private double fitness;
 
+    public Cod(int size) {
+        ind = new double[size];
+        _size = size;
+    }
+    
     public double getFitness() {
         return fitness;
     }
@@ -39,12 +44,6 @@ public class Cod extends Codification {
     
     public int getSize(){
         return _size;
-    }
-    
-    
-    public Cod(int size) {
-        ind = new double[size];
-        _size = size;
     }
     
     @Override
