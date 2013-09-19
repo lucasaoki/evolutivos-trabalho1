@@ -35,6 +35,10 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public ACK() throws Exception {
         initialize();
     }

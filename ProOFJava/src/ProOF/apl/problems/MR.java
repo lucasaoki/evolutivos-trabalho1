@@ -38,6 +38,10 @@ public class MR extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public MR() throws Exception {
     }
 

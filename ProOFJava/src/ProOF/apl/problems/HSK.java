@@ -34,6 +34,10 @@ public class HSK extends SingleObjective<Problem, Codification, SingleObjective>
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public HSK() throws Exception {
     }
 

@@ -35,6 +35,10 @@ public class SIN extends SingleObjective<Problem, Codification, SingleObjective>
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public SIN() throws Exception {
     }
 
