@@ -25,7 +25,7 @@ public class Mutat extends oMutation {
                 for (int i = 0; i < 10; i++) {
                     double rand = Math.random();
                     if (rand < 0.99) {
-                        ((Cod) ind).setIndVal(((Prob) mem).ob.getMin() + (Math.random() * ((((Prob) mem).ob.getMax()) - ((Prob) mem).ob.getMin())), i);
+                        ((Cod) ind).setIndVal(((Prob) mem).ob.getMin(i) + (Math.random() * ((((Prob) mem).ob.getMax(i)) - ((Prob) mem).ob.getMin(i))), i);
                     }
                 }
             }

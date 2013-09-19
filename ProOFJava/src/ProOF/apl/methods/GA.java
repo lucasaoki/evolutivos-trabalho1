@@ -25,7 +25,6 @@ public class GA extends MetaHeuristic {
     @Override
     public void parameters(LinkerParameters link) throws Exception {
         pop_size = link.Int("Tamanho da populacao", 1000);
-        ind_size = link.Int("Tammanho do individuo", 10);
     }
 
     @Override
@@ -40,6 +39,8 @@ public class GA extends MetaHeuristic {
 
     @Override
     public void execute() throws Exception {
+        ind_size = prob.ob.getSize();
+        
         Cod[] pop = new Cod[pop_size];
         Cod best = new Cod(ind_size);
         int p1;

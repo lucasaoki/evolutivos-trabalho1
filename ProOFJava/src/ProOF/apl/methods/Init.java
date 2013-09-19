@@ -18,7 +18,7 @@ public class Init extends oInitializer {
     @Override
     public void initialize(Problem mem, Codification ind) throws Exception {
         for (int i = 0; i < ((Cod) ind).getSize(); i++) {
-            ((Cod) ind).setIndVal(Math.random(), i);
+            ((Cod) ind).setIndVal(((Prob) mem).ob.getMin(i) + (Math.random() * ((((Prob) mem).ob.getMax(i)) - ((Prob) mem).ob.getMin(i))), i);
         }
     }
 
