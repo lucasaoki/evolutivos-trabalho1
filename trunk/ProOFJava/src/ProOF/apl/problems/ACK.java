@@ -60,7 +60,7 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
         int i = 0;
 
         for (i = 0; i < size; i++) {
-            sum1 += Math.sqrt(Math.abs(x[i]));
+            sum1 += Math.pow(x[i],2);
             sum2 += Math.cos(2.0 * Math.PI * x[i]);
         }
         eval = -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / size)) - Math.exp(sum2 / size) + 20.0 + Math.E;
