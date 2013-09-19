@@ -20,6 +20,8 @@ public class GRP extends SingleObjective<Problem, Codification, SingleObjective>
     private int size = 99;
 
     public void initialize() {
+        _max = new double[size];
+        _min = new double[size];
         _max[0] = 100;
         _max[1] = 25.6;
         _max[2] = 5;

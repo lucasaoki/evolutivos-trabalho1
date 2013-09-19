@@ -20,6 +20,8 @@ public class SIN extends SingleObjective<Problem, Codification, SingleObjective>
     private int size = 20;
 
     public void initialize() {
+        _max = new double[size];
+        _min = new double[size];
         int i;
         for (i = 0; i < size; i++) {
             _max[i] = 0;
