@@ -15,18 +15,27 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class HV extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max = 10;
-    private double _min = -10;
+    private double[] _max;
+    private double[] _min;
+    private int size = 3;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 10;
+            _min[i] = -10;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public HV() throws Exception {
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override
@@ -40,13 +49,12 @@ public class HV extends SingleObjective<Problem, Codification, SingleObjective> 
         double eval;
         double teta;
         if (x[0] < 0) {
-            teta = 1 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]) + 1 / 2, -1);
+            teta = 1.0 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]) + 1.0 / 2, -1);
         } else {
-            teta = 1 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]), -1);
+            teta = 1.0 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]), -1);
         }
 
-
-        eval = 100 * (Math.sqrt(x[1] - 10 * teta) + (Math.pow(Math.sqrt(x[0]) + Math.sqrt(x[1]) - 1, 1 / 2))) + Math.sqrt(x[2]);
+        eval = 100 * (Math.sqrt(x[1] - 10 * teta) + (Math.pow(Math.sqrt(x[0]) + Math.sqrt(x[1]) - 1, 1.0 / 2))) + Math.sqrt(x[2]);
         ((Cod) codif).setFitness(eval);
     }
 }

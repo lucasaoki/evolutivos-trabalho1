@@ -15,21 +15,30 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class MR extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max = 10;
-    private double _min = -10;
     private double[] ti = {1.0, 2.0, 1.0, 2.0, 0.1};
     private double[] vi = {1.0, 1.0, 2.0, 2.0, 0.0};
     private double[] yi = {0.126, 0.219, 0.076, 0.126, 0.186};
+    private double[] _max;
+    private double[] _min;
+    private int size = 3;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 10;
+            _min[i] = -10;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public MR() throws Exception {
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override

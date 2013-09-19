@@ -17,18 +17,25 @@ public class CM extends SingleObjective<Problem, Codification, SingleObjective> 
 
     private double[] _max;
     private double[] _min;
+    private int size = 4;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 1;
+            _min[i] = -1;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
-    }
-
-    public double getMax() {
-        return _max[0];
-    }
-
-    public double getMin() {
-        return _min[0];
     }
 
     @Override
@@ -39,7 +46,6 @@ public class CM extends SingleObjective<Problem, Codification, SingleObjective> 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
         double sum1 = 0;
         double sum2 = 0;
         double eval = 0;
@@ -49,7 +55,7 @@ public class CM extends SingleObjective<Problem, Codification, SingleObjective> 
             sum1 += Math.cos(5 * Math.PI * x[i]);
             sum2 += Math.sqrt(x[i]);
         }
-        eval = 0.1 * sum1 - sum2;
+        eval = -1*(0.1 * sum1 - sum2);
         ((Cod) codif).setFitness(eval);
     }
 }

@@ -15,8 +15,9 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class H6 extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max;
-    private double _min;
+    private double[] _max;
+    private double[] _min;
+    private int size = 6;
     private double[] ci = {1, 1.2, 3, 3.2};
     private double[][] aij = {
         {10, 3, 17, 3.5, 1.7, 8},
@@ -31,17 +32,23 @@ public class H6 extends SingleObjective<Problem, Codification, SingleObjective> 
         {0.4047, 0.8828, 0.8732, 0.5743, 0.1091, 0.0381}
     };
 
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 1;
+            _min[i] = 0;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
+
     public H6() throws Exception {
-        //this._max = 1;
-        //this._min = 0;
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override
@@ -51,7 +58,7 @@ public class H6 extends SingleObjective<Problem, Codification, SingleObjective> 
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
-        double[] tmp = ((Cod) codif).getInd();
+        double[] x = ((Cod) codif).getInd();
         double eval = 0;
         double sum = 0;
         int i;
@@ -59,7 +66,7 @@ public class H6 extends SingleObjective<Problem, Codification, SingleObjective> 
 
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 6; j++) {
-                sum += aij[i][j] * Math.sqrt(tmp[j] - pij[i][j]);
+                sum += aij[i][j] * Math.sqrt(x[j] - pij[i][j]);
             }
             eval += -ci[i] * Math.exp(-sum);
         }
