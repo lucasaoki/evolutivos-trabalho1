@@ -35,9 +35,11 @@ public class EXP extends SingleObjective<Problem, Codification, SingleObjective>
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public EXP() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
     }
 
     @Override

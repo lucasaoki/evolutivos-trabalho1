@@ -35,6 +35,10 @@ public class CM extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public CM() throws Exception {
     }
 
@@ -55,7 +59,7 @@ public class CM extends SingleObjective<Problem, Codification, SingleObjective> 
             sum1 += Math.cos(5 * Math.PI * x[i]);
             sum2 += Math.sqrt(x[i]);
         }
-        eval = -1*(0.1 * sum1 - sum2);
+        eval = -1 * (0.1 * sum1 - sum2);
         ((Cod) codif).setFitness(eval);
     }
 }

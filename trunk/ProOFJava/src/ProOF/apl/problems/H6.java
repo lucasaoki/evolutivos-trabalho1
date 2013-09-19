@@ -48,6 +48,10 @@ public class H6 extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public H6() throws Exception {
     }
 

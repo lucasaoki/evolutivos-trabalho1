@@ -36,6 +36,10 @@ public class GP extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public GP() throws Exception {
     }
 

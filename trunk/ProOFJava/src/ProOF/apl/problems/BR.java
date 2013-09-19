@@ -35,9 +35,11 @@ public class BR extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public BR() throws Exception {
-        //this._max = 30;
-        //this._min = -30;
     }
 
     @Override

@@ -35,6 +35,10 @@ public class WP extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public WP() throws Exception {
     }
 

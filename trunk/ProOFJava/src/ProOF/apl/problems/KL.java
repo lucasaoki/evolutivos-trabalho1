@@ -37,6 +37,10 @@ public class KL extends SingleObjective<Problem, Codification, SingleObjective> 
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public KL() throws Exception {
     }
 

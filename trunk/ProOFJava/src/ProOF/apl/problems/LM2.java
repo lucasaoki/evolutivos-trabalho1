@@ -35,6 +35,10 @@ public class LM2 extends SingleObjective<Problem, Codification, SingleObjective>
         return _max[n];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public LM2() throws Exception {
     }
 
