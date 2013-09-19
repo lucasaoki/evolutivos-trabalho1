@@ -20,6 +20,7 @@ public class Cod extends Codification {
     public Cod(int size) {
         ind = new double[size];
         _size = size;
+        fitness = 999999;
     }
     
     public double getFitness() {
@@ -51,6 +52,7 @@ public class Cod extends Codification {
         for( int i=0; i < _size; i++ ){
             ind[i] = ((Cod)source).getIndVal(i);
         }
+        this.setFitness(((Cod)source).getFitness());
     }
 
     @Override

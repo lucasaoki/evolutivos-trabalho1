@@ -25,7 +25,7 @@ public class Cross extends oCrossover {
         size = ((Cod) ind1).getSize();
         newInd = new Cod(size);
         /* Escolhe um metodo aleatorio */
-        switch ((new Random(0).nextInt(3))) {
+        switch ((new Random(System.currentTimeMillis()).nextInt(3))) {
             case 0:
                 method1((Cod) ind1, (Cod) ind2);
                 break;
