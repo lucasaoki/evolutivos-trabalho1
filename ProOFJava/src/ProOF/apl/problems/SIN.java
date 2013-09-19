@@ -13,43 +13,42 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class CM extends SingleObjective<Problem, Codification, SingleObjective> {
+public class SIN extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max;
-    private double[] _min;
+    private double _max=180;
+    private double _min = 0;
 
-    public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
+    public SIN() throws Exception {
     }
 
     public double getMax() {
-        return _max[0];
+        return _max;
     }
 
     public double getMin() {
-        return _min[0];
+        return _min;
     }
 
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new CM();
+        return new SIN();
     }
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
-        double sum1 = 0;
-        double sum2 = 0;
+        double size = ((Cod) codif).getSize();
         double eval = 0;
-        int i = 0;
-
+        double A = 2.5;
+        double B = 5;
+        double z = 30;
+        double prod1 = 0;
+        double prod2 = 0;
+        int i;
         for (i = 0; i < size; i++) {
-            sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
+            prod1 *= Math.sin(x[i] - z);
+            prod2 *= Math.sin(B * (x[i] - z));
         }
-        eval = 0.1 * sum1 - sum2;
-        ((Cod) codif).setFitness(eval);
+        eval = -(A * prod1 + prod2);
     }
 }

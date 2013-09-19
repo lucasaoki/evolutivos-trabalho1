@@ -13,43 +13,39 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class CM extends SingleObjective<Problem, Codification, SingleObjective> {
+public class LM2 extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max;
-    private double[] _min;
+    private double _max = 5;
+    private double _min = -5;
 
-    public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
+    public LM2() throws Exception {
     }
 
     public double getMax() {
-        return _max[0];
+        return _max;
     }
 
     public double getMin() {
-        return _min[0];
+        return _min;
     }
 
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new CM();
+        return new LM2();
     }
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
         int size = ((Cod) codif).getSize();
-        double sum1 = 0;
-        double sum2 = 0;
+        double sum = 0;
         double eval = 0;
-        int i = 0;
-
-        for (i = 0; i < size; i++) {
-            sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
+        int i;
+        for (i = 0; i < size - 1; i++) {
+            sum += (Math.sqrt(x[i] - 1) * (1 + Math.sqrt(Math.sin(3 * Math.PI * x[i + 1]))));
         }
-        eval = 0.1 * sum1 - sum2;
+        eval = 0.1 * (Math.sqrt(Math.sin(3 * Math.PI * x[0])) + sum + Math.sqrt(x[size - 1] - 1) * (Math.sqrt(Math.sin(2 * Math.PI * x[size - 1]))));
+
         ((Cod) codif).setFitness(eval);
     }
 }

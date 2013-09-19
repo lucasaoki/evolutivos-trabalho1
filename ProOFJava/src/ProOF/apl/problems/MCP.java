@@ -13,43 +13,32 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class CM extends SingleObjective<Problem, Codification, SingleObjective> {
+public class MCP extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max;
-    private double[] _min;
+    private double _max = 1 ;
+    private double _min = -1;
 
-    public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
+    public MCP() throws Exception {
     }
 
     public double getMax() {
-        return _max[0];
+        return _max;
     }
 
     public double getMin() {
-        return _min[0];
+        return _min;
     }
 
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new CM();
+        return new MCP();
     }
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
-        double sum1 = 0;
-        double sum2 = 0;
         double eval = 0;
-        int i = 0;
-
-        for (i = 0; i < size; i++) {
-            sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
-        }
-        eval = 0.1 * sum1 - sum2;
+        eval = Math.pow(Math.exp(x[0] - x[1]), 4) + 100 * Math.pow(x[1] - x[2], 6) + Math.pow(x[2] - x[3], 4) + Math.pow(x[0], 8);
         ((Cod) codif).setFitness(eval);
     }
 }

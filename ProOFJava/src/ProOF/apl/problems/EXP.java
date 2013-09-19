@@ -37,14 +37,14 @@ public class EXP extends SingleObjective<Problem, Codification, SingleObjective>
     
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
-        double[] tmp = ((Cod) codif).getInd();
+        double[] x = ((Cod) codif).getInd();
         double sum = 0;
         double eval;
         int i;
         int size = ((Cod) codif).getSize();
 
         for(i = 0 ; i < size ; i++){
-            sum += Math.sqrt(tmp[i]);
+            sum += Math.sqrt(x[i]);
         }
         eval = Math.exp(-0.5*sum);
         ((Cod) codif).setFitness(eval);
