@@ -13,43 +13,40 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class CM extends SingleObjective<Problem, Codification, SingleObjective> {
+public class HV extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max;
-    private double[] _min;
+    private double _max = 10;
+    private double _min = -10;
 
-    public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
+    public HV() throws Exception {
     }
 
     public double getMax() {
-        return _max[0];
+        return _max;
     }
 
     public double getMin() {
-        return _min[0];
+        return _min;
     }
 
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new CM();
+        return new HV();
     }
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
-        double sum1 = 0;
-        double sum2 = 0;
-        double eval = 0;
-        int i = 0;
-
-        for (i = 0; i < size; i++) {
-            sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
+        double eval;
+        double teta;
+        if (x[0] < 0) {
+            teta = 1 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]) + 1 / 2, -1);
+        } else {
+            teta = 1 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]), -1);
         }
-        eval = 0.1 * sum1 - sum2;
+
+
+        eval = 100 * (Math.sqrt(x[1] - 10 * teta) + (Math.pow(Math.sqrt(x[0]) + Math.sqrt(x[1]) - 1, 1 / 2))) + Math.sqrt(x[2]);
         ((Cod) codif).setFitness(eval);
     }
 }

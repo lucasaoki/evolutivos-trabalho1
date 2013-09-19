@@ -13,43 +13,33 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class CM extends SingleObjective<Problem, Codification, SingleObjective> {
+public class WP extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max;
-    private double[] _min;
+    private double _max = 10;
+    private double _min = -10;
 
-    public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
+    public WP() throws Exception {
     }
 
     public double getMax() {
-        return _max[0];
+        return _max;
     }
 
     public double getMin() {
-        return _min[0];
+        return _min;
     }
 
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new CM();
+        return new WP();
     }
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
-        double sum1 = 0;
-        double sum2 = 0;
         double eval = 0;
-        int i = 0;
-
-        for (i = 0; i < size; i++) {
-            sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
-        }
-        eval = 0.1 * sum1 - sum2;
+        eval = 100 * Math.sqrt(x[1] - Math.sqrt(x[0])) + Math.sqrt(1 - x[0]) + 90 * Math.sqrt(x[3] - Math.sqrt(x[2])) + Math.sqrt(1 - x[2]);
+        eval += 10.1 * Math.sqrt(x[1] - 1) + Math.sqrt(x[3] - 1) + 19.8 * (x[1] - 1) * (x[3] - 1);
         ((Cod) codif).setFitness(eval);
     }
 }

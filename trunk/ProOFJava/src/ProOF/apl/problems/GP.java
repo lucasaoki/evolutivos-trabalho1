@@ -1,4 +1,5 @@
 /*
+
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -13,39 +14,37 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class GP extends SingleObjective<Problem, Codification, SingleObjective>{
+public class GP extends SingleObjective<Problem, Codification, SingleObjective> {
+
     private double _max;
     private double _min;
-    
-    public GP()throws Exception{
+
+    public GP() throws Exception {
         //this._max = 2;
         //this._min = -2;
     }
- 
-    public double getMax(){
+
+    public double getMax() {
         return _max;
     }
-    
-    public double getMin(){
+
+    public double getMin() {
         return _min;
     }
-    
+
     @Override
     public SingleObjective New(Problem prob) throws Exception {
         return new GP();
     }
-    
+
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
-        double[] tmp = ((Cod) codif).getInd();
-        double x1 = tmp[0];
-        double x2 = tmp[1];
+        double[] x = ((Cod) codif).getInd();
         double eval = 0;
-        int size = ((Cod) codif).getSize();
-        
-        eval = 1 + Math.sqrt(x1+x2+1)*(19-14*x1+3*Math.sqrt(x1)-14*x2+6*x1*x2+3*Math.sqrt(x2));
-        eval *= 30 + Math.sqrt(2*x1-3*x2)*(18-32*x1+12*Math.sqrt(x1)+48*x2-36*x1*x2+27*Math.sqrt(x2));
-     
+
+        eval = 1 + Math.sqrt(x[0] + x[1] + 1) * (19 - 14 * x[0] + 3 * Math.sqrt(x[0]) - 14 * x[1] + 6 * x[0] * x[1] + 3 * Math.sqrt(x[1]));
+        eval *= 30 + Math.sqrt(2 * x[0] - 3 * x[1]) * (18 - 32 * x[0] + 12 * Math.sqrt(x[0]) + 48 * x[1] - 36 * x[0] * x[1] + 27 * Math.sqrt(x[1]));
+
         ((Cod) codif).setFitness(eval);
-    } 
+    }
 }

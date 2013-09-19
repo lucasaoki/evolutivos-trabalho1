@@ -15,12 +15,24 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class ACK extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double max;
-    private double min;
+    private double[] _max;
+    private double[] _min;
+
+    public void initialize() {
+        _max[0] = 30;
+        _min[0] = -30;
+    }
+
+    public double[] getMin() {
+        return _min;
+    }
+
+    public double[] getMax() {
+        return _max;
+    }
 
     public ACK() throws Exception {
-        this.max = 30;
-        this.min = -30;
+        initialize();
     }
 
     @Override
@@ -30,29 +42,18 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
-        double[] tmp = ((Cod) codif).getInd();
+        double[] x = ((Cod) codif).getInd();
+        int size = ((Cod) codif).getSize();
         double sum1 = 0;
         double sum2 = 0;
         double eval = 0;
-        int x = 0;
-        int size = ((Cod) codif).getSize();
-        
-        for(x = 0 ; x < size ; x++){
-            sum1 += Math.sqrt(tmp[x]);
-            sum2 += Math.cos(2*Math.PI*tmp[x]);
+        int i = 0;
+
+        for (i = 0; i < size; i++) {
+            sum1 += Math.sqrt(x[i]);
+            sum2 += Math.cos(2 * Math.PI * x[i]);
         }
-        eval = -20.0*Math.exp(-0.02*Math.sqrt(sum1/size)) - Math.exp(sum2/size) + 20 + Math.E;
+        eval = -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / size)) - Math.exp(sum2 / size) + 20 + Math.E;
         ((Cod) codif).setFitness(eval);
     }
-
-    public double getMin() {
-        return min;
-    }
-
-    public double getMax() {
-        return max;
-    }
 }
-
-
-

@@ -13,43 +13,37 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class CM extends SingleObjective<Problem, Codification, SingleObjective> {
+public class KL extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max;
-    private double[] _min;
+    private double _max = 0.42;
+    private double _min = 0;
+    private double[] ai = {0.1957, 0.1947, 0.1735, 0.16, 0.0844, 0.0627, 0.0456, 0.0342, 0.0323, 0.0235, 0.0246};
+    private double[] bi = {0.25, 0.50, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0};
 
-    public CM() throws Exception {
-        //this._max = 1;
-        //this._min = -1;
+    public KL() throws Exception {
     }
 
     public double getMax() {
-        return _max[0];
+        return _max;
     }
 
     public double getMin() {
-        return _min[0];
+        return _min;
     }
 
     @Override
     public SingleObjective New(Problem prob) throws Exception {
-        return new CM();
+        return new KL();
     }
 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
-        double sum1 = 0;
-        double sum2 = 0;
         double eval = 0;
-        int i = 0;
-
-        for (i = 0; i < size; i++) {
-            sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
+        int i;
+        for (i = 0; i < 11; i++) {
+            eval += Math.sqrt(ai[i] - x[0] * (1 + x[1] * bi[i]) / (1 + x[2] * bi[i] + x[3] * Math.sqrt(bi[i])));
         }
-        eval = 0.1 * sum1 - sum2;
         ((Cod) codif).setFitness(eval);
     }
 }
