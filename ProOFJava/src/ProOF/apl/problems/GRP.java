@@ -15,23 +15,30 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class GRP extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double[] _max = {100, 25.6, 5};
-    private double[] _min = {0.1, 0, 0};
+    private double[] _max;
+    private double[] _min;
+    private int size = 99;
 
-    public GRP() throws Exception {
-        //this._max = 100;
-        //this._min = 0.1;
-        //this._max = 0;
-        //this._min = 25.6;
+    public void initialize() {
+        _max[0] = 100;
+        _max[1] = 25.6;
+        _max[2] = 5;
+        _min[0] = 0.1;
+        _min[1] = 0;
+        _min[2] = 0;
     }
 
-//    public double getMax() {
-//        return _max;
-//    }
-//
-//    public double getMin() {
-//        return _min;
-//    }
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
+
+    public GRP() throws Exception {
+    }
+
     @Override
     public SingleObjective New(Problem prob) throws Exception {
         return new GRP();
@@ -43,7 +50,7 @@ public class GRP extends SingleObjective<Problem, Codification, SingleObjective>
         double eval = 0;
         double ui;
         int i;
-        for (i = 0; i < 99; i++) {
+        for (i = 0; i < size; i++) {
             ui = 25 + Math.pow(-50 * Math.log(0.01 * (i + 1)), 2 / 3);
             eval += Math.sqrt(Math.exp(-Math.pow(ui - x[1], x[2]) / x[0]) - 0.01 * (i + 1));
         }

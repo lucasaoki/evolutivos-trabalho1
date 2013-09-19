@@ -13,40 +13,49 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  *
  * @author Seiji
  */
-public class EXP extends SingleObjective<Problem, Codification, SingleObjective>{
-    private double _max;
-    private double _min;
-    
-    public EXP()throws Exception{
+public class EXP extends SingleObjective<Problem, Codification, SingleObjective> {
+
+    private double[] _max;
+    private double[] _min;
+    private int size = 10;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 1;
+            _min[i] = -1;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
+
+    public EXP() throws Exception {
         //this._max = 1;
         //this._min = -1;
     }
- 
-    public double getMax(){
-        return _max;
-    }
-    
-    public double getMin(){
-        return _min;
-    }
-    
+
     @Override
     public SingleObjective New(Problem prob) throws Exception {
         return new EXP();
     }
-    
+
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
         double sum = 0;
         double eval;
         int i;
-        int size = ((Cod) codif).getSize();
 
-        for(i = 0 ; i < size ; i++){
+        for (i = 0; i < size; i++) {
             sum += Math.sqrt(x[i]);
         }
-        eval = Math.exp(-0.5*sum);
+        eval = -Math.exp(-0.5 * sum);
         ((Cod) codif).setFitness(eval);
-    } 
+    }
 }

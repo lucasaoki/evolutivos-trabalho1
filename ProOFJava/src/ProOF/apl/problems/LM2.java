@@ -15,18 +15,27 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class LM2 extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max = 5;
-    private double _min = -5;
+    private double[] _max;
+    private double[] _min;
+    private int size = 10;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 5;
+            _min[i] = -5;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public LM2() throws Exception {
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override
@@ -37,7 +46,6 @@ public class LM2 extends SingleObjective<Problem, Codification, SingleObjective>
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
         double sum = 0;
         double eval = 0;
         int i;

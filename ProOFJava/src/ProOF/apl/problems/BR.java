@@ -15,20 +15,29 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class BR extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max;
-    private double _min;
+    private double[] _max;
+    private double[] _min;
+    private int size = 10;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 30;
+            _min[i] = -30;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public BR() throws Exception {
         //this._max = 30;
         //this._min = -30;
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override
@@ -39,7 +48,6 @@ public class BR extends SingleObjective<Problem, Codification, SingleObjective> 
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
         double eval = 0;
         int i;
         for (i = 0; i < size - 1; i++) {

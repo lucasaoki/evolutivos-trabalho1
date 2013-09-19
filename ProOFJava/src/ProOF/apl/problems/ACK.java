@@ -17,18 +17,22 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
 
     private double[] _max;
     private double[] _min;
+    private int size = 10;
 
     public void initialize() {
-        _max[0] = 30;
-        _min[0] = -30;
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 30;
+            _min[i] = -30;
+        }
     }
 
-    public double[] getMin() {
-        return _min;
+    public double getMin(int n) {
+        return _min[n];
     }
 
-    public double[] getMax() {
-        return _max;
+    public double getMax(int n) {
+        return _max[n];
     }
 
     public ACK() throws Exception {
@@ -43,7 +47,6 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        int size = ((Cod) codif).getSize();
         double sum1 = 0;
         double sum2 = 0;
         double eval = 0;

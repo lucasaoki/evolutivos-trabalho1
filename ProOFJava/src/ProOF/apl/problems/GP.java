@@ -16,20 +16,27 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class GP extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max;
-    private double _min;
+    private double[] _max;
+    private double[] _min;
+    private int size = 2;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 2;
+            _min[i] = -2;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public GP() throws Exception {
-        //this._max = 2;
-        //this._min = -2;
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override

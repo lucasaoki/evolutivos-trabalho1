@@ -15,18 +15,27 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class SIN extends SingleObjective<Problem, Codification, SingleObjective> {
 
-    private double _max=180;
-    private double _min = 0;
+    private double[] _max;
+    private double[] _min;
+    private int size = 20;
+
+    public void initialize() {
+        int i;
+        for (i = 0; i < size; i++) {
+            _max[i] = 0;
+            _min[i] = 180;
+        }
+    }
+
+    public double getMin(int n) {
+        return _min[n];
+    }
+
+    public double getMax(int n) {
+        return _max[n];
+    }
 
     public SIN() throws Exception {
-    }
-
-    public double getMax() {
-        return _max;
-    }
-
-    public double getMin() {
-        return _min;
     }
 
     @Override
@@ -37,7 +46,6 @@ public class SIN extends SingleObjective<Problem, Codification, SingleObjective>
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
-        double size = ((Cod) codif).getSize();
         double eval = 0;
         double A = 2.5;
         double B = 5;
