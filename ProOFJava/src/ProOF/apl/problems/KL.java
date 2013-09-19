@@ -22,6 +22,8 @@ public class KL extends SingleObjective<Problem, Codification, SingleObjective> 
     private double[] bi = {0.25, 0.50, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0};
 
     public void initialize() {
+        _max = new double[size];
+        _min = new double[size];
         int i;
         for (i = 0; i < size; i++) {
             _max[i] = 1;

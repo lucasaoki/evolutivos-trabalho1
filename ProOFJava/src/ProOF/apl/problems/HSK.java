@@ -20,6 +20,8 @@ public class HSK extends SingleObjective<Problem, Codification, SingleObjective>
     private int size = 2;
 
     public void initialize() {
+        _max = new double[size];
+        _min = new double[size];
         _max[0] = 5;
         _max[1] = 6;
         _min[0] = 0;

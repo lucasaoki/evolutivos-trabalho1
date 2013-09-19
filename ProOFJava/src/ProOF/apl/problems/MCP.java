@@ -20,6 +20,8 @@ public class MCP extends SingleObjective<Problem, Codification, SingleObjective>
     private int size = 4;
 
     public void initialize() {
+        _max = new double[size];
+        _min = new double[size];
         int i;
         for (i = 0; i < size; i++) {
             _max[i] = 1;
