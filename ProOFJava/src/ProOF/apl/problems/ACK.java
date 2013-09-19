@@ -21,6 +21,9 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
 
     public void initialize() {
         int i;
+        _max = new double[size];
+        _min = new double[size];
+        
         for (i = 0; i < size; i++) {
             _max[i] = 30;
             _min[i] = -30;
@@ -58,9 +61,9 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
 
         for (i = 0; i < size; i++) {
             sum1 += Math.sqrt(x[i]);
-            sum2 += Math.cos(2 * Math.PI * x[i]);
+            sum2 += Math.cos(2.0 * Math.PI * x[i]);
         }
-        eval = -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / size)) - Math.exp(sum2 / size) + 20 + Math.E;
+        eval = -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / size)) - Math.exp(sum2 / size) + 20.0 + Math.E;
         ((Cod) codif).setFitness(eval);
     }
 }
