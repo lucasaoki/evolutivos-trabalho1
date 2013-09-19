@@ -7,6 +7,7 @@ import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.metaheuristic.MetaHeuristic;
+import java.util.Random;
 import sun.misc.Compare;
 import sun.misc.Sort;
 
@@ -23,8 +24,8 @@ public class GA extends MetaHeuristic {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-        pop_size = link.Int("Tamanho da populacao", 10);
-        ind_size = link.Int("Tammanho do individuo", 1);
+        pop_size = link.Int("Tamanho da populacao", 1000);
+        ind_size = link.Int("Tammanho do individuo", 10);
     }
 
     @Override
@@ -40,6 +41,7 @@ public class GA extends MetaHeuristic {
     @Override
     public void execute() throws Exception {
         Cod[] pop = new Cod[pop_size];
+        Cod best = new Cod(ind_size);
         int p1;
         int stop = 0;
 
@@ -57,7 +59,7 @@ public class GA extends MetaHeuristic {
             init.initialize(prob, pop[i]);
         }
 
-        while (stop < 10) {
+        while (stop < 10000) {
             stop++;
 
 
@@ -65,20 +67,13 @@ public class GA extends MetaHeuristic {
                 prob.ob.Evaluate(prob, pop[i]);
             }
             System.out.println("INTERATION " + stop);
-            System.out.println("PREQUICK");
-            for (int i = 0; i < pop_size; i++) {
-                System.out.println("[" + i + "] " + pop[i].getFitness());
-            }
 
             pop = tour(pop);
-            
-            System.out.println("POSTQUICK");
-            for (int i = 0; i < pop_size; i++) {
-                System.out.println("[" + i + "] " + pop[i].getFitness());
-            }
 
-            System.out.println("Best: " + pop[0].getFitness());
-            System.out.println("Last: " + pop[pop_size - 1].getFitness());
+            if( pop[0].getFitness() < best.getFitness()){
+                best.Copy(prob, pop[0]);
+            }
+            System.out.println("Best: " + best.getFitness());
 
             for (int i = ((int) 0.4 * pop_size); i < (int) (0.5 * pop_size); i++) {
                 init.initialize(prob, pop[i]);
@@ -89,6 +84,13 @@ public class GA extends MetaHeuristic {
 
             for (int i = (int) (0.75 * pop_size); i < pop_size; i++) {
                 init.initialize(prob, pop[i]);
+            }
+            
+            for (int i = 0; i < pop_size; i++) {
+                double rand = Math.random();
+                if( rand < 0.99){
+                    mut.mutation(prob, pop[i]);
+                }
             }
 
         }
@@ -111,6 +113,10 @@ class Comp implements Compare {
 
     @Override
     public int doCompare(Object o, Object o1) {
-        return (int) (((Cod) o).getFitness() - ((Cod) o1).getFitness());
+        if (((Cod) o).getFitness() > ((Cod) o1).getFitness()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }
