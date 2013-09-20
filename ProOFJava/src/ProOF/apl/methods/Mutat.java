@@ -52,7 +52,7 @@ public class Mutat extends oMutation<Prob, Cod> {
 
                                 } else {
                                     ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).getIfunction().getMin(i)) * Math.random(), i);
-                                
+
                                 }
                                 if (((Cod) ind).getHistE(i) > 0) {
                                     ((Cod) ind).setHistE(-1, i);
@@ -94,6 +94,6 @@ public class Mutat extends oMutation<Prob, Cod> {
 
     @Override
     public String name() {
-	return "Mut";
+        return "Mut";
     }
 }
