@@ -7,7 +7,6 @@ import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.metaheuristic.MetaHeuristic;
-import java.util.Random;
 import sun.misc.Compare;
 import sun.misc.Sort;
 
@@ -55,9 +54,14 @@ public class GA extends MetaHeuristic {
         System.out.println("ind_size : " + ind_size);
         System.out.println("---------- Starting ----------");
 
+        double step = 0.0;
         for (int i = 0; i < pop_size; i++) {
             pop[i] = new Cod(ind_size);
             init.initialize(prob, pop[i]);
+            for (int j = 0; j < ind_size; j++) {
+                step = (prob.ob.getMax(j) - prob.ob.getMin(j)) / ((double) pop_size);
+                pop[i].setIndVal(prob.ob.getMin(j) + (i * step) + (pop[i].getIndVal(j) * step), j);
+            }
         }
 
         while (stop < 10000) {
