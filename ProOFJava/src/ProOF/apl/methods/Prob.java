@@ -6,7 +6,6 @@ package ProOF.apl.methods;
 
 import ProOF.apl.aFunction;
 import ProOF.apl.factorys.fFunction;
-import ProOF.apl.problems.LM2;
 import ProOF.com.LinkerNodes;
 import ProOF.gen.best.BestSol;
 import ProOF.opt.abst.problem.meta.Objective;
@@ -20,12 +19,10 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
 public class Prob extends Problem<BestSol> {
 
     private aFunction ifunction;
-    public LM2  ob;
     private BestSol b;
     
     public Prob() throws Exception {
         this.b = new BestSol();
-        ob = new LM2();
     }
 
     public aFunction getIfunction() {

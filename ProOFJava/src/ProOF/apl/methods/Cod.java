@@ -4,14 +4,13 @@
  */
 package ProOF.apl.methods;
 
-import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
  *
  * @author Luke
  */
-public class Cod extends Codification {
+public class Cod extends Codification<Prob, Cod> {
 
     private double[] ind;
     private int _size;
@@ -66,15 +65,15 @@ public class Cod extends Codification {
     }
 
     @Override
-    public void Copy(Problem prob, Codification source) throws Exception {
-        for (int i = 0; i < _size; i++) {
-            ind[i] = ((Cod) source).getIndVal(i);
+    public void Copy(Prob prob, Cod source) throws Exception {        
+        for( int i=0; i < _size; i++ ){
+            ind[i] = source.getIndVal(i);
         }
-        this.setFitness(((Cod) source).getFitness());
+        this.setFitness(source.getFitness());
     }
 
     @Override
-    public Codification New(Problem prob) throws Exception {
+    public Cod New(Prob prob) throws Exception {
         return new Cod(_size);
     }
 }

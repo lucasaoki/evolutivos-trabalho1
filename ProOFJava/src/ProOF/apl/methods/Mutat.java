@@ -5,17 +5,15 @@
 package ProOF.apl.methods;
 
 import ProOF.gen.operator.oMutation;
-import ProOF.opt.abst.problem.meta.Problem;
-import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
  *
  * @author Luke
  */
-public class Mutat extends oMutation {
+public class Mutat extends oMutation<Prob, Cod> {
 
     @Override
-    public void mutation(Problem mem, Codification ind) throws Exception {
+    public void mutation(Prob mem, Cod ind) throws Exception {
 
         int idx = 0 + (int) (Math.random() * (2 + 0));
 
@@ -25,7 +23,7 @@ public class Mutat extends oMutation {
                 for (int i = 0; i < ((Cod) ind).getSize(); i++) {
                     double rand = Math.random();
                     if (rand < 0.99) {
-                        ((Cod) ind).setIndVal(((Prob) mem).ob.getMin(i) + (Math.random() * ((((Prob) mem).ob.getMax(i)) - ((Prob) mem).ob.getMin(i))), i);
+                        ((Cod) ind).setIndVal(((Prob) mem).getIfunction().getMin(i) + (Math.random() * ((((Prob) mem).getIfunction().getMax(i)) - ((Prob) mem).getIfunction().getMin(i))), i);
                     }
                 }
             }
@@ -34,26 +32,26 @@ public class Mutat extends oMutation {
                     double random = Math.random();
                     if (((Cod) ind).getHistE(i) == 0) {
                         if ((random + 0.5) > 1) {
-                            ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) + (((Prob) mem).ob.getMax(i) - ((Cod) ind).getIndVal(i)) * Math.random(), i);
+                            ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) + (((Prob) mem).getIfunction().getMax(i) - ((Cod) ind).getIndVal(i)) * Math.random(), i);
                             ((Cod) ind).setHistE(((Cod) ind).getHistE(i) + 1, i);
                         } else {
-                            ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).ob.getMin(i)) * Math.random(), i);
+                            ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).getIfunction().getMin(i)) * Math.random(), i);
                             ((Cod) ind).setHistE(((Cod) ind).getHistE(i) - 1, i);
                         }
                     } else {
                         if (((Cod) ind).getHistE(i) < 0 && ((Cod) ind).getHistF() < ((Cod) ind).getFitness()) {
-                            ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).ob.getMin(i)) * Math.random(), i);
+                            ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).getIfunction().getMin(i)) * Math.random(), i);
                             ((Cod) ind).setHistE(((Cod) ind).getHistE(i) - 1, i);
                         } else {
                             if (((Cod) ind).getHistE(i) > 0 && ((Cod) ind).getHistF() < ((Cod) ind).getFitness()) {
-                                ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) + (((Prob) mem).ob.getMax(i) - ((Cod) ind).getIndVal(i)) * Math.random(), i);
+                                ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) + (((Prob) mem).getIfunction().getMax(i) - ((Cod) ind).getIndVal(i)) * Math.random(), i);
                                 ((Cod) ind).setHistE(((Cod) ind).getHistE(i) + 1, i);
                             } else {
                                 if ((random + 0.5) > 1) {
-                                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) + (((Prob) mem).ob.getMax(i) - ((Cod) ind).getIndVal(i)) * Math.random(), i);
+                                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) + (((Prob) mem).getIfunction().getMax(i) - ((Cod) ind).getIndVal(i)) * Math.random(), i);
 
                                 } else {
-                                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).ob.getMin(i)) * Math.random(), i);
+                                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(i) - (((Cod) ind).getIndVal(i) - ((Prob) mem).getIfunction().getMin(i)) * Math.random(), i);
                                 
                                 }
                                 if (((Cod) ind).getHistE(i) > 0) {
@@ -96,6 +94,6 @@ public class Mutat extends oMutation {
 
     @Override
     public String name() {
-        return "Mut";
+	return "Mut";
     }
 }
