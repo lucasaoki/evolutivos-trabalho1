@@ -26,15 +26,15 @@ public class Cross extends oCrossover {
         newInd = new Cod(size);
         /* Escolhe um metodo aleatorio */
         switch ((new Random(System.currentTimeMillis()).nextInt(3))) {
-            case 0:
-                method1((Cod) ind1, (Cod) ind2);
-                break;
-            case 1:
-                method2((Cod) ind1, (Cod) ind2);
-                break;
-            case 2:
-                method3((Cod) ind1, (Cod) ind2);
-                break;
+//            case 0:
+//                method1((Cod) ind1, (Cod) ind2);
+//                break;
+//            case 1:
+//                method2((Cod) ind1, (Cod) ind2);
+//                break;
+//            case 2:
+//                method3((Cod) ind1, (Cod) ind2);
+//                break;
         }
         /* Calculo do Fitness */
         ((Prob) mem).ob.Evaluate(mem, newInd);

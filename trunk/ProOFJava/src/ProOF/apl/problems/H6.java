@@ -55,6 +55,7 @@ public class H6 extends SingleObjective<Problem, Codification, SingleObjective> 
     }
 
     public H6() throws Exception {
+        initialize();
     }
 
     @Override
@@ -72,10 +73,11 @@ public class H6 extends SingleObjective<Problem, Codification, SingleObjective> 
 
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 6; j++) {
-                sum += aij[i][j] * Math.pow(x[j] - pij[i][j],2);
+                sum += aij[i][j] * Math.pow(x[j] - pij[i][j], 2);
             }
             eval += -ci[i] * Math.exp(-sum);
         }
+        ((Cod) codif).setHistF(((Cod) codif).getFitness());
         ((Cod) codif).setFitness(eval);
     }
 }
