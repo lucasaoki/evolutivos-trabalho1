@@ -6,6 +6,7 @@ package ProOF.apl.Function;
 
 import ProOF.apl.aFunction;
 import ProOF.apl.methods.Cod;
+import ProOF.apl.methods.Prob;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
@@ -44,8 +45,8 @@ public final class iFunctionACK extends aFunction {
     }
 
     @Override
-    public void Evaluate(Codification codif) throws Exception {
-	double[] x = ((Cod) codif).getInd();
+    public void Evaluate(Prob prob, Cod codif) throws Exception {
+	double[] x = codif.getInd();
 	double sum1 = 0;
 	double sum2 = 0;
 	double eval = 0;
@@ -57,6 +58,6 @@ public final class iFunctionACK extends aFunction {
 	}
 	eval = -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / _size)) - Math.exp(sum2 / _size) + 20.0 + Math.E;
 
-	((Cod) codif).setFitness(eval);
+	codif.setFitness(eval);
     }
 }

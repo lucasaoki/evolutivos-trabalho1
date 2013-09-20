@@ -5,39 +5,37 @@
 package ProOF.apl.methods;
 
 import ProOF.gen.operator.oCrossover;
-import ProOF.opt.abst.problem.meta.Problem;
-import ProOF.opt.abst.problem.meta.codification.Codification;
 import java.util.Random;
 
 /**
  *
  * @author Luke
  */
-public class Cross extends oCrossover {
+public class Cross extends oCrossover<Prob, Cod> {
 
     private int size;
     private double fitness;
     private Cod newInd;
 
     @Override
-    public Codification crossover(Problem mem, Codification ind1, Codification ind2) throws Exception {
+    public Cod crossover(Prob mem, Cod ind1, Cod ind2) throws Exception {
 
-        size = ((Cod) ind1).getSize();
+        size = ind1.getSize();
         newInd = new Cod(size);
         /* Escolhe um metodo aleatorio */
         switch ((new Random(System.currentTimeMillis()).nextInt(3))) {
-//            case 0:
-//                method1((Cod) ind1, (Cod) ind2);
-//                break;
-//            case 1:
-//                method2((Cod) ind1, (Cod) ind2);
-//                break;
-//            case 2:
-//                method3((Cod) ind1, (Cod) ind2);
-//                break;
+            case 0:
+                method1( ind1,  ind2);
+                break;
+            case 1:
+                method2( ind1,ind2);
+                break;
+            case 2:
+                method3( ind1, ind2);
+                break;
         }
         /* Calculo do Fitness */
-        ((Prob) mem).ob.Evaluate(mem, newInd);
+        ((Prob) mem).getIfunction().Evaluate(mem, newInd);
 
         return newInd;
     }
@@ -107,4 +105,6 @@ public class Cross extends oCrossover {
             }
         }
     }
+
+
 }

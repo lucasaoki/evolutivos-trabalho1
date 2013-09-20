@@ -5,19 +5,17 @@
 package ProOF.apl.methods;
 
 import ProOF.gen.operator.oInitializer;
-import ProOF.opt.abst.problem.meta.Problem;
-import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
  *
  * @author Luke
  */
-public class Init extends oInitializer {
+public class Init extends oInitializer<Prob, Cod> {
 
     @Override
-    public void initialize(Problem mem, Codification ind) throws Exception {
+    public void initialize(Prob mem, Cod ind) throws Exception {
         for (int i = 0; i < ((Cod) ind).getSize(); i++) {
-            ((Cod) ind).setIndVal(((Prob) mem).ob.getMin(i) + (Math.random() * ((((Prob) mem).ob.getMax(i)) - ((Prob) mem).ob.getMin(i))), i);
+            ((Cod) ind).setIndVal(((Prob) mem).getIfunction().getMin(i) + (Math.random() * ((((Prob) mem).getIfunction().getMax(i)) - ((Prob) mem).getIfunction().getMin(i))), i);
         }
     }
 

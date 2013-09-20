@@ -4,12 +4,13 @@
  */
 package ProOF.apl;
 
+import ProOF.apl.methods.Cod;
+import ProOF.apl.methods.Prob;
 import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.com.LinkerResults;
 import ProOF.com.LinkerValidations;
 import ProOF.com.language.Node;
-import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
  *
@@ -33,16 +34,16 @@ public abstract class aFunction extends Node {
 
     public abstract void initialize();
 
-    public double[] getMax() {
-	return _max;
+    public double getMax(int index) {
+	return _max[index];
     }
 
     public void setMax(double[] _max) {
 	this._max = _max;
     }
 
-    public double[] getMin() {
-	return _min;
+    public double getMin(int index) {
+	return _min[index];
     }
 
     public void setMin(double[] _min) {
@@ -57,7 +58,7 @@ public abstract class aFunction extends Node {
 	this._size = size;
     }
 
-    public abstract void Evaluate(Codification codif) throws Exception;
+    public abstract void Evaluate(Prob prob, Cod codif) throws Exception;
 
     @Override
     public void services(LinkerNodes link) throws Exception {
