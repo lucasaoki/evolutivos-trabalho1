@@ -42,6 +42,7 @@ public class LM2 extends SingleObjective<Problem, Codification, SingleObjective>
     }
 
     public LM2() throws Exception {
+        initialize();
     }
 
     @Override
@@ -56,10 +57,11 @@ public class LM2 extends SingleObjective<Problem, Codification, SingleObjective>
         double eval = 0;
         int i;
         for (i = 0; i < size - 1; i++) {
-            sum += (Math.pow(x[i] - 1,2) * (1 + Math.pow(Math.sin(3 * Math.PI * x[i + 1]),2)));
+            sum += (Math.pow(x[i] - 1, 2) * (1 + Math.pow(Math.sin(3 * Math.PI * x[i + 1]), 2)));
         }
-        eval = 0.1 * (Math.pow(Math.sin(3 * Math.PI * x[0]),2) + sum + Math.pow(x[size - 1] - 1,2) * (Math.pow(Math.sin(2 * Math.PI * x[size - 1]),2)));
+        eval = 0.1 * (Math.pow(Math.sin(3 * Math.PI * x[0]), 2) + sum + Math.pow(x[size - 1] - 1, 2) * (Math.pow(Math.sin(2 * Math.PI * x[size - 1]), 2)));
 
+        ((Cod) codif).setHistF(((Cod) codif).getFitness());
         ((Cod) codif).setFitness(eval);
     }
 }
