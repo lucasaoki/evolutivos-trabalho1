@@ -4,10 +4,11 @@
  */
 package ProOF.apl.methods;
 
+import ProOF.apl.aFunction;
+import ProOF.apl.factorys.fFunction;
 import ProOF.apl.problems.ACK;
 import ProOF.com.LinkerNodes;
 import ProOF.gen.best.BestSol;
-import ProOF.opt.abst.problem.meta.Best;
 import ProOF.opt.abst.problem.meta.Objective;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.codification.Codification;
@@ -16,8 +17,9 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  *
  * @author Luke
  */
-public class Prob extends Problem {
+public class Prob extends Problem<BestSol> {
 
+    private aFunction ifunction;
     public ACK  ob;
     private BestSol b;
     
@@ -25,10 +27,16 @@ public class Prob extends Problem {
         this.b = new BestSol();
         ob = new ACK();
     }
+
+    public aFunction getIfunction() {
+	return ifunction;
+    }
     
-    @Override
-    public Best best() {
-        return (Best)b;
+    
+    
+     @Override
+    public BestSol best() {
+	return b;
     }
 
     @Override
@@ -48,8 +56,11 @@ public class Prob extends Problem {
     
     @Override
     public void services(LinkerNodes link) throws Exception{
-        super.services(link);
+        super.services(link);	
+	ifunction = link.get(fFunction.obj, ifunction);
         
     }
+
+   
     
 }
