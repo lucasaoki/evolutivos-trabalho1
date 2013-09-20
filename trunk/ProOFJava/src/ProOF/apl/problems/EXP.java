@@ -57,7 +57,7 @@ public class EXP extends SingleObjective<Problem, Codification, SingleObjective>
         int i;
 
         for (i = 0; i < size; i++) {
-            sum += Math.sqrt(x[i]);
+            sum += Math.pow(x[i],2);
         }
         eval = -Math.exp(-0.5 * sum);
         ((Cod) codif).setFitness(eval);

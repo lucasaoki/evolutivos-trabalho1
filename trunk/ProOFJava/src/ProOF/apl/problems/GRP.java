@@ -17,7 +17,7 @@ public class GRP extends SingleObjective<Problem, Codification, SingleObjective>
 
     private double[] _max;
     private double[] _min;
-    private int size = 99;
+    private int size =3;
 
     public void initialize() {
         _max = new double[size];
@@ -56,9 +56,9 @@ public class GRP extends SingleObjective<Problem, Codification, SingleObjective>
         double eval = 0;
         double ui;
         int i;
-        for (i = 0; i < size; i++) {
+        for (i = 0; i < 99; i++) {
             ui = 25 + Math.pow(-50 * Math.log(0.01 * (i + 1)), 2 / 3);
-            eval += Math.sqrt(Math.exp(-Math.pow(ui - x[1], x[2]) / x[0]) - 0.01 * (i + 1));
+            eval += Math.pow(Math.exp(-Math.pow(ui - x[1], x[2]) / x[0]) - 0.01 * (i + 1), 2);
         }
         ((Cod) codif).setFitness(eval);
     }

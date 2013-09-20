@@ -59,7 +59,7 @@ public class CM extends SingleObjective<Problem, Codification, SingleObjective> 
 
         for (i = 0; i < size; i++) {
             sum1 += Math.cos(5 * Math.PI * x[i]);
-            sum2 += Math.sqrt(x[i]);
+            sum2 += Math.pow(x[i],2);
         }
         eval = -1 * (0.1 * sum1 - sum2);
         ((Cod) codif).setFitness(eval);
