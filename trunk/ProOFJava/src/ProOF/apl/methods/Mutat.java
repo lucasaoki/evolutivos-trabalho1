@@ -5,6 +5,7 @@
 package ProOF.apl.methods;
 
 import ProOF.gen.operator.oMutation;
+import java.util.Random;
 
 /**
  *
@@ -15,9 +16,10 @@ public class Mutat extends oMutation<Prob, Cod> {
     @Override
     public void mutation(Prob mem, Cod ind) throws Exception {
 
-        int idx = 0 + (int) (Math.random() * (2 + 0));
+        int idx = 0 + (int) (Math.random() * (3 + 1));
+        Random rnd = new Random(System.currentTimeMillis());
 
-        switch (1) {
+        switch (rnd.nextInt(2) + 2) {
             //Cada elemento do vetor tem chance de alterar seu valor
             case 0: {
                 for (int i = 0; i < ((Cod) ind).getSize(); i++) {
@@ -27,6 +29,8 @@ public class Mutat extends oMutation<Prob, Cod> {
                     }
                 }
             }
+            break;
+
             case 1: {
                 for (int i = 0; i < ((Cod) ind).getSize(); i++) {
                     double random = Math.random();
@@ -65,30 +69,35 @@ public class Mutat extends oMutation<Prob, Cod> {
 
                 }
             }
+            break;
+
             //  mudar de posicao de algum elemento do vetor
-//            case 2: {
-//                int p1 = 0 + (int) (Math.random() * (((Cod) ind).getSize() + 0));
-//                int p2 = 0 + (int) (Math.random() * (((Cod) ind).getSize() + 0));
-//
-//                double tmp = ((Cod) ind).getIndVal(p1);
-//                ((Cod) ind).setIndVal(((Cod) ind).getIndVal(p2), p1);
-//                ((Cod) ind).setIndVal(tmp, p2);
-//            }
+            case 2: {
+                int p1 = 0 + (int) (Math.random() * (((Cod) ind).getSize() + 0));
+                int p2 = 0 + (int) (Math.random() * (((Cod) ind).getSize() + 0));
+
+                double tmp = ((Cod) ind).getIndVal(p1);
+                ((Cod) ind).setIndVal(((Cod) ind).getIndVal(p2), p1);
+                ((Cod) ind).setIndVal(tmp, p2);
+            }
+            break;
+
             //inverter o vetor
-//            case 3: {
-//                int p1 = 0;
-//                int p2 = ((Cod) ind).getSize() - 1;
-//
-//                double tmp;
-//
-//                for (int i = 0; i < ((Cod) ind).getSize() / 2; i++) {
-//                    tmp = ((Cod) ind).getIndVal(p1);
-//                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(p2), p1);
-//                    ((Cod) ind).setIndVal(tmp, p2);
-//                    p1++;
-//                    p2--;
-//                }
-//            }
+            case 3: {
+                int p1 = 0;
+                int p2 = ((Cod) ind).getSize() - 1;
+
+                double tmp;
+
+                for (int i = 0; i < ((Cod) ind).getSize() / 2; i++) {
+                    tmp = ((Cod) ind).getIndVal(p1);
+                    ((Cod) ind).setIndVal(((Cod) ind).getIndVal(p2), p1);
+                    ((Cod) ind).setIndVal(tmp, p2);
+                    p1++;
+                    p2--;
+                }
+            }
+            break;
         }
     }
 

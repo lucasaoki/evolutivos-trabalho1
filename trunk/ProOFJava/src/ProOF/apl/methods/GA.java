@@ -71,7 +71,7 @@ public class GA extends MetaHeuristic {
             for (int i = 0; i < pop_size; i++) {
                 prob.getIfunction().Evaluate(prob, pop[i]);
             }
-            System.out.println("ITERATION No." + stop);
+//            System.out.println("ITERATION No. " + stop);
 
             pop = tour(pop);
 
@@ -84,8 +84,11 @@ public class GA extends MetaHeuristic {
                 init.initialize(prob, pop[i]);
                 prob.getIfunction().Evaluate(prob, pop[i]);
             }
-            for (int i = 0; i < (int) (0.5 * pop_size); i += 2) {
-                pop[((int) (0.5 * pop_size)) + i / 2] = (Cod) cross.crossover(prob, pop[i], pop[i + 1]);
+//            for (int i = 0; i < (int) (0.5 * pop_size); i += 2) {
+//                pop[((int) (0.5 * pop_size)) + i / 2] = (Cod) cross.crossover(prob, pop[i], pop[i + 1]);
+//            }
+            for (int i = 0; i < (int) (0.25 * pop_size); i++) {
+                pop[((int) (0.5 * pop_size)) + i] = (Cod) cross.crossover(prob, pop[i], pop[pop_size / 2 - i - 1]);
             }
 
             for (int i = (int) (0.75 * pop_size); i < pop_size; i++) {

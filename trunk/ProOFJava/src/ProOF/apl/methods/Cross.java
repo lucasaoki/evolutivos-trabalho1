@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author Luke
+ * @author Aoki
  */
 public class Cross extends oCrossover<Prob, Cod> {
 
@@ -22,16 +22,20 @@ public class Cross extends oCrossover<Prob, Cod> {
 
         size = ind1.getSize();
         newInd = new Cod(size);
+        Random rnd = new Random(System.currentTimeMillis());
         /* Escolhe um metodo aleatorio */
-        switch ((new Random(System.currentTimeMillis()).nextInt(3))) {
+        switch (rnd.nextInt(4)) {
             case 0:
-                method1( ind1,  ind2);
+                method1(ind1, ind2);
                 break;
             case 1:
-                method2( ind1,ind2);
+                method2(ind1, ind2);
                 break;
             case 2:
-                method3( ind1, ind2);
+                method3(ind1, ind2);
+                break;
+            case 3:
+                method4(ind1, ind2);
                 break;
         }
         /* Calculo do Fitness */
@@ -47,6 +51,9 @@ public class Cross extends oCrossover<Prob, Cod> {
 
     /**
      * 50% do ind1 e 50% do ind2
+     *
+     * @param ind1
+     * @param ind2
      */
     private void method1(Cod ind1, Cod ind2) {
 
@@ -62,6 +69,9 @@ public class Cross extends oCrossover<Prob, Cod> {
 
     /**
      * Intercalação
+     *
+     * @param ind1
+     * @param ind2
      */
     private void method2(Cod ind1, Cod ind2) {
 
@@ -77,6 +87,9 @@ public class Cross extends oCrossover<Prob, Cod> {
 
     /**
      * Ponderada dos melhores valores (está implementada para minimização
+     *
+     * @param ind1
+     * @param ind2
      */
     private void method3(Cod ind1, Cod ind2) {
 
@@ -106,5 +119,23 @@ public class Cross extends oCrossover<Prob, Cod> {
         }
     }
 
+    /**
+     * Método de escolha de gene aleatório.
+     *
+     * @param ind1
+     * @param ind2
+     */
+    private void method4(Cod ind1, Cod ind2) {
 
+        double tmp;
+        for (int i = 0; i < size; i++) {
+            /* Aleatório */
+            tmp = Math.random();
+            if (tmp < 0.5) {
+                newInd.setIndVal(ind1.getIndVal(i), i);
+            } else {
+                newInd.setIndVal(ind2.getIndVal(i), i);
+            }
+        }
+    }
 }
