@@ -60,7 +60,7 @@ public class HV extends SingleObjective<Problem, Codification, SingleObjective> 
             teta = 1.0 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]), -1);
         }
 
-        eval = 100 * (Math.sqrt(x[1] - 10 * teta) + (Math.pow(Math.sqrt(x[0]) + Math.sqrt(x[1]) - 1, 1.0 / 2))) + Math.sqrt(x[2]);
+        eval = 100 * (Math.pow(x[1] - 10 * teta,2) + (Math.pow(Math.pow(x[0],2) + Math.pow(x[1],2) - 1, 1.0 / 2))) + Math.pow(x[2],2);
         ((Cod) codif).setFitness(eval);
     }
 }

@@ -59,7 +59,7 @@ public class MR extends SingleObjective<Problem, Codification, SingleObjective> 
         int i;
 
         for (i = 0; i < 5; i++) {
-            eval += Math.sqrt((x[0] * x[2] * ti[i]) / (1 + x[0] * ti[i] + x[1] * vi[i]) - yi[i]);
+            eval += Math.pow((x[0] * x[2] * ti[i]) / (1 + x[0] * ti[i] + x[1] * vi[i]) - yi[i],2);
         }
         ((Cod) codif).setFitness(eval);
     }

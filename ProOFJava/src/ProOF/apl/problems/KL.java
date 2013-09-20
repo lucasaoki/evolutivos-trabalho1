@@ -57,7 +57,7 @@ public class KL extends SingleObjective<Problem, Codification, SingleObjective> 
         double eval = 0;
         int i;
         for (i = 0; i < 11; i++) {
-            eval += Math.sqrt(ai[i] - x[0] * (1.0 + x[1] * bi[i]) / (1.0 + x[2] * bi[i] + x[3] * Math.sqrt(bi[i])));
+            eval += Math.pow(ai[i] - x[0] * (1.0 + x[1] * bi[i]) / (1.0 + x[2] * bi[i] + x[3] * Math.pow(bi[i],2)),2);
         }
         ((Cod) codif).setFitness(eval);
     }

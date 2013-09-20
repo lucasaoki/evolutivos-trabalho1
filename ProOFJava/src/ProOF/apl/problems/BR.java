@@ -55,7 +55,7 @@ public class BR extends SingleObjective<Problem, Codification, SingleObjective> 
         double eval = 0;
         int i;
         for (i = 0; i < size - 1; i++) {
-            eval += 100 * Math.sqrt(x[i + 1] - Math.sqrt(x[i]) + Math.sqrt(x[i] - 1));
+            eval += 100 * Math.pow(x[i + 1] - Math.pow(x[i], 2), 2) + Math.pow(x[i] - 1, 2);
         }
         ((Cod) codif).setFitness(eval);
     }

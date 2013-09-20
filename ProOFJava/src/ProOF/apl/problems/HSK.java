@@ -53,7 +53,7 @@ public class HSK extends SingleObjective<Problem, Codification, SingleObjective>
         double[] x = ((Cod) codif).getInd();
         double eval;
 
-        eval = (1 - 8 * x[0] + 7 * Math.sqrt(x[0]) - 7.0 / (3 * Math.pow(x[0], 3)) + 1.0 / (4 * Math.pow(x[0], 4))) * Math.sqrt(x[1]) * Math.exp(-x[1]);
+        eval = (1 - 8 * x[0] + 7 * Math.pow(x[0],2) - 7.0 / (3 * Math.pow(x[0], 3)) + 1.0 / (4 * Math.pow(x[0], 4))) * Math.pow(x[1],2) * Math.exp(-x[1]);
         ((Cod) codif).setFitness(eval);
     }
 }
