@@ -41,7 +41,7 @@ public class HV extends SingleObjective<Problem, Codification, SingleObjective> 
         return size;
     }
 
-    public HV() throws Exception {
+    public HV() throws Exception {initialize();
     }
 
     @Override
@@ -60,7 +60,9 @@ public class HV extends SingleObjective<Problem, Codification, SingleObjective> 
             teta = 1.0 / (Math.PI * 2) * Math.pow(Math.tan(x[1] / x[0]), -1);
         }
 
-        eval = 100 * (Math.pow(x[1] - 10 * teta,2) + (Math.pow(Math.pow(x[0],2) + Math.pow(x[1],2) - 1, 1.0 / 2))) + Math.pow(x[2],2);
+        eval = 100 * (Math.pow(x[1] - 10 * teta, 2) + (Math.pow(Math.pow(x[0], 2) + Math.pow(x[1], 2) - 1, 1.0 / 2))) + Math.pow(x[2], 2);
+
+        ((Cod) codif).setHistF(((Cod) codif).getFitness());
         ((Cod) codif).setFitness(eval);
     }
 }

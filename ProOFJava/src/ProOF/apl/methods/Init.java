@@ -7,7 +7,6 @@ package ProOF.apl.methods;
 import ProOF.gen.operator.oInitializer;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.codification.Codification;
-import java.util.Random;
 
 /**
  *

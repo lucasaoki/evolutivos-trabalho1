@@ -57,6 +57,7 @@ public class BR extends SingleObjective<Problem, Codification, SingleObjective> 
         for (i = 0; i < size - 1; i++) {
             eval += 100 * Math.pow(x[i + 1] - Math.pow(x[i], 2), 2) + Math.pow(x[i] - 1, 2);
         }
+        ((Cod) codif).setHistF(((Cod) codif).getFitness());
         ((Cod) codif).setFitness(eval);
     }
 }

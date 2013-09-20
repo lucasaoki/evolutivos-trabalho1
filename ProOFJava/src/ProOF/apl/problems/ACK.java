@@ -14,11 +14,11 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  * @author Seiji
  */
 public class ACK extends SingleObjective<Problem, Codification, SingleObjective> {
-
+    
     private double[] _max;
     private double[] _min;
     private int size = 10;
-
+    
     public void initialize() {
         _max = new double[size];
         _min = new double[size];
@@ -29,28 +29,28 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
             _min[i] = -30;
         }
     }
-
+    
     public double getMin(int n) {
         return _min[n];
     }
-
+    
     public double getMax(int n) {
         return _max[n];
     }
-
+    
     public int getSize() {
         return size;
     }
-
+    
     public ACK() throws Exception {
         initialize();
     }
-
+    
     @Override
     public SingleObjective New(Problem prob) throws Exception {
         return new ACK();
     }
-
+    
     @Override
     public void Evaluate(Problem prob, Codification codif) throws Exception {
         double[] x = ((Cod) codif).getInd();
@@ -58,13 +58,13 @@ public class ACK extends SingleObjective<Problem, Codification, SingleObjective>
         double sum2 = 0;
         double eval = 0;
         int i = 0;
-
+        
         for (i = 0; i < size; i++) {
-            sum1 += Math.pow(x[i],2);
+            sum1 += Math.pow(x[i], 2);
             sum2 += Math.cos(2.0 * Math.PI * x[i]);
         }
         eval = -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / size)) - Math.exp(sum2 / size) + 20.0 + Math.E;
-
+        ((Cod) codif).setHistF(((Cod) codif).getFitness());
         ((Cod) codif).setFitness(eval);
     }
 }
