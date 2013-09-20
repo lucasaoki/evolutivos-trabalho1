@@ -24,7 +24,7 @@ public class GA extends MetaHeuristic {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-        pop_size = link.Int("Tamanho da populacao", 1000);
+        pop_size = link.Int("Population Size", 1000);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GA extends MetaHeuristic {
     @Override
     public void execute() throws Exception {
         ind_size = prob.ob.getSize();
-        
+
         Cod[] pop = new Cod[pop_size];
         Cod best = new Cod(ind_size);
         int p1;
@@ -51,9 +51,9 @@ public class GA extends MetaHeuristic {
         mut = new Mutat();
 
 
-        System.out.println(pop_size);
-        System.out.println(ind_size);
-        System.out.println("Iniciando ----------");
+        System.out.println("pop_size : " + pop_size);
+        System.out.println("ind_size : " + ind_size);
+        System.out.println("---------- Starting ----------");
 
         for (int i = 0; i < pop_size; i++) {
             pop[i] = new Cod(ind_size);
@@ -67,14 +67,14 @@ public class GA extends MetaHeuristic {
             for (int i = 0; i < pop_size; i++) {
                 prob.ob.Evaluate(prob, pop[i]);
             }
-            System.out.println("INTERATION " + stop);
+            System.out.println("ITERATION No." + stop);
 
             pop = tour(pop);
 
-            if( pop[0].getFitness() < best.getFitness()){
+            if (pop[0].getFitness() < best.getFitness()) {
                 best.Copy(prob, pop[0]);
             }
-            System.out.println("Best: " + best.getFitness());
+            System.out.println("Best Fitness: " + best.getFitness());
 
             for (int i = ((int) 0.4 * pop_size); i < (int) (0.5 * pop_size); i++) {
                 init.initialize(prob, pop[i]);
@@ -86,10 +86,10 @@ public class GA extends MetaHeuristic {
             for (int i = (int) (0.75 * pop_size); i < pop_size; i++) {
                 init.initialize(prob, pop[i]);
             }
-            
+
             for (int i = 0; i < pop_size; i++) {
                 double rand = Math.random();
-                if( rand < 0.99){
+                if (rand < 0.99) {
                     mut.mutation(prob, pop[i]);
                 }
             }
@@ -106,7 +106,7 @@ public class GA extends MetaHeuristic {
 
     @Override
     public String name() {
-        return "GA";
+        return "GA(mbiarra)";
     }
 }
 
