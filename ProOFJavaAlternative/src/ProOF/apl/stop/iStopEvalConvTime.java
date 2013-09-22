@@ -63,7 +63,7 @@ public class iStopEvalConvTime extends aStop {
 
     @Override
     public void parameters(LinkerParameters win) throws Exception {
-	max_evaluations = win.Long("Evaluations", 10000, 0, 1000000000, "the maximum evaluations (0 disable)");
+	max_evaluations = win.Long("Evaluations", 0, 0, 1000000000, "the maximum evaluations (0 disable)");
 	_max_eval_enable = max_evaluations != 0;
 
 	time = win.Dbl("seconds", 3 * 60, 0, 1000000000, "the maximum time in seconds (0 disable)");
@@ -146,7 +146,7 @@ public class iStopEvalConvTime extends aStop {
 	    result = iter.value() > max_iterations;
 	}
 	if (_max_iter_wo_Vary && !result) {
-	    result = (iter.value() - problem.best().iter_best()) > max_IterWOVary;
+	    result = (iter.value() - problem.best().iter_best()) >= max_IterWOVary;
 	}
 
 

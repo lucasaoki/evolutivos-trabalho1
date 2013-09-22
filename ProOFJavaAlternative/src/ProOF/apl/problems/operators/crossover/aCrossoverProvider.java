@@ -34,7 +34,7 @@ public abstract class aCrossoverProvider extends Node {
 	}
     }
 
-    public abstract Solution<iProblem, iObjective, iCodification, Solution> runCross(Solution<iProblem, iObjective, iCodification, Solution> s1, Solution<iProblem, iObjective, iCodification, Solution> s2);
+    public abstract Solution<iProblem, iObjective, iCodification, Solution> runCross(Solution<iProblem, iObjective, iCodification, Solution> s1, Solution<iProblem, iObjective, iCodification, Solution> s2) throws Exception;
 
     public double getCrossoverRate() {
 	return crossoverRate;

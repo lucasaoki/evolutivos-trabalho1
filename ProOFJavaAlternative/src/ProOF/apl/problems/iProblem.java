@@ -15,6 +15,7 @@ import ProOF.com.LinkerResults;
 import ProOF.gen.best.BestSol;
 import ProOF.opt.abst.problem.meta.Objective;
 import ProOF.opt.abst.problem.meta.Problem;
+import ProOF.opt.abst.problem.meta.Solution;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
@@ -54,6 +55,15 @@ public class iProblem extends Problem<iBestSol> {
 	return bestSol;
     }
 
+//    @Override
+//    public Solution NewSolution() throws Exception {
+//	return new _Sol();
+//    }
+//
+//    @Override
+//    public Solution NewSolution(Codification codif) throws Exception {
+//	return new _Sol(new iObjective(), (iCodification) codif);
+//    }
     //important because problemNode.NewSolution() calls newCodification and newObjective
     @Override
     public Codification NewCodification() throws Exception {
@@ -70,4 +80,24 @@ public class iProblem extends Problem<iBestSol> {
 	super.results(com);
 	System.out.printf("iproblem results\n");
     }
+//    private class _Sol extends Solution<iProblem, iObjective, iCodification, Solution> {
+//
+//	public _Sol() throws Exception {
+//	    super((iObjective) NewObjective(), (iCodification) NewCodification());
+//	}
+//
+//	public _Sol(iObjective objective, iCodification codification) throws Exception {
+//	    super(objective, codification);
+//	}
+//
+//	@Override
+//	public Solution New(iProblem prob) throws Exception {
+//	    return new _Sol();
+//	}
+//
+//	@Override
+//	public Solution New(iProblem prob, iCodification codification) throws Exception {
+//	    return new _Sol(objective, codification);
+//	}
+//    }
 }

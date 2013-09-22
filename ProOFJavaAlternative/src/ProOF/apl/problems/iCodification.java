@@ -17,6 +17,9 @@ public class iCodification extends Codification<iProblem, iCodification> {
 
     public iCodification(int size) throws Exception {
 	ind = new Double[size];
+	for (int c = 0; c < size; c++) {
+	    ind[c] = new Double(1);
+	}
 	_size = size;
     }
 
