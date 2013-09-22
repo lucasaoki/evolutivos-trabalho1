@@ -21,13 +21,13 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  *
  * @author ito
  */
-public class iProblem extends Problem<BestSol> {
+public class iProblem extends Problem<iBestSol> {
 
-    private BestSol bestSol;
+    private iBestSol bestSol;
     private aFunction ifunction;
 
     public iProblem() {
-	bestSol = BestSol.object();
+	bestSol = iBestSol.object();
 	BestSol.force_finish(false);
     }
 
@@ -50,7 +50,7 @@ public class iProblem extends Problem<BestSol> {
     }
 
     @Override
-    public BestSol best() {
+    public iBestSol best() {
 	return bestSol;
     }
 

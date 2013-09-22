@@ -42,9 +42,12 @@ public class iGADefault extends aGA {
     public void iterate() throws Exception {
 	System.out.printf("ITERATING\n");
 	Solution<iProblem, iObjective, iCodification, Solution> s;
-	s = problemNode.NewSolution();
-	initializerOperatorNode.initialize(problemNode, s.codif());
-	problemNode.evaluate(s);
+	for (int c = 0; c < population_size; c++) {
+	    s = problemNode.NewSolution();
+	    initializerOperatorNode.initialize(problemNode, s.codif());
+	    problemNode.evaluate(s);
+	    //TODO: FIRST EVALUATION?
+	}
     }
 
     @Override
