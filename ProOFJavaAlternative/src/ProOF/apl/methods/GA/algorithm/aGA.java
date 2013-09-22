@@ -18,7 +18,6 @@ import ProOF.com.LinkerValidations;
 import ProOF.com.language.Node;
 import ProOF.gen.best.nEvaluations;
 import ProOF.gen.operator.oInitializer;
-import ProOF.gen.operator.oMutation;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
@@ -56,7 +55,7 @@ public abstract class aGA extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	population_size = link.Int("Population size", 100, 1, 1000);
+	population_size = link.Int("Population size", 1000, 1, 9999);
     }
 
     @Override

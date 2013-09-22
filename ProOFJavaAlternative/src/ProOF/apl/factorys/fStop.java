@@ -28,9 +28,9 @@ public final class fStop extends Factory<aStop> {
     public aStop NewNode(int index) {
 	switch (index) {
 	    case 0:
-		return new iStopEvals();
-	    case 1:
 		return new iStopEvalConvTime();
+	    case 1:
+		return new iStopEvals();
 	    case 2:
 		return new iStopTime();
 	    case 3:

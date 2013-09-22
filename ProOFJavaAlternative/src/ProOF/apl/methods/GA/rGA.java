@@ -13,6 +13,7 @@ import ProOF.com.LinkerParameters;
 import ProOF.com.LinkerResults;
 import ProOF.com.LinkerValidations;
 import ProOF.gen.stopping.aStop;
+import ProOF.gen.stopping.pIteration;
 import ProOF.opt.abst.metaheuristic.MetaHeuristic;
 import ProOF.opt.abst.problem.meta.Problem;
 
@@ -25,6 +26,7 @@ public class rGA extends MetaHeuristic {
     private Problem _prob;
     private aGA _algorithm;
     private aStop _stop;
+    private pIteration _iteration;
 
     @Override
     public String name() {
@@ -46,6 +48,8 @@ public class rGA extends MetaHeuristic {
 	_prob = link.get(fProblem.obj, _prob);
 	_algorithm = link.get(fGA.obj, _algorithm);
 	_stop = link.get(fStop.obj, _stop);
+	_iteration = pIteration.object();
+	link.add(_iteration);
     }
 
     @Override
@@ -55,6 +59,7 @@ public class rGA extends MetaHeuristic {
 
 	while (!_stop.end()) {
 	    _algorithm.iterate();
+	    _iteration.iteration();
 	}
     }
 
