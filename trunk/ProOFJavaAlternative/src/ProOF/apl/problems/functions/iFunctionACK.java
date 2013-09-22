@@ -35,9 +35,8 @@ public final class iFunctionACK extends aFunction {
 	Double[] x = codif.getInd();
 	double sum1 = 0;
 	double sum2 = 0;
-	int i = 0;
 
-	for (i = 0; i < getSize(); i++) {
+	for (int i = 0; i < getSize(); i++) {
 	    sum1 += Math.pow(x[i], 2);
 	    sum2 += Math.cos(2.0 * Math.PI * x[i]);
 	}

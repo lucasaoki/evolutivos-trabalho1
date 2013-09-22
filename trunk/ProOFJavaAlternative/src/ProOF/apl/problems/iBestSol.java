@@ -93,21 +93,6 @@ public class iBestSol extends Best {
     }
 
     @Override
-    public void results(Problem prob, LinkerResults link) throws Exception {
-	link.writeLong("eval tot", cont_eval.value());
-	link.writeLong("eval best", best.eval);
-	link.writeLong("iter tot", cont_iter.value());
-	link.writeLong("iter best", best.iteration);
-	link.writeDbl("time tot", time_now());
-	link.writeDbl("time best", time_best());
-	link.writeDbl("time after", time_after());
-	if (best.sol != null) {
-	    best.sol.obj().results(prob, link);
-	    best.sol.codif().resulter(prob, link);
-	}
-    }
-
-    @Override
     public void better(Problem prob, Solution sol) throws Exception {
 	//best = best==null ? sol : stop.evaluate() ? best : best.minimum(sol);
 	cont_eval.update();
@@ -126,6 +111,21 @@ public class iBestSol extends Best {
 	    }
 	} else if (force_finish) {
 	    throw new ExceptionForceFinish();
+	}
+    }
+
+    @Override
+    public void results(Problem prob, LinkerResults link) throws Exception {
+	link.writeLong("eval tot", cont_eval.value());
+	link.writeLong("eval best", best.eval);
+	link.writeLong("iter tot", cont_iter.value());
+	link.writeLong("iter best", best.iteration);
+	link.writeDbl("time tot", time_now());
+	link.writeDbl("time best", time_best());
+	link.writeDbl("time after", time_after());
+	if (best.sol != null) {
+	    best.sol.obj().results(prob, link);
+	    best.sol.codif().resulter(prob, link);
 	}
     }
 

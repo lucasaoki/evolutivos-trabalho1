@@ -22,6 +22,9 @@ import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -40,7 +43,7 @@ public abstract class aGA extends Node {
     protected aMutationProvider mutation;
     //POPULATION
     protected int population_size;
-    protected ArrayList<Solution<iProblem, iObjective, iCodification, Solution>> populationList;
+    protected List<Solution<iProblem, iObjective, iCodification, Solution>> populationList;
 
     @Override
     public void services(LinkerNodes link) throws Exception {
@@ -65,12 +68,41 @@ public abstract class aGA extends Node {
 
     @Override
     public void start() throws Exception {
-	populationList = new ArrayList<>(population_size);
+	populationList = generate(0);
     }
 
     public abstract void initialize() throws Exception;
 
     public abstract void iterate() throws Exception;
+
+    public List<Solution<iProblem, iObjective, iCodification, Solution>> generate(int size) throws Exception {
+	List<Solution<iProblem, iObjective, iCodification, Solution>> tpop = new ArrayList<>();
+	Solution<iProblem, iObjective, iCodification, Solution> s;
+	for (int c = 0; c < size; c++) {
+	    s = problemNode.NewSolution();
+	    initializerOperatorNode.initialize(problemNode, s.codif());
+	    tpop.add(s);
+	}
+	return tpop;
+    }
+
+    protected void evaluate() throws Exception {
+	for (Solution s : populationList) {
+	    problemNode.evaluate(s);
+	}
+	Collections.sort(populationList, new IComp());
+    }
+
+    protected List<Solution<iProblem, iObjective, iCodification, Solution>> sublistClone(List<Solution<iProblem, iObjective, iCodification, Solution>> list, int start, int end) throws Exception {
+	List sublist = list.subList(start, end);
+	List newsublist = generate(0);
+
+	for (int c = 0; c < sublist.size(); c++) {
+	    newsublist.add(sublist.get(c));
+	}
+
+	return newsublist;
+    }
 
     //NOT USED
     //NOT USED
@@ -83,5 +115,22 @@ public abstract class aGA extends Node {
     @Override
     public boolean validation(LinkerValidations link) throws Exception {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    protected class IComp implements Comparator<Solution<iProblem, iObjective, iCodification, Solution>> {
+
+	@Override
+	public int compare(Solution<iProblem, iObjective, iCodification, Solution> t, Solution<iProblem, iObjective, iCodification, Solution> t1) {
+	    if (t.obj().abs_value() == t1.obj().abs_value()) {
+		return 0;
+	    }
+
+	    if (t.obj().abs_value() > t1.obj().abs_value()) {
+		return 1;
+	    } else {
+		return -1;
+	    }
+
+	}
     }
 }

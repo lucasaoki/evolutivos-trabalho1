@@ -26,7 +26,7 @@ public class iCrossoverProviderDefault extends aCrossoverProvider {
     }
 
     @Override
-    public Solution<iProblem, iObjective, iCodification, Solution> runCross(Solution<iProblem, iObjective, iCodification, Solution> s1, Solution<iProblem, iObjective, iCodification, Solution> s2) {
-	return s1;
+    public Solution<iProblem, iObjective, iCodification, Solution> runCross(Solution<iProblem, iObjective, iCodification, Solution> s1, Solution<iProblem, iObjective, iCodification, Solution> s2) throws Exception {
+	return s1.Clone(problemNode);
     }
 }

@@ -9,6 +9,7 @@ import ProOF.apl.problems.iObjective;
 import ProOF.apl.problems.iProblem;
 import ProOF.com.LinkerResults;
 import ProOF.opt.abst.problem.meta.Solution;
+import java.util.List;
 
 /**
  *
@@ -28,26 +29,32 @@ public class iGADefault extends aGA {
 
     @Override
     public void initialize() throws Exception {
-	Solution<iProblem, iObjective, iCodification, Solution> s;
-	for (int c = 0; c < population_size; c++) {
-	    s = problemNode.NewSolution();
-	    initializerOperatorNode.initialize(problemNode, s.codif());
-	    problemNode.evaluate(s);
-	    //TODO: FIRST EVALUATION?
-	}
+	populationList.addAll(generate(population_size));
+
 	System.out.printf("INITIALIZATED\n");
     }
 
     @Override
     public void iterate() throws Exception {
 	System.out.printf("ITERATING\n");
-	Solution<iProblem, iObjective, iCodification, Solution> s;
-	for (int c = 0; c < population_size; c++) {
-	    s = problemNode.NewSolution();
-	    initializerOperatorNode.initialize(problemNode, s.codif());
-	    problemNode.evaluate(s);
-	    //TODO: FIRST EVALUATION?
+
+	evaluate();
+
+	List lold = sublistClone(populationList, 0, Math.round(population_size * 0.4f));
+	List lnew = generate(Math.round(population_size * 0.1f));
+	populationList.clear();
+	populationList.addAll(lold);
+	populationList.addAll(lnew);
+
+	for (int c = 1; c < populationList.size(); c += 2) {
+	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c - 1), populationList.get(c));
+
+	    // populationList.addAll(generate(1));
+	    populationList.add(child);
 	}
+
+	populationList.addAll(generate(population_size - populationList.size()));
+
     }
 
     @Override
