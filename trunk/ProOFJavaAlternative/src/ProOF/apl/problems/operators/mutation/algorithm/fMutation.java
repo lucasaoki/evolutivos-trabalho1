@@ -25,6 +25,8 @@ public class fMutation extends Factory<oMutation> {
 	switch (index) {
 	    case 0:
 		return new iMutationInv();
+            case 1:
+                return new iMutationRange();
 	}
 	return null;
     }

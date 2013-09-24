@@ -8,6 +8,8 @@ import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iObjective;
 import ProOF.apl.problems.iProblem;
 import ProOF.opt.abst.problem.meta.Solution;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +19,12 @@ public class iMutationProviderDefault extends aMutationProvider {
 
     @Override
     public Solution<iProblem, iObjective, iCodification, Solution> runMutation(Solution<iProblem, iObjective, iCodification, Solution> s1) {
-	return s1;
+        try {
+            mutationList[1].mutation(problemNode, s1.codif());
+        } catch (Exception ex) {
+            Logger.getLogger(iMutationProviderDefault.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s1;
     }
 
     @Override

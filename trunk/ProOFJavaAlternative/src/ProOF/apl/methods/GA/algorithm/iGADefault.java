@@ -54,6 +54,10 @@ public class iGADefault extends aGA {
 	}
 
 	populationList.addAll(generate(population_size - populationList.size()));
+        
+        for (int c = 0; c < populationList.size(); c++) {
+            mutation.runMutation(populationList.get(c));
+        }
 
     }
 
