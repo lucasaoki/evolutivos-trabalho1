@@ -34,11 +34,11 @@ public class iFunctionGRP extends aFunction {
     public double Evaluate(iCodification codif) throws Exception {
         double[] x = codif.getInd();
         double eval = 0;
-        double ui;
+        double ui = 0;
 
         for (int i = 1; i <= 99; i++) {
-            ui = 25 + Math.pow(-50 * Math.log(0.01 * (i)), (1 / 1.5));
-            eval += Math.pow(Math.exp(-Math.pow(ui - x[1], x[2]) / x[0]) - 0.01 * (i), 2);
+            ui = 25.0 + Math.pow(-50 * Math.log(0.01 * i), (1.0 / 1.5));
+            eval += Math.pow(Math.exp(-(Math.pow(ui - x[1], x[2]) / x[0])) - 0.01 * i, 2);
         }
         return eval;
     }
