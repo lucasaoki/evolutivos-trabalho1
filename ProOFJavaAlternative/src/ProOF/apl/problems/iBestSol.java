@@ -119,7 +119,7 @@ public class iBestSol extends Best {
 		System.out.print("Best Sol: " + String.format("%f", iobj.abs_value()) + " Values: ");
 
 		for (double d : icod.X) {
-		    System.out.format("[%.1f] ", d);
+		    System.out.format("[%.3f] ", d);
 		}
 
 		System.out.println();
@@ -131,15 +131,16 @@ public class iBestSol extends Best {
 
     @Override
     public void finish() throws Exception {
-//	iObjective iobj = (iObjective)
-//	iCodification icod = (iCodification) best.sol.codif();
-//	printComGeneral("####################################################");
-//	printComResult("Best Sol", iobj.abs_value(), new Boolean(true));
-//
-//	for (int c = 0; c < icod.X.length; c++) {
-//	    printComResult("X[" + Integer.toString(c) + "]", icod.X[c], ((icod.X[c] >= problemNode.getIFunc().getMin(c) && icod.X[c] <= problemNode.getIFunc().getMax(c))));
-//	}
-//	printComGeneral("####################################################");
+	if (best.sol.obj() != null) {
+	    iObjective iobj = (iObjective) best.sol.obj();
+	    iCodification icod = (iCodification) best.sol.codif();
+	    System.out.println("=================================================");
+	    System.out.println("Best Sol: " + String.format("%f", iobj.abs_value()));
+	    for (int c = 0; c < icod.X.length; c++) {
+		System.out.format("\tX[%d]: %f\t->Check: %s%n", c, icod.X[c], (icod.X[c] >= problemNode.getIFunc().getMin(c)) && (icod.X[c] <= problemNode.getIFunc().getMax(c)));
+	    }
+	    System.out.println("=================================================");
+	}
     }
 
     @Override
@@ -155,11 +156,6 @@ public class iBestSol extends Best {
 	    best.sol.obj().results(prob, link);
 	    best.sol.codif().resulter(prob, link);
 	}
-    }
-
-    private void printComResult(String str, double value, Object check) throws Exception {
-	String format = String.format("%s:\t%.4f\tLimit: %s", str, value, check.toString());
-	printComGeneral(format);
     }
 
     private void printComGeneral(String str) throws Exception {

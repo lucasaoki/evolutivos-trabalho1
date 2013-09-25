@@ -53,16 +53,6 @@ public class iProblem extends Problem<iBestSol> {
 	return bestSol;
     }
 
-//    @Override
-//    public Solution NewSolution() throws Exception {
-//	return new _Sol();
-//    }
-//
-//    @Override
-//    public Solution NewSolution(Codification codif) throws Exception {
-//	return new _Sol(new iObjective(), (iCodification) codif);
-//    }
-    //important because problemNode.NewSolution() calls newCodification and newObjective
     @Override
     public Codification NewCodification() throws Exception {
 	return new iCodification(ifunction.getSize());
