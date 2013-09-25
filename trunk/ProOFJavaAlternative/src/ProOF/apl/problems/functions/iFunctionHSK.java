@@ -33,7 +33,7 @@ public class iFunctionHSK extends aFunction {
     public double Evaluate(iCodification codif) throws Exception {
         double[] x = codif.getInd();
 
-        return (1.0 - 8.0 * x[0] + 7 * Math.pow(x[0], 2) - 7.0 / (3 * Math.pow(x[0], 3)) + 1.0 / (4 * Math.pow(x[0], 4)))
+        return (1.0 - 8.0 * x[0] + 7 * Math.pow(x[0], 2) - 7.0 / 3 * Math.pow(x[0], 3) + 1.0 / 4 * Math.pow(x[0], 4))
                 * Math.pow(x[1], 2) * Math.exp(-x[1]);
     }
 }
