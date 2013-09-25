@@ -80,6 +80,8 @@ public abstract class aGA extends Node {
 	Solution<iProblem, iObjective, iCodification, Solution> s;
 	for (int c = 0; c < size; c++) {
 	    s = problemNode.NewSolution();
+	    s.codif().setRelativePopSize(size);
+	    s.codif().setRelativePositionInPop(c);
 	    initializerOperatorNode.initialize(problemNode, s.codif());
 	    tpop.add(s);
 	}
