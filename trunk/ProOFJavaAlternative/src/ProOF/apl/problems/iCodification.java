@@ -12,22 +12,31 @@ import ProOF.gen.codification.Real.cReal;
  */
 public class iCodification extends cReal<iProblem> {
 
-    private int positionInArray;
+    private int relativePositionInPop;
+    private int relativePopSize;
 
     public iCodification(int size) throws Exception {
 	super(size);
-	positionInArray = 0;
+	relativePositionInPop = 0;
 	for (int c = 0; c < size; c++) {
 	    X[c] = 1;
 	}
     }
 
-    public int getPositionInArray() {
-	return positionInArray;
+    public int getRelativePositionInPop() {
+	return relativePositionInPop;
     }
 
-    public void setPositionInArray(int positionInArray) {
-	this.positionInArray = positionInArray;
+    public void setRelativePositionInPop(int relativePositionInPop) {
+	this.relativePositionInPop = relativePositionInPop;
+    }
+
+    public int getRelativePopSize() {
+	return relativePopSize;
+    }
+
+    public void setRelativePopSize(int relativePopSize) {
+	this.relativePopSize = relativePopSize;
     }
 
     public double[] getInd() {
