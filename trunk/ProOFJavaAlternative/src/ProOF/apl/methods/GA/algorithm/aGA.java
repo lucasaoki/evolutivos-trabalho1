@@ -50,7 +50,6 @@ public abstract class aGA extends Node {
 	problemNode = link.need(Problem.class, problemNode);
 	stopNode = link.need(aStop.class, stopNode);
 	evalNodeSingle = link.need(nEvaluations.class, evalNodeSingle);	//added by bestsol
-	//initializerOperatorNode = link.get(fOperatorInitializer.obj, initializerOperatorNode);
 	initializerOperatorNode = link.need(oInitializer.class, initializerOperatorNode);
 	cross = link.get(fCrossoverProvider.obj, cross);
 	mutation = link.get(fMutationProvider.obj, mutation);

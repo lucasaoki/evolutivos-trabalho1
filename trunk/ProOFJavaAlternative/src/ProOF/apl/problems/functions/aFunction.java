@@ -71,28 +71,28 @@ public abstract class aFunction extends Node {
     public abstract double Evaluate(iCodification codif) throws Exception;
 
     public double getDefinedMinGlobal() throws Exception {
+	printLine("Warning: MinGlobal not defined");
 	return -1;
     }
 
     public double[] getDefinedBestSol() throws Exception {
+	printLine("Warning: Bestsol not defined");
 	return new double[]{0, 0, 0, 0};
     }
 
     protected void printInfo() throws Exception {
-	printLine(name(), getDefinedMinGlobal(), 9999999d);
-
+	printLine("Nome Funcao: " + name());
+	printLine("Melhor solucao: " + getDefinedMinGlobal());
 	if (com != null) {
 	    double[] definedBestSol = getDefinedBestSol();
-	    for (double i : definedBestSol) {
-		printLine(name(), getDefinedMinGlobal(), i);
+	    for (int c = 0; c < definedBestSol.length; c++) {
+		printLine(String.format("\tX[%d]: %8f", c, definedBestSol[c]));
 	    }
 	}
     }
 
-    protected void printLine(String s1, Double d1, Double d2) throws Exception {
-	com.printString("F. Name", s1);
-	com.printDbl("Min Global", d1);
-	com.printDbl("Best Sol", d2);
+    protected void printLine(String str) throws Exception {
+	com.printString("Info", str);
     }
 
     @Override
