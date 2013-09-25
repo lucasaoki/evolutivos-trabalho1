@@ -58,6 +58,11 @@ public class iFunctionSIN extends aFunction {
 
     @Override
     public double[] getDefinedBestSol() throws Exception {
-        return new double[]{90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z};
+        return new double[]{Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z,
+            Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z,
+            Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z,
+            Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z,
+            Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z, Math.PI / 2 + z,
+            Math.PI / 2 + z};
     }
 }
