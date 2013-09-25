@@ -39,6 +39,6 @@ public class iFunctionBR extends aFunction {
         double g = 10.0;
         double h = 1.0 / (8 * Math.PI);
 
-        return a * Math.pow(x[1] - b * Math.pow(x[0], 2) + c * x[0] - d, 2);
+        return a * Math.pow(x[1] - b * Math.pow(x[0], 2) + c * x[0] - d, 2) + g * (1 - h) * Math.cos(x[0]) + g;
     }
 }

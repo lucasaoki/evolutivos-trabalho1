@@ -18,23 +18,23 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
 
     @Override
     public void services(LinkerNodes com) throws Exception {
-	//super.services(com);
+        //super.services(com);
     }
 
     @Override
     public void parameters(LinkerParameters win) throws Exception {
-	//super.parameters(win);
+        //super.parameters(win);
     }
 
     @Override
     public void initialize(iProblem prob, iCodification codif) throws Exception {
-	for (int i = 0; i < codif.getSize(); i++) {
-	    codif.setIndVal(prob.getIFunc().getMin(i) + (Math.random() * ((prob.getIFunc().getMax(i)) - prob.getIFunc().getMin(i))), i);
-	}
+        for (int i = 0; i < codif.getSize(); i++) {
+            codif.setIndVal(prob.getIFunc().getMin(i) + (Math.random() * ((prob.getIFunc().getMax(i)) - prob.getIFunc().getMin(i))), i);
+        }
     }
 
     @Override
     public String name() {
-	return "Init Default";
+        return "Init Default";
     }
 }
