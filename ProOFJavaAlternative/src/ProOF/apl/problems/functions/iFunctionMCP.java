@@ -36,4 +36,14 @@ public class iFunctionMCP extends aFunction {
 
         return Math.pow(Math.exp(x[0]) - x[1], 4) + 100 * Math.pow(x[1] - x[2], 6) + Math.pow(Math.tan(x[2] - x[3]), 4) + Math.pow(x[0], 8);
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return 0;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{0, 1, 1, 1};
+    }
 }

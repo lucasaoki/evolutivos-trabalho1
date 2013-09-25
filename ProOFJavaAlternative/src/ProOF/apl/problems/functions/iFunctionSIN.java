@@ -14,7 +14,7 @@ public class iFunctionSIN extends aFunction {
 
     private double A = 2.5;
     private double B = 5;
-    private double z = Math.PI/6;
+    private double z = Math.PI / 6;
 
     public iFunctionSIN() {
         super(20);
@@ -36,7 +36,7 @@ public class iFunctionSIN extends aFunction {
             prod1 *= Math.sin(x[i] - z);
             prod2 *= Math.sin(B * (x[i] - z));
         }
-        
+
         eval = -(A * prod1 + prod2);
         return eval;
     }
@@ -49,5 +49,15 @@ public class iFunctionSIN extends aFunction {
     @Override
     public String description() {
         return "To be done (SIN Function)";
+    }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return -(A + 1);
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z, 90 + z};
     }
 }

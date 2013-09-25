@@ -43,4 +43,14 @@ public class iFunctionKL extends aFunction {
 
         return eval;
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return 3.0748e-4;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{0.192, 0.190, 0.123, 0.135};
+    }
 }

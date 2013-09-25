@@ -43,4 +43,14 @@ public class iFunctionLM2 extends aFunction {
 
         return eval;
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return 0;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    }
 }

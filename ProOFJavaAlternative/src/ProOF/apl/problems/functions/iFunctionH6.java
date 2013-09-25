@@ -57,4 +57,14 @@ public class iFunctionH6 extends aFunction {
         }
         return -eval;
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return -3.322368;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{0.201690, 0.150011, 0.476874, 0.275332, 0.311652, 0.657301};
+    }
 }
