@@ -16,15 +16,43 @@ public class fFunction extends Factory<aFunction> {
 
     @Override
     public String name() {
-	return "Objective Function Factory";
+        return "Objective Function Factory";
     }
 
     @Override
     public aFunction NewNode(int index) {
-	switch (index) {
-	    case 0:
-		return new iFunctionACK();
-	}
-	return null;
+        switch (index) {
+            case 0:
+                return new iFunctionACK();
+            case 1:
+                return new iFunctionCM();
+            case 2:
+                return new iFunctionEXP();
+            case 3:
+                return new iFunctionGP();
+            case 4:
+                return new iFunctionGRP();
+            case 5:
+                return new iFunctionH6();
+            case 6:
+                return new iFunctionHSK();
+            case 7:
+                return new iFunctionHV();
+            case 8:
+                return new iFunctionKL();
+            case 9:
+                return new iFunctionLM2();
+            case 10:
+                return new iFunctionMCP();
+            case 11:
+                return new iFunctionMR();
+            case 12:
+                return new iFunctionBR();
+            case 13:
+                return new iFunctionSIN();
+            case 14:
+                return new iFunctionWP();
+        }
+        return null;
     }
 }
