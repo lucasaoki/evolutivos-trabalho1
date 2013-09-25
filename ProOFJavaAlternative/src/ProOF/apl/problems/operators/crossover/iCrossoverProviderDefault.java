@@ -29,7 +29,12 @@ public class iCrossoverProviderDefault extends aCrossoverProvider {
     @Override
     public Solution<iProblem, iObjective, iCodification, Solution> runCross(Solution<iProblem, iObjective, iCodification, Solution> s1, Solution<iProblem, iObjective, iCodification, Solution> s2) throws Exception {
         Random rnd = new Random(System.currentTimeMillis());
-        crossoverList[rnd.nextInt(crossoverList.length - 1)].crossover(problemNode, s1.codif(), s2.codif());
+        if (crossoverList.length != 0) {
+            crossoverList[rnd.nextInt(crossoverList.length)].crossover(problemNode, s1.codif(), s2.codif());
+        } else {
+            System.out.println("Critical Error: Empty Mutation List.");
+            return s1;
+        }
         return s1.Clone(problemNode);
     }
 }
