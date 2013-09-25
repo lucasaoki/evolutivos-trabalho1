@@ -4,54 +4,47 @@
  */
 package ProOF.apl.problems;
 
-import ProOF.opt.abst.problem.meta.codification.Codification;
+import ProOF.gen.codification.Real.cReal;
 
 /**
  *
  * @author ito
  */
-public class iCodification extends Codification<iProblem, iCodification> {
-
-    private Double[] ind;
-    private int _size;
+public class iCodification extends cReal<iProblem> {
 
     public iCodification(int size) throws Exception {
-	ind = new Double[size];
+	super(size);
 	for (int c = 0; c < size; c++) {
-	    ind[c] = new Double(1);
+	    X[c] = 1;
 	}
-	_size = size;
     }
 
-    public Double[] getInd() {
-	return ind;
+    public double[] getInd() {
+	return X;
     }
 
-    public void setInd(Double[] ind) {
-	this.ind = ind;
+    public void setInd(double[] ind) {
+	if (ind.length != X.length) {
+	    System.err.println("invalid Codification size!\n");
+	} else {
+	    System.arraycopy(ind, 0, this.X, 0, this.X.length);
+	}
     }
 
     public void setIndVal(double val, int p) {
-	ind[p] = val;
+	X[p] = val;
     }
 
     public double getIndVal(int p) {
-	return ind[p];
+	return X[p];
     }
 
     public int getSize() {
-	return _size;
-    }
-
-    @Override
-    public void Copy(iProblem prob, iCodification source) throws Exception {
-	for (int i = 0; i < _size; i++) {
-	    ind[i] = source.getIndVal(i);
-	}
+	return X.length;
     }
 
     @Override
     public iCodification New(iProblem prob) throws Exception {
-	return new iCodification(_size);
+	return new iCodification(X.length);
     }
 }

@@ -4,7 +4,12 @@
  */
 package ProOF.apl.problems;
 
+import ProOF.gen.operator.oCrossover;
+import ProOF.gen.operator.oMutation;
+import ProOF.opt.abst.problem.meta.objective.BoundDbl;
 import ProOF.opt.abst.problem.meta.objective.SingleObjective;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,14 +17,22 @@ import ProOF.opt.abst.problem.meta.objective.SingleObjective;
  */
 public class iObjective extends SingleObjective<iProblem, iCodification, iObjective> {
 
+    protected double eval_count;
+    protected List<oCrossover> cross_hist;
+    protected List<oMutation> mut_hist;
+
     public iObjective() throws Exception {
-	//TODO: verificar limites aqui
-	//super(new BoundDbl(-1e9, 1e9, 1e-9));
+	super(new BoundDbl(-1e9, 1e9, 1e-9));
+
+	eval_count = 0;
+	cross_hist = new ArrayList<>();
+	mut_hist = new ArrayList<>();
     }
 
     @Override
     public void Evaluate(iProblem prob, iCodification codif) throws Exception {
 	set(prob.getIFunc().Evaluate(codif));
+	eval_count++;
     }
 
     @Override

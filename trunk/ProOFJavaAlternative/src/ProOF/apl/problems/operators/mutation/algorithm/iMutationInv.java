@@ -7,9 +7,7 @@ package ProOF.apl.problems.operators.mutation.algorithm;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iProblem;
 import ProOF.gen.operator.oMutation;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -19,9 +17,8 @@ public class iMutationInv extends oMutation<iProblem, iCodification> {
 
     @Override
     public void mutation(iProblem mem, iCodification ind) throws Exception {
-	List<Double> tmp = Arrays.asList(ind.getInd());
-	Collections.reverse(tmp);
-	ind.setInd((Double[]) tmp.toArray());
+	ArrayUtils.reverse(ind.getInd());
+
     }
 
     @Override
