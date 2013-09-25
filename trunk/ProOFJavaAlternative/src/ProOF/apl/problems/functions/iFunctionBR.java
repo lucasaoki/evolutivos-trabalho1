@@ -8,25 +8,25 @@ import ProOF.apl.problems.iCodification;
 
 /**
  *
- * @author ito
+ * @author Lucas
  */
-public final class iFunctionACK extends aFunction {
+public class iFunctionBR extends aFunction {
 
     @Override
     public String name() {
-	return "ACK Function";
+	return "BR Function";
     }
 
     @Override
     public String description() {
-	return "To be done (ACK Function)";
+	return "To be done (BR Function)";
     }
 
-    public iFunctionACK() {
+    public iFunctionBR() {
 	//IMPORTANT!!! SUPER(SIZE)
-	super(10);
+	super(2);
 	for (int i = 0; i < limitList.size(); i++) {
-	    limitList.get(i).setLimits(-30, 30);
+	    limitList.get(i).setLimits(-50, 50);
 	}
     }
 
