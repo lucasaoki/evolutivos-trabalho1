@@ -7,7 +7,6 @@ package ProOF.apl.problems;
 import ProOF.apl.problems.functions.aFunction;
 import ProOF.apl.problems.functions.fFunction;
 import ProOF.apl.problems.operators.crossover.algorithm.fCrossover;
-import ProOF.apl.problems.operators.fRealOperator;
 import ProOF.apl.problems.operators.init.fOperatorInitializer;
 import ProOF.apl.problems.operators.mutation.algorithm.fMutation;
 import ProOF.com.LinkerNodes;
@@ -15,7 +14,6 @@ import ProOF.com.LinkerResults;
 import ProOF.gen.best.BestSol;
 import ProOF.opt.abst.problem.meta.Objective;
 import ProOF.opt.abst.problem.meta.Problem;
-import ProOF.opt.abst.problem.meta.Solution;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**

@@ -32,7 +32,7 @@ public final class iFunctionACK extends aFunction {
 
     @Override
     public double Evaluate(iCodification codif) throws Exception {
-	Double[] x = codif.getInd();
+	double[] x = codif.getInd();
 	double sum1 = 0;
 	double sum2 = 0;
 
