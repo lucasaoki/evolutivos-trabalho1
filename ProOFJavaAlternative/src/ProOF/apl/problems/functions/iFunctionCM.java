@@ -8,25 +8,25 @@ import ProOF.apl.problems.iCodification;
 
 /**
  *
- * @author ito
+ * @author Lucas
  */
-public final class iFunctionACK extends aFunction {
+public class iFunctionCM extends aFunction {
 
     @Override
     public String name() {
-	return "ACK Function";
+	return "CM Function";
     }
 
     @Override
     public String description() {
-	return "To be done (ACK Function)";
+	return "To be done (CM Function)";
     }
 
-    public iFunctionACK() {
+    public iFunctionCM() {
 	//IMPORTANT!!! SUPER(SIZE)
-	super(10);
+	super(4);
 	for (int i = 0; i < limitList.size(); i++) {
-	    limitList.get(i).setLimits(-30, 30);
+	    limitList.get(i).setLimits(-1, 1);
 	}
     }
 
@@ -37,9 +37,9 @@ public final class iFunctionACK extends aFunction {
 	double sum2 = 0;
 
 	for (int i = 0; i < getSize(); i++) {
-	    sum1 += Math.pow(x[i], 2);
-	    sum2 += Math.cos(2.0 * Math.PI * x[i]);
+	    sum1 += Math.cos(5 * Math.PI * x[i]);
+	    sum2 += Math.pow(x[i], 2);
 	}
-	return -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / getSize())) - Math.exp(sum2 / getSize()) + 20.0 + Math.E;
+	return (-1 * (0.1 * sum1 - sum2));
     }
 }
