@@ -137,7 +137,7 @@ public class iBestSol extends Best {
 	    System.out.println("=================================================");
 	    System.out.println("Best Sol: " + String.format("%f", iobj.abs_value()));
 	    for (int c = 0; c < icod.X.length; c++) {
-		System.out.format("\tX[%d]: %f\t->Check: %s%n", c, icod.X[c], (icod.X[c] >= problemNode.getIFunc().getMin(c)) && (icod.X[c] <= problemNode.getIFunc().getMax(c)));
+		System.out.format("\tX[%d]: %f\t->Check: %s\t[%f < X < %f%n", c, icod.X[c], (icod.X[c] >= problemNode.getIFunc().getMin(c)) && (icod.X[c] <= problemNode.getIFunc().getMax(c)), problemNode.getIFunc().getMin(c), problemNode.getIFunc().getMax(c));
 	    }
 	    System.out.println("=================================================");
 	}
