@@ -22,7 +22,12 @@ public class iMutationProviderDefault extends aMutationProvider {
     public Solution<iProblem, iObjective, iCodification, Solution> runMutation(Solution<iProblem, iObjective, iCodification, Solution> s1) {
         try {
             Random rnd = new Random(System.currentTimeMillis());
-            mutationList[rnd.nextInt(mutationList.length - 1)].mutation(problemNode, s1.codif());
+            if (mutationList.length != 0) {
+                mutationList[rnd.nextInt(mutationList.length)].mutation(problemNode, s1.codif());
+            } else {
+                System.out.println("Critical Error: Empty Mutation List.");
+                return s1;
+            }
         } catch (Exception ex) {
             Logger.getLogger(iMutationProviderDefault.class.getName()).log(Level.SEVERE, null, ex);
         }
