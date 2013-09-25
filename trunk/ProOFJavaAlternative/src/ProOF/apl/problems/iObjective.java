@@ -4,6 +4,7 @@
  */
 package ProOF.apl.problems;
 
+import ProOF.com.StreamPrinter;
 import ProOF.gen.operator.oCrossover;
 import ProOF.gen.operator.oMutation;
 import ProOF.opt.abst.problem.meta.objective.BoundDbl;
@@ -38,5 +39,10 @@ public class iObjective extends SingleObjective<iProblem, iCodification, iObject
     @Override
     public iObjective New(iProblem prob) throws Exception {
 	return new iObjective();
+    }
+
+    @Override
+    public void printer(iProblem prob, StreamPrinter com) throws Exception {
+	//super.printer(prob, com); //To change body of generated methods, choose Tools | Templates.
     }
 }

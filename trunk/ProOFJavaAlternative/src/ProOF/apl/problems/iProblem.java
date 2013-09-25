@@ -78,24 +78,4 @@ public class iProblem extends Problem<iBestSol> {
 	super.results(com);
 	System.out.printf("iproblem results\n");
     }
-//    private class _Sol extends Solution<iProblem, iObjective, iCodification, Solution> {
-//
-//	public _Sol() throws Exception {
-//	    super((iObjective) NewObjective(), (iCodification) NewCodification());
-//	}
-//
-//	public _Sol(iObjective objective, iCodification codification) throws Exception {
-//	    super(objective, codification);
-//	}
-//
-//	@Override
-//	public Solution New(iProblem prob) throws Exception {
-//	    return new _Sol();
-//	}
-//
-//	@Override
-//	public Solution New(iProblem prob, iCodification codification) throws Exception {
-//	    return new _Sol(objective, codification);
-//	}
-//    }
 }

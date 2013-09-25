@@ -36,7 +36,7 @@ public class iGADefault extends aGA {
 
     @Override
     public void iterate() throws Exception {
-	System.out.printf("ITERATING\n");
+	//System.out.printf("ITERATING\n");
 
 	evaluate();
 
@@ -54,10 +54,10 @@ public class iGADefault extends aGA {
 	}
 
 	populationList.addAll(generate(population_size - populationList.size()));
-        
-        for (int c = 0; c < populationList.size(); c++) {
-            mutation.runMutation(populationList.get(c));
-        }
+
+	for (int c = 0; c < populationList.size(); c++) {
+	    mutation.runMutation(populationList.get(c));
+	}
 
     }
 
