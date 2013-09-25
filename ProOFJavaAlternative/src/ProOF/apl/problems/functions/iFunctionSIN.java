@@ -14,12 +14,12 @@ public class iFunctionSIN extends aFunction {
 
     private double A = 2.5;
     private double B = 5;
-    private double z = 30;
+    private double z = Math.PI/6;
 
     public iFunctionSIN() {
         super(20);
         for (int i = 0; i < 20; i++) {
-            limitList.get(i).setLimits(0.0, 180.0);
+            limitList.get(i).setLimits(0.0, Math.PI);
         }
 
     }
@@ -29,15 +29,15 @@ public class iFunctionSIN extends aFunction {
         double[] x = codif.getInd();
         double eval;
 
-        double prod1 = 0;
-        double prod2 = 0;
+        double prod1 = 1.0;
+        double prod2 = 1.0;
         int i;
         for (i = 0; i < 20; i++) {
             prod1 *= Math.sin(x[i] - z);
             prod2 *= Math.sin(B * (x[i] - z));
         }
+        
         eval = -(A * prod1 + prod2);
-
         return eval;
     }
 
