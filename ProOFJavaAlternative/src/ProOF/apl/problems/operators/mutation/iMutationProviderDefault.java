@@ -19,12 +19,12 @@ public class iMutationProviderDefault extends aMutationProvider {
 
     @Override
     public Solution<iProblem, iObjective, iCodification, Solution> runMutation(Solution<iProblem, iObjective, iCodification, Solution> s1) {
-        try {
-            mutationList[1].mutation(problemNode, s1.codif());
-        } catch (Exception ex) {
-            Logger.getLogger(iMutationProviderDefault.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return s1;
+	try {
+	    mutationList[0].mutation(problemNode, s1.codif());
+	} catch (Exception ex) {
+	    Logger.getLogger(iMutationProviderDefault.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return s1;
     }
 
     @Override
