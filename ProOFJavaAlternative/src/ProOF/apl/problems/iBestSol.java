@@ -93,7 +93,7 @@ public class iBestSol extends Best {
 	best = new Sol(null, 0, 0, 0);
 	time.start();
 
-	printComGeneral("Eval\tIter\tTime\tSolution");
+	printComGeneral("Eval\t\tIter\tTime\tSolution");
     }
 
     @Override
@@ -131,7 +131,7 @@ public class iBestSol extends Best {
 
     @Override
     public void finish() throws Exception {
-//	iObjective iobj = (iObjective) best.sol.obj();
+//	iObjective iobj = (iObjective)
 //	iCodification icod = (iCodification) best.sol.codif();
 //	printComGeneral("####################################################");
 //	printComResult("Best Sol", iobj.abs_value(), new Boolean(true));
