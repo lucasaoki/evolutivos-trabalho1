@@ -42,4 +42,14 @@ public final class iFunctionACK extends aFunction {
 	}
 	return -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / getSize())) - Math.exp(sum2 / getSize()) + 20.0 + Math.E;
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+	return 0;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+	return new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    }
 }

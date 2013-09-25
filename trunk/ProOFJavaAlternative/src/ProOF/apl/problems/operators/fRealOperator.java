@@ -34,31 +34,31 @@ public class fRealOperator extends Factory<Operator> {
     @Override
     public Operator NewNode(int index) {
 	switch (index) {
-//	    case 0:
-//		return new iRealCrossAvg();
-//	    case 1:
-//		return new iRealCrossOX();
-//	    case 2:
-//		return new iRealCrossBLX();
-//	    case 3:
-//		return new iRealCrossHeur();
-//
-//	    case 4:
-//		return new iRealMutReplace();
-//	    case 5:
-//		return new iRealMutLimit();
-//	    case 6:
-//		return new iRealMutInvert();
-//
-//	    case 7:
-//		return new iRealMovReplace();
-//	    case 8:
-//		return new iRealMovLimit();
-//	    case 9:
-//		return new iRealMovInvert();
-//
-//	    case 10:
-//		return new iRealInitRandom();
+	    case 0:
+		return new iRealCrossAvg();
+	    case 1:
+		return new iRealCrossOX();
+	    case 2:
+		return new iRealCrossBLX();
+	    case 3:
+		return new iRealCrossHeur();
+
+	    case 4:
+		return new iRealMutReplace();
+	    case 5:
+		return new iRealMutLimit();
+	    case 6:
+		return new iRealMutInvert();
+
+	    case 7:
+		return new iRealMovReplace();
+	    case 8:
+		return new iRealMovLimit();
+	    case 9:
+		return new iRealMovInvert();
+
+	    case 10:
+		return new iRealInitRandom();
 	}
 	return null;
     }
