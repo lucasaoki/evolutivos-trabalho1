@@ -17,15 +17,21 @@ public class fCrossover extends Factory<oCrossover> {
 
     @Override
     public String name() {
-	return "Crossover Operator Factory";
+        return "Crossover Operator Factory";
     }
 
     @Override
     public oCrossover NewNode(int index) {
-	switch (index) {
-	    case 0:
-		return new iCrossAvg();
-	}
-	return null;
+        switch (index) {
+            case 0:
+                return new iCrossAvg();
+            case 1:
+                return new iCrossHalf();
+            case 2:
+                return new iCrossIntercalation();
+            case 3:
+                return new iCrossRandomChoice();
+        }
+        return null;
     }
 }

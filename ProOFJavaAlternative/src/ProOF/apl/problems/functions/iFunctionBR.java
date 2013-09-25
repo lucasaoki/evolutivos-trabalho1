@@ -14,32 +14,31 @@ public class iFunctionBR extends aFunction {
 
     @Override
     public String name() {
-	return "BR Function";
+        return "BR Function";
     }
 
     @Override
     public String description() {
-	return "To be done (BR Function)";
+        return "To be done (BR Function)";
     }
 
     public iFunctionBR() {
-	//IMPORTANT!!! SUPER(SIZE)
-	super(2);
-	for (int i = 0; i < limitList.size(); i++) {
-	    limitList.get(i).setLimits(-50, 50);
-	}
+        //IMPORTANT!!! SUPER(SIZE)
+        super(2);
+        limitList.get(0).setLimits(-5, 10);
+        limitList.get(1).setLimits(0, 15);
     }
 
     @Override
     public double Evaluate(iCodification codif) throws Exception {
-	double[] x = codif.getInd();
-	double sum1 = 0;
-	double sum2 = 0;
+        double[] x = codif.getInd();
+        double a = 1.0;
+        double b = 5.1 / (4 * Math.pow(Math.PI, 2));
+        double c = 5.0 / Math.PI;
+        double d = 6.0;
+        double g = 10.0;
+        double h = 1.0 / (8 * Math.PI);
 
-	for (int i = 0; i < getSize(); i++) {
-	    sum1 += Math.pow(x[i], 2);
-	    sum2 += Math.cos(2.0 * Math.PI * x[i]);
-	}
-	return -20.0 * Math.exp(-0.02 * Math.sqrt(sum1 / getSize())) - Math.exp(sum2 / getSize()) + 20.0 + Math.E;
+        return a * Math.pow(x[1] - b * Math.pow(x[0], 2) + c * x[0] - d, 2);
     }
 }

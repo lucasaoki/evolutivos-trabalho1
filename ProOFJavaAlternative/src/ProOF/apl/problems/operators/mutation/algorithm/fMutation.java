@@ -17,17 +17,19 @@ public class fMutation extends Factory<oMutation> {
 
     @Override
     public String name() {
-	return "Mutation Operator Factory";
+        return "Mutation Operator Factory";
     }
 
     @Override
     public oMutation NewNode(int index) {
-	switch (index) {
-	    case 0:
-		return new iMutationInv();
+        switch (index) {
+            case 0:
+                return new iMutationInv();
             case 1:
                 return new iMutationRange();
-	}
-	return null;
+            case 2:
+                return new iMutationChangePosition();
+        }
+        return null;
     }
 }
