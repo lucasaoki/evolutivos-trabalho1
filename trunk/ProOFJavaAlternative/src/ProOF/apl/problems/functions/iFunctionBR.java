@@ -41,4 +41,14 @@ public class iFunctionBR extends aFunction {
 
         return a * Math.pow(x[1] - b * Math.pow(x[0], 2) + c * x[0] - d, 2) + g * (1 - h) * Math.cos(x[0]) + g;
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return (5 / (4 * Math.PI));
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{-Math.PI, 12.275, Math.PI, 2.275, 3 * Math.PI, 2.475};
+    }
 }

@@ -36,4 +36,14 @@ public class iFunctionHSK extends aFunction {
         return (1.0 - 8.0 * x[0] + 7 * Math.pow(x[0], 2) - 7.0 / 3 * Math.pow(x[0], 3) + 1.0 / 4 * Math.pow(x[0], 4))
                 * Math.pow(x[1], 2) * Math.exp(-x[1]);
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return -2.3458;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{4, 2};
+    }
 }

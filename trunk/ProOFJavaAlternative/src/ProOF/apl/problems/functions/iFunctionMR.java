@@ -45,4 +45,14 @@ public class iFunctionMR extends aFunction {
     public String description() {
         return "To be done (MR Function)";
     }
+
+    @Override
+    public double getDefinedMinGlobal() throws Exception {
+        return 0.4e-4;
+    }
+
+    @Override
+    public double[] getDefinedBestSol() throws Exception {
+        return new double[]{3.13, 15.16, 0.78};
+    }
 }
