@@ -204,4 +204,8 @@ public class iBestSol extends Best {
     public double iter_best() {
 	return best.iteration;
     }
+
+    public pIteration getCont_iter() {
+	return cont_iter;
+    }
 }
