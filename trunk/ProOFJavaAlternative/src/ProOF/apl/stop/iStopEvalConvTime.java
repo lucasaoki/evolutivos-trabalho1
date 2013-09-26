@@ -78,7 +78,7 @@ public class iStopEvalConvTime extends aStop {
 	max_iterations = win.Long("iterations", 1000, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_enable = max_iterations != 0;
 
-	max_RangeVary = win.Dbl("BestSol evaluates w/o vary GAP", 0.001, 0, 1, "the maximum evaluate w/o vary (0 disable) gap ");
+	max_RangeVary = win.Dbl("BestSol evaluates w/o vary GAP", 0.00001, 0, 1, "the maximum evaluate w/o vary (0 disable) gap ");
 	max_RangeVaryEval = win.Dbl("BestSol number of evaluates w/o vary", 10, 0, 1000000000, "the maximum evaluate w/o vary (0 disable) gap ");
 	_max_eval_wo_Vary = max_RangeVary != 0 && max_RangeVaryEval != 0;
 

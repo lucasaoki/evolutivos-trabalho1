@@ -52,23 +52,23 @@ public class iGADefault extends aGA {
 	populationList.addAll(lnew);
 //	System.out.println("AfterAddNew  Pop size: " + Integer.toString(populationList.size()));
 
-	Collections.shuffle(populationList);
+	//Collections.shuffle(populationList);
 
 	double limitCount = populationList.size() / 2f;
-	for (int c = 0; c < limitCount; c++) {
-	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c), populationList.get(populationList.size() - 1 - c));
-
-	    populationList.add(child);
-
-//	    System.out.print(Integer.toString(c) + " ");
-	}
 //	for (int c = 0; c < limitCount; c++) {
-//	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c * 2), populationList.get(c * 2 + 1));
+//	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c), populationList.get(populationList.size() - 1 - c));
 //
 //	    populationList.add(child);
 //
 ////	    System.out.print(Integer.toString(c) + " ");
 //	}
+	for (int c = 0; c < limitCount; c++) {
+	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c * 2), populationList.get(c * 2 + 1));
+
+	    populationList.add(child);
+
+//	    System.out.print(Integer.toString(c) + " ");
+	}
 //	System.out.println("End Conting: ");
 //	System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
 //	System.out.println("AfterCompleting Pop size: " + Integer.toString(populationList.size()));
@@ -77,7 +77,7 @@ public class iGADefault extends aGA {
 	    mutation.runMutation(populationList.get(c));
 	}
 
-	selection();
+	//selection();
 
 	populationList.addAll(generate(population_size - populationList.size()));
 
