@@ -25,11 +25,11 @@ public class fMutation extends Factory<oMutation> {
         switch (index) {
             case 0:
                 return new iMutationRange();
+//            case 1:
+//                return new iMutationSwapChance();
+//            case 2:
+//                return new iMutationShiftRight();
             case 1:
-                return new iMutationSwapChance();
-            case 2:
-                return new iMutationShiftRight();
-            case 3:
                 return new iMutationLargeRange();
 //            case 4:
 //                return new iMutationChangePosition();
