@@ -46,6 +46,7 @@ public abstract class aGA extends Node {
     //POPULATION
     protected int population_size;
     protected double selectionRate;
+    protected double newPopForCrossover;
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> populationList;
 
     @Override
@@ -61,7 +62,8 @@ public abstract class aGA extends Node {
     @Override
     public void parameters(LinkerParameters link) throws Exception {
 	population_size = link.Int("Population size", 1000, 10, 10000000);
-	selectionRate = link.Dbl("Selection Rate", 0.4, 0, 1);
+	selectionRate = link.Dbl("Selection Rate(%)", 0.4, 0, 1);
+	newPopForCrossover = link.Dbl("New population for crossover (%)", 0.1, 0, 1);
     }
 
     @Override
