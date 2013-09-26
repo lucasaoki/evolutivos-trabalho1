@@ -24,17 +24,17 @@ public class fMutation extends Factory<oMutation> {
     public oMutation NewNode(int index) {
         switch (index) {
             case 0:
-                return new iMutationInv();
-            case 1:
                 return new iMutationRange();
-            case 2:
-                return new iMutationChangePosition();
-            case 3:
+            case 1:
                 return new iMutationSwapChance();
-            case 4:
+            case 2:
                 return new iMutationShiftRight();
-            case 5:
+            case 3:
                 return new iMutationLargeRange();
+//            case 4:
+//                return new iMutationChangePosition();
+//            case 5:
+//                return new iMutationInv();
         }
         return null;
     }
