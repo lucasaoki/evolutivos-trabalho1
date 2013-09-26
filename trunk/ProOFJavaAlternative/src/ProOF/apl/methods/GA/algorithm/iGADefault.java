@@ -43,17 +43,29 @@ public class iGADefault extends aGA {
 	List lold = sublistClone(populationList, 0, Math.round(population_size * 0.4f));
 	List lnew = generate(Math.round(population_size * 0.1f));
 	populationList.clear();
+
+//	System.out.println("AfterClean  Pop size: " + Integer.toString(populationList.size()));
+
 	populationList.addAll(lold);
+//	System.out.println("AfterAddOld  Pop size: " + Integer.toString(populationList.size()));
 	populationList.addAll(lnew);
+//	System.out.println("AfterAddNew  Pop size: " + Integer.toString(populationList.size()));
 
-	for (int c = 1; c < populationList.size(); c += 2) {
-	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c - 1), populationList.get(c));
 
-	    // populationList.addAll(generate(1));
+	double limitCount = populationList.size() / 2f;
+	for (int c = 0; c < limitCount; c++) {
+	    Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c * 2), populationList.get(c * 2 + 1));
+
 	    populationList.add(child);
+
+//	    System.out.print(Integer.toString(c) + " ");
 	}
+//	System.out.println("End Conting: ");
+//	System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
 
 	populationList.addAll(generate(population_size - populationList.size()));
+
+//	System.out.println("AfterCompleting Pop size: " + Integer.toString(populationList.size()));
 
 	for (int c = 0; c < populationList.size(); c++) {
 	    mutation.runMutation(populationList.get(c));
