@@ -167,9 +167,15 @@ public class iBestSol extends Best {
 	link.writeDbl("time tot", time_now());
 	link.writeDbl("time best", time_best());
 	link.writeDbl("time after", time_after());
+
+
 	if (best.sol != null) {
-	    best.sol.obj().results(prob, link);
-	    best.sol.codif().resulter(prob, link);
+	    iObjective iobj = (iObjective) best.sol.obj();
+	    link.writeString("BestSol", Double.toString(iobj.abs_value()));
+	    link.writeDbl("DiffBest", Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value()));
+
+//	    best.sol.obj().results(prob, link);
+//	    best.sol.codif().resulter(prob, link);
 	}
     }
 
