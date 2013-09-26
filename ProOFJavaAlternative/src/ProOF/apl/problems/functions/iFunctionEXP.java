@@ -43,7 +43,7 @@ public class iFunctionEXP extends aFunction {
 
     @Override
     public double getDefinedMinGlobal() throws Exception {
-        return 1;
+        return -1;
     }
 
     @Override
