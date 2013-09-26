@@ -35,35 +35,35 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 	if (ind.getGenInfo().getCurrGeneration() != currGen) {
 	    currGen = ind.getGenInfo().getCurrGeneration();
 	    _initialize(mem, ind.getGenInfo());
+	    System.out.println();
 	}
 
 	_PopInfo pinfo = baseValues.get(ind.getGenInfo().getRelativePopSize());
 
 
-	//System.out.print("Gen: " + Double.toString(currGen) + " Ind: " + Double.toString(ind.getGenInfo().getRelativePositionInPop()) + "::  ");
+	System.out.print("Gen: " + Double.toString(currGen) + " Ind: " + Double.toString(ind.getGenInfo().getRelativePositionInPop()) + "::  ");
 
 	for (int c = 0; c < ind.X.length; c++) {
+	    boolean ok;
+	    double incr;
+	    do {
+		ok = true;
+		incr = (new Random(System.currentTimeMillis()).nextInt(2) == 0 ? 1 : -1) * (pinfo.stepList.get(c) / 2) * Math.random();
+		incr += pinfo.list.get(c).get(ind.getGenInfo().getRelativePositionInPop());
 
-	    double incr = (new Random().nextInt(2) == 0 ? 1 : -1) * pinfo.stepList.get(c) * Math.random();
-	    incr += pinfo.list.get(c).get(ind.getGenInfo().getRelativePositionInPop());
+		if (incr > mem.getIFunc().getMax(c)) {
+		    ok = false;
+		} else if (incr < mem.getIFunc().getMin(c)) {
+		    ok = false;
+		}
 
-	    if (incr > mem.getIFunc().getMax(c)) {
-		incr = mem.getIFunc().getMax(c);
-	    } else if (incr < mem.getIFunc().getMin(c)) {
-		incr = mem.getIFunc().getMin(c);
-	    }
-
+	    } while (!ok);
 	    ind.X[c] = incr;
 
-	    //System.out.print("[" + String.format("%f", incr) + "] ");
+	    System.out.print("[" + String.format("%f", incr) + "] ");
 	}
 
-	//System.out.println();
-
-
-	//ind.setInd(ind);
-
-
+	System.out.println();
     }
 
     @Override
@@ -97,11 +97,14 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 	    for (int c = 0; c < ifu.getSize(); c++) {
 		List<Double> queue = pList.newListForPopulation();
 		double preStep = ifu.getMax(c) - ifu.getMin(c);
-		preStep /= genInfo.getRelativePopSize();
+		preStep /= pList.popSize;
 
 		//adiciona o total de população de um gene
-		for (int d = 0; d < genInfo.getRelativePopSize(); d++) {
-		    queue.add(ifu.getMin(c) + d * preStep);
+		double teste = 0 - (pList.popSize * preStep) / 2;
+		double startValue = ifu.getMin(c) + preStep / 2;
+
+		for (int d = 0; d < pList.popSize; d++) {
+		    queue.add(startValue + d * preStep);
 		}
 
 		pList.addGeneInfo(queue, preStep);
@@ -112,7 +115,7 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 
 	if (aligned == 0) {
 	    for (List<Double> aq : pList.list) {
-		Collections.shuffle(aq, new Random(currGen));
+		Collections.shuffle(aq, new Random(System.currentTimeMillis()));
 	    }
 	}
 

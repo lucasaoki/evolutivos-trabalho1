@@ -83,6 +83,8 @@ public abstract class aGA extends Node {
 	if (size > 0) {
 	    GenerationInfo.newGeneration();
 
+	    System.out.println("Generating " + Integer.toString(size) + "individuals");
+
 	    for (int c = 0; c < size; c++) {
 		s = problemNode.NewSolution();
 		s.codif().getGenInfo().setInfo(c, size);
