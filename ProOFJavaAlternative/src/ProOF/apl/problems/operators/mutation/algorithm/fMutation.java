@@ -33,6 +33,8 @@ public class fMutation extends Factory<oMutation> {
                 return new iMutationSwapChance();
             case 4:
                 return new iMutationShiftRight();
+            case 5:
+                return new iMutationLargeRange();
         }
         return null;
     }

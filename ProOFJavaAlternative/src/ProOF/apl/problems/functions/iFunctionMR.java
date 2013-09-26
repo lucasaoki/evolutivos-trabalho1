@@ -19,7 +19,7 @@ public class iFunctionMR extends aFunction {
     public iFunctionMR() {
         super(3);
         limitList.get(0).setLimits(-10.0, 10.0);
-        limitList.get(1).setLimits(-10.0, 10.0);
+        limitList.get(1).setLimits(-10.0, 16.0);
         limitList.get(2).setLimits(-10.0, 10.0);
     }
 
