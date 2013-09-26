@@ -139,6 +139,9 @@ public class iBestSol extends Best {
 	    for (int c = 0; c < icod.X.length; c++) {
 		System.out.format("\tX[%d]: %f\t->Check: %s\t[%f < X < %f%n", c, icod.X[c], (icod.X[c] >= problemNode.getIFunc().getMin(c)) && (icod.X[c] <= problemNode.getIFunc().getMax(c)), problemNode.getIFunc().getMin(c), problemNode.getIFunc().getMax(c));
 	    }
+
+	    double dist = Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value());
+	    System.out.println("Distance from optimal Solution: " + Double.toString(dist) + " " + (dist < 0.01 ? ":-)" : ":-("));
 	    System.out.println("=================================================");
 	}
     }
