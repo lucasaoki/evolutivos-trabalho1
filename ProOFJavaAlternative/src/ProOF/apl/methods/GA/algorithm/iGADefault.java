@@ -9,6 +9,7 @@ import ProOF.apl.problems.iObjective;
 import ProOF.apl.problems.iProblem;
 import ProOF.com.LinkerResults;
 import ProOF.opt.abst.problem.meta.Solution;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,17 +41,18 @@ public class iGADefault extends aGA {
 
 	evaluate();
 
-	List lold = sublistClone(populationList, 0, Math.round(population_size * 0.4f));
-	List lnew = generate(Math.round(population_size * 0.1f));
+	List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
+	//List lnew = generate(Math.round(population_size * 0.1f));
 	populationList.clear();
 
 //	System.out.println("AfterClean  Pop size: " + Integer.toString(populationList.size()));
 
 	populationList.addAll(lold);
 //	System.out.println("AfterAddOld  Pop size: " + Integer.toString(populationList.size()));
-	populationList.addAll(lnew);
+	//populationList.addAll(lnew);
 //	System.out.println("AfterAddNew  Pop size: " + Integer.toString(populationList.size()));
 
+	//Collections.shuffle(populationList);
 
 	double limitCount = populationList.size() / 2f;
 	for (int c = 0; c < limitCount; c++) {
@@ -62,9 +64,6 @@ public class iGADefault extends aGA {
 	}
 //	System.out.println("End Conting: ");
 //	System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
-
-	populationList.addAll(generate(population_size - populationList.size()));
-
 //	System.out.println("AfterCompleting Pop size: " + Integer.toString(populationList.size()));
 
 	for (int c = 0; c < populationList.size(); c++) {

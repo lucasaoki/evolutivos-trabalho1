@@ -14,7 +14,6 @@ import ProOF.com.StreamProgress;
 import ProOF.gen.stopping.aStop;
 import ProOF.gen.stopping.pIteration;
 import ProOF.opt.abst.problem.meta.Problem;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -163,19 +162,19 @@ public class iStopEvalConvTime extends aStop {
 	boolean result = false;
 
 	if (_max_eval_enable && !result) {
-	    result = eval.value() > max_evaluations;
+	    result = eval.value() >= max_evaluations;
 	    if (result) {
-		System.out.println("Stop by Max Eval");
+		StopResult = ("Stop by Max Eval");
 	    }
 	}
 	if (_max_sec_enable && !result) {
-	    result = time() / time > 1.0;
+	    result = time() / time >= 1.0;
 	    if (result) {
 		StopResult = ("Stop by time elapsed");
 	    }
 	}
 	if (_max_iter_enable && !result) {
-	    result = iter.value() > max_iterations;
+	    result = iter.value() >= max_iterations;
 	    if (result) {
 		StopResult = ("Stop by Max Iterationss");
 	    }
