@@ -50,6 +50,7 @@ public class iFunctionH6 extends aFunction {
         };
 
         for (int i = 0; i < 4; i++) {
+            sum = 0;
             for (int j = 0; j < 6; j++) {
                 sum += aij[i][j] * Math.pow(x[j] - pij[i][j], 2);
             }
