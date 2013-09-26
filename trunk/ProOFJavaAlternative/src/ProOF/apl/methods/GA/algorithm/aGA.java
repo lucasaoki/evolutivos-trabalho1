@@ -61,7 +61,7 @@ public abstract class aGA extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	population_size = link.Int("Population size", 1000, 10, 10000000);
+	population_size = link.Int("Population size", 2000, 10, 10000000);
 	selectionRate = link.Dbl("Selection Rate(%)", 0.4, 0, 1);
 	newPopForCrossover = link.Dbl("New population for crossover (%)", 0.1, 0, 1);
     }
