@@ -99,7 +99,11 @@ public abstract class aGA extends Node {
 	for (Solution s : populationList) {
 	    problemNode.evaluate(s);
 	}
-	Collections.sort(populationList, new IComp());
+	try {
+	    Collections.sort(populationList, new IComp());
+	} catch (Exception e) {
+	    System.err.println("Sort Error");
+	}
     }
 
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> sublistClone(List<Solution<iProblem, iObjective, iCodification, Solution>> list, int start, int end) throws Exception {
