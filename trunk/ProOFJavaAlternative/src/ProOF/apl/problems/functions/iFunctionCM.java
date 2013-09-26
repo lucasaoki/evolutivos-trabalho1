@@ -45,7 +45,7 @@ public class iFunctionCM extends aFunction {
 
     @Override
     public double getDefinedMinGlobal() throws Exception {
-        return 0.4;
+        return -0.4;
     }
 
     @Override
