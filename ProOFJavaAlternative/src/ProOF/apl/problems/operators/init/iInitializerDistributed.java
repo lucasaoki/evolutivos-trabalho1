@@ -44,20 +44,20 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 //	System.out.print("Gen: " + Double.toString(currGen) + " Ind: " + Double.toString(ind.getGenInfo().getRelativePositionInPop()) + "::  ");
 
 	for (int c = 0; c < ind.X.length; c++) {
-	    boolean ok;
+//	    boolean ok;
 	    double incr;
-	    do {
-		ok = true;
-		incr = (new Random(System.currentTimeMillis()).nextInt(2) == 0 ? 1 : -1) * (pinfo.stepList.get(c) / 2) * Math.random();
-		incr += pinfo.list.get(c).get(ind.getGenInfo().getRelativePositionInPop());
+//	    do {
+//		ok = true;
+	    incr = (new Random(System.currentTimeMillis()).nextInt(2) == 0 ? 1 : -1) * (pinfo.stepList.get(c) / 2) * Math.random();
+	    incr += pinfo.list.get(c).get(ind.getGenInfo().getRelativePositionInPop());
 
-		if (incr > mem.getIFunc().getMax(c)) {
-		    ok = false;
-		} else if (incr < mem.getIFunc().getMin(c)) {
-		    ok = false;
-		}
+	    if (incr > mem.getIFunc().getMax(c)) {
+		incr = mem.getIFunc().getMax(c);
+	    } else if (incr < mem.getIFunc().getMin(c)) {
+		incr = mem.getIFunc().getMin(c);
+	    }
 
-	    } while (!ok);
+//	    } while (!ok);
 	    ind.X[c] = incr;
 
 //	    System.out.print("[" + String.format("%f", incr) + "] ");
@@ -100,7 +100,7 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 		preStep /= pList.popSize;
 
 		//adiciona o total de população de um gene
-		double teste = 0 - (pList.popSize * preStep) / 2;
+//		double teste = 0 - (pList.popSize * preStep) / 2;
 		double startValue = ifu.getMin(c) + preStep / 2;
 
 		for (int d = 0; d < pList.popSize; d++) {
