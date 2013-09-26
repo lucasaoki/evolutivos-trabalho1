@@ -104,6 +104,9 @@ public abstract class aGA extends Node {
 
 	for (Solution s : populationList) {
 	    problemNode.evaluate(s);
+	    if (stopNode.end()) {
+		return;
+	    }
 	}
 	Collections.sort(populationList, new IComp());
 
