@@ -22,7 +22,6 @@ import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
-import ProOF.opt.abst.problem.meta.codification.Codification;
 import ProOF.utils.GenerationInfo;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +45,7 @@ public abstract class aGA extends Node {
     protected aMutationProvider mutation;
     //POPULATION
     protected int population_size;
+    protected double selectionRate;
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> populationList;
 
     @Override
@@ -61,6 +61,7 @@ public abstract class aGA extends Node {
     @Override
     public void parameters(LinkerParameters link) throws Exception {
 	population_size = link.Int("Population size", 1000, 10, 10000000);
+	selectionRate = link.Dbl("Selection Rate", 0.4, 0, 1);
     }
 
     @Override
