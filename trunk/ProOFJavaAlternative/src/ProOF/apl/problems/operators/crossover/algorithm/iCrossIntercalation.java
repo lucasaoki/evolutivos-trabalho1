@@ -16,31 +16,31 @@ public class iCrossIntercalation extends oCrossover<iProblem, iCodification> {
 
     /**
      * Intercalação
-     * 
+     *
      * @param mem
      * @param ind1
      * @param ind2
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public iCodification crossover(iProblem mem, iCodification ind1, iCodification ind2) throws Exception {
-	iCodification codNew = ind1.New(mem);
+        iCodification child = ind1.New(mem);
 
-	for (int i = 0; i < codNew.getSize(); i++) {
+        for (int i = 0; i < child.getSize(); i++) {
             /* Intercalando */
             if (i % 2 == 0) {
-                codNew.setIndVal(ind1.getIndVal(i), i);
+                child.setIndVal(ind1.getIndVal(i), i);
             } else {
-                codNew.setIndVal(ind2.getIndVal(i), i);
+                child.setIndVal(ind2.getIndVal(i), i);
             }
         }
-        
-	return codNew;
+
+        return child;
     }
 
     @Override
     public String name() {
-	return "CrossIntercalation";
+        return "CrossIntercalation";
     }
 }
