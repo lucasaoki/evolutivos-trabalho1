@@ -44,7 +44,7 @@ public abstract class aMutationProvider extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	mutationRate = link.Dbl("Mutatin Rate", 0.5, 0, 1);
+	mutationRate = link.Dbl("Mutatin Rate", 1, 0, 1);
     }
 
     @Override
