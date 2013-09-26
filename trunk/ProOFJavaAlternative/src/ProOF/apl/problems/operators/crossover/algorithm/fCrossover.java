@@ -26,17 +26,17 @@ public class fCrossover extends Factory<oCrossover> {
             case 0:
                 return new iCrossAvg();
             case 1:
-                return new iCrossHalf();
-            case 2:
-                return new iCrossIntercalation();
-            case 3:
-                return new iCrossRandomChoice();
-            case 4:
                 return new iCrossArithmetic();
-            case 5:
+            case 2:
                 return new iCrossGeometric();
-            case 6:
+            case 3:
                 return new iCrossLinear();
+            case 4:
+                return new iCrossRandomChoice();
+//            case 5:
+//                return new iCrossHalf();
+//            case 6:
+//                return new iCrossIntercalation();
         }
         return null;
     }
