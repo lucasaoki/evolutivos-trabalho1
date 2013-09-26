@@ -17,7 +17,6 @@ import ProOF.com.LinkerParameters;
 import ProOF.com.LinkerResults;
 import ProOF.com.LinkerValidations;
 import ProOF.com.language.Node;
-import ProOF.gen.best.nEvaluations;
 import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
