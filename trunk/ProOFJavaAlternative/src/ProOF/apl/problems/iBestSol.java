@@ -152,7 +152,7 @@ public class iBestSol extends Best {
 		System.out.format("\tX[%d]: %f\t->Check: %s\t[%f < X < %f%n", c, icod.X[c], (icod.X[c] >= problemNode.getIFunc().getMin(c)) && (icod.X[c] <= problemNode.getIFunc().getMax(c)), problemNode.getIFunc().getMin(c), problemNode.getIFunc().getMax(c));
 	    }
 
-	    double dist = Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value());
+	    double dist = Math.floor(Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value()) * 100) / 100;
 	    System.out.println("Distance from optimal Solution: " + Double.toString(dist) + " " + (dist < 0.01 ? ":-)" : ":-("));
 	    System.out.println("=================================================");
 	}
@@ -172,7 +172,7 @@ public class iBestSol extends Best {
 	if (best.sol != null) {
 	    iObjective iobj = (iObjective) best.sol.obj();
 	    link.writeString("BestSol", Double.toString(iobj.abs_value()));
-	    double dist = Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value());
+	    double dist = Math.floor(Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value()) * 100) / 100;
 	    link.writeDbl("DiffBest", Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value()));
 	    link.writeString("DiffBest1", (dist < 0.01 ? ":-)" : ":-("));
 
