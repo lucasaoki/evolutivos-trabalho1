@@ -5,6 +5,7 @@
 package ProOF.apl.problems;
 
 import ProOF.gen.codification.Real.cReal;
+import ProOF.utils.GenerationInfo;
 
 /**
  *
@@ -12,31 +13,14 @@ import ProOF.gen.codification.Real.cReal;
  */
 public class iCodification extends cReal<iProblem> {
 
-    private int relativePositionInPop;
-    private int relativePopSize;
+    GenerationInfo gen;
 
     public iCodification(int size) throws Exception {
 	super(size);
-	relativePositionInPop = 0;
+	gen = new GenerationInfo(0, 0);
 	for (int c = 0; c < size; c++) {
 	    X[c] = 1;
 	}
-    }
-
-    public int getRelativePositionInPop() {
-	return relativePositionInPop;
-    }
-
-    public void setRelativePositionInPop(int relativePositionInPop) {
-	this.relativePositionInPop = relativePositionInPop;
-    }
-
-    public int getRelativePopSize() {
-	return relativePopSize;
-    }
-
-    public void setRelativePopSize(int relativePopSize) {
-	this.relativePopSize = relativePopSize;
     }
 
     public double[] getInd() {
@@ -66,5 +50,9 @@ public class iCodification extends cReal<iProblem> {
     @Override
     public iCodification New(iProblem prob) throws Exception {
 	return new iCodification(X.length);
+    }
+
+    public GenerationInfo getGenInfo() {
+	return gen;
     }
 }
