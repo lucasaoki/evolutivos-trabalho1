@@ -11,23 +11,23 @@ package ProOF.utils;
 public class GlobalConstants {
 
     //aGA
-    public final static int population_size = 2000;
+    public final static int population_size = 300;
     public final static double selectionRate = 0.4f;
     public final static double newPopForCrossover = 0.1;
     //aCrossoverProvider
     public final static double crossoverRate = 0.5;
     //aMutationProvider
-    public final static double mutationRate = 1;
+    public final static double mutationRate = 0.9;
     //iStopEvalConvTime
     //eval
     public final static long max_evaluations = 1000000;
     //time
     public final static double time = 1 * 30f;
     //iterations
-    public final static long max_iterations = 1000;
+    public final static long max_iterations = 10000;
     //vary
-    public final static long max_IterWOVary = 500;
+    public final static long max_IterWOVary = 10000;
     //best sol vary
-    public final static double max_RangeVary = 1e-6;
-    public final static long max_RangeVaryEval = 10;
+    public final static double max_RangeVary = 1e-5;
+    public final static long max_RangeVaryEval = 3;
 }
