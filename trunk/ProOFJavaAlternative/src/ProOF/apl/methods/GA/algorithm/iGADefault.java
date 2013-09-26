@@ -71,6 +71,8 @@ public class iGADefault extends aGA {
 	    mutation.runMutation(populationList.get(c));
 	}
 
+	//for (int c = 0;)
+
     }
 
     @Override

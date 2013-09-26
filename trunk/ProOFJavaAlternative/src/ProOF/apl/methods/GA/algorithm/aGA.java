@@ -19,6 +19,7 @@ import ProOF.com.language.Node;
 import ProOF.gen.best.nEvaluations;
 import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
+import ProOF.opt.abst.problem.meta.Objective;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
 import ProOF.utils.GenerationInfo;
@@ -102,6 +103,17 @@ public abstract class aGA extends Node {
 	Collections.sort(populationList, new IComp());
     }
 
+    protected void selection() throws Exception {
+
+
+	for (Solution s : populationList) {
+	    iObjective obj = (iObjective) s.obj();
+
+	    obj.abs_value();
+
+	}
+    }
+
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> sublistClone(List<Solution<iProblem, iObjective, iCodification, Solution>> list, int start, int end) throws Exception {
 	List sublist = list.subList(start, end);
 	List newsublist = generate(0);
@@ -130,19 +142,14 @@ public abstract class aGA extends Node {
 
 	@Override
 	public int compare(Solution<iProblem, iObjective, iCodification, Solution> t, Solution<iProblem, iObjective, iCodification, Solution> t1) {
-
-	    return Double.compare(t.obj().abs_value(), t1.obj().abs_value());
-
-//	    if (t.obj().abs_value() > t1.obj().abs_value()) {
-//		return 1;
-//	    } else if (t.obj().abs_value() < t1.obj().abs_value()) {
-//		return -1;
-//	    } else {
-//		return 0;
-//	    }
-//		if (t.obj().abs_value() == t1.obj().abs_value()) {
-//		    return 0;
-
+	    //return Double.compare(t.obj().abs_value(), t1.obj().abs_value());
+	    if (t.obj().abs_value() > t1.obj().abs_value()) {
+		return 1;
+	    } else if (t.obj().abs_value() < t1.obj().abs_value()) {
+		return -1;
+	    } else {
+		return 0;
+	    }
 	}
     }
 }
