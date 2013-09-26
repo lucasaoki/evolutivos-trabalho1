@@ -29,6 +29,8 @@ public class fMutation extends Factory<oMutation> {
                 return new iMutationRange();
             case 2:
                 return new iMutationChangePosition();
+            case 3:
+                return new iMutationSwapChance();
         }
         return null;
     }
