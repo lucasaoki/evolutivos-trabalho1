@@ -14,6 +14,7 @@ import ProOF.com.StreamProgress;
 import ProOF.gen.stopping.aStop;
 import ProOF.gen.stopping.pIteration;
 import ProOF.opt.abst.problem.meta.Problem;
+import ProOF.utils.GlobalConstants;
 
 /**
  *
@@ -45,7 +46,7 @@ public class iStopEvalConvTime extends aStop {
     private boolean _max_iter_wo_Vary = true;
     //best sol vary
     private double max_RangeVary;
-    private double max_RangeVaryEval;
+    private long max_RangeVaryEval;
     private StreamProgress comEvaWOVary;
     private boolean _max_eval_wo_Vary = true;
     private String StopResult;
@@ -69,20 +70,20 @@ public class iStopEvalConvTime extends aStop {
 
     @Override
     public void parameters(LinkerParameters win) throws Exception {
-	max_evaluations = win.Long("Evaluations", 0, 0, 1000000000, "the maximum evaluations (0 disable)");
+	max_evaluations = win.Long("Evaluations", GlobalConstants.max_evaluations, 0, 1000000000, "the maximum evaluations (0 disable)");
 	_max_eval_enable = max_evaluations != 0;
 
-	time = win.Dbl("seconds", 1 * 60, 0, 1000000000, "the maximum time in seconds (0 disable)");
+	time = win.Dbl("seconds", GlobalConstants.time, 0, 1000000000, "the maximum time in seconds (0 disable)");
 	_max_sec_enable = time != 0;
 
-	max_iterations = win.Long("iterations", 1000, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
+	max_iterations = win.Long("iterations", GlobalConstants.max_iterations, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_enable = max_iterations != 0;
 
-	max_RangeVary = win.Dbl("BestSol evaluates w/o vary GAP", 0.00001, 0, 1, "the maximum evaluate w/o vary (0 disable) gap ");
-	max_RangeVaryEval = win.Dbl("BestSol number of evaluates w/o vary", 10, 0, 1000000000, "the maximum evaluate w/o vary (0 disable) gap ");
+	max_RangeVary = win.Dbl("BestSol evaluates w/o vary GAP", GlobalConstants.max_RangeVary, 0, 1, "the maximum evaluate w/o vary (0 disable) gap ");
+	max_RangeVaryEval = win.Long("BestSol number of evaluates w/o vary", GlobalConstants.max_RangeVaryEval, 0, 1000000000, "the maximum evaluate w/o vary (0 disable) gap ");
 	_max_eval_wo_Vary = max_RangeVary != 0 && max_RangeVaryEval != 0;
 
-	max_IterWOVary = win.Long("iterations w/o vary", 500, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
+	max_IterWOVary = win.Long("iterations w/o vary", GlobalConstants.max_IterWOVary, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_wo_Vary = max_IterWOVary != 0;
     }
 
@@ -130,6 +131,11 @@ public class iStopEvalConvTime extends aStop {
 
 	if (_max_eval_enable) {
 	    pEval = eval.value() * 1.0 / max_evaluations;
+	    if (pEval > 1) {
+		pEval = 1;
+	    } else if (pEval < 0) {
+		pEval = 0;
+	    }
 	    comEval.progress(pEval);
 	}
 

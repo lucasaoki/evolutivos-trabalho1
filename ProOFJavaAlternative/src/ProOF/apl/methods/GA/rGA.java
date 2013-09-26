@@ -35,7 +35,7 @@ public class rGA extends MetaHeuristic {
 
     @Override
     public String description() {
-	return "GA Base Metaheuristic description";
+	return "dGA Base Met";
 
     }
 

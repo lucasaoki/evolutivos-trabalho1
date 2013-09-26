@@ -4,6 +4,7 @@
  */
 package ProOF.apl.problems;
 
+import ProOF.apl.problems.functions.aFunction;
 import ProOF.com.StreamPrinter;
 import ProOF.gen.operator.oCrossover;
 import ProOF.gen.operator.oMutation;
@@ -21,6 +22,7 @@ public class iObjective extends SingleObjective<iProblem, iCodification, iObject
     protected double eval_count;
     protected List<oCrossover> cross_hist;
     protected List<oMutation> mut_hist;
+    protected aFunction.Limits objectiveLimits;
 
     public iObjective() throws Exception {
 	super(new BoundDbl(-1e9, 1e9, 1e-9));

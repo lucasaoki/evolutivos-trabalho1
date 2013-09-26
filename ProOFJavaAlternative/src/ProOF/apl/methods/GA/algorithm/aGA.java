@@ -23,6 +23,7 @@ import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
 import ProOF.utils.GenerationInfo;
+import ProOF.utils.GlobalConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -61,14 +62,13 @@ public abstract class aGA extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	population_size = link.Int("Population size", 2000, 10, 10000000);
-	selectionRate = link.Dbl("Selection Rate(%)", 0.4, 0, 1);
-	newPopForCrossover = link.Dbl("New population for crossover (%)", 0.1, 0, 1);
+	population_size = link.Int("Population size", GlobalConstants.population_size, 1, 10000000);
+	selectionRate = link.Dbl("Selection Rate(%)", GlobalConstants.selectionRate, 0, 1);
+	newPopForCrossover = link.Dbl("New population for crossover (%)", GlobalConstants.newPopForCrossover, 0, 1);
     }
 
     @Override
     public void load() throws Exception {
-	//???
     }
 
     @Override
@@ -113,8 +113,6 @@ public abstract class aGA extends Node {
 	    codif.getGenInfo().setInfo(c, populationList.size());
 	    c++;
 	}
-
-
     }
 
     protected void selection() throws Exception {
