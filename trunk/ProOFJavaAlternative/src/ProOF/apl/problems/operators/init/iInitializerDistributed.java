@@ -11,6 +11,7 @@ import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.gen.operator.oInitializer;
 import ProOF.utils.GenerationInfo;
+import ProOF.utils.GlobalConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -83,15 +84,15 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 
     @Override
     public void parameters(LinkerParameters win) throws Exception {
-	aligned = win.Int("Init Aligned", 1, 0, 1, "aligned -> 1, not aligned -> 0");
+	aligned = win.Int("Init Aligned", GlobalConstants.aligned, 0, 1, "aligned -> 1, not aligned -> 0");
     }
 
     private void _initialize(iProblem mem, GenerationInfo genInfo) {
 	_PopInfo pList = baseValues.get(genInfo.getRelativePopSize());
-
+	aFunction ifu = mem.getIFunc();
 	if (pList == null) {
 	    pList = new _PopInfo(genInfo.getRelativePopSize());
-	    aFunction ifu = mem.getIFunc();
+
 
 	    //faz para cada gene
 	    for (int c = 0; c < ifu.getSize(); c++) {
@@ -113,9 +114,41 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 	    baseValues.put(pList.popSize, pList);
 	}
 
-	if (aligned == 0) {
+	boolean vary = true;
+
+	double[] diffMin = new double[ifu.getSize() - 1];
+	double[] diffMax = new double[ifu.getSize() - 1];
+	double minAVG = 0, minVar = 0;
+	double maxAVG = 0, maxVar = 0;
+
+	for (int c = 0; c < ifu.getSize(); c++) {
+	    minAVG += ifu.getMin(c);
+	    maxAVG += ifu.getMax(c);
+	}
+	minAVG /= ifu.getSize();
+	maxAVG /= ifu.getSize();
+
+	for (int c = 0; c < ifu.getSize(); c++) {
+	    minVar += Math.pow(minAVG - ifu.getMin(c), 2);
+	    maxVar += Math.pow(maxAVG - ifu.getMax(c), 2);
+	}
+
+	minVar /= ifu.getSize();
+	maxVar /= ifu.getSize();
+	minVar = Math.sqrt(minVar);
+	maxVar = Math.sqrt(maxVar);
+
+
+	if (minVar > 0.5 || maxVar > 0.5) {
+	    vary = true;
+	} else {
+	    vary = false;
+	}
+
+	if (aligned == 0 || vary) {
 	    for (List<Double> aq : pList.list) {
 		Collections.shuffle(aq, new Random(System.currentTimeMillis()));
+		//System.out.println("SHUFFFFFFFFFFFLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEEEE");
 	    }
 	}
 

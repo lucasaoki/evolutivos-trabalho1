@@ -22,7 +22,7 @@ public class GlobalConstants {
     //eval
     public final static long max_evaluations = 1000000;
     //time
-    public final static double time = 1 * 30f;
+    public final static double time = 1 * 5f;
     //iterations
     public final static long max_iterations = 10000;
     //vary
@@ -30,4 +30,6 @@ public class GlobalConstants {
     //best sol vary
     public final static double max_RangeVary = 1e-5;
     public final static long max_RangeVaryEval = 3;
+    //initialize
+    public final static int aligned = 1;
 }
