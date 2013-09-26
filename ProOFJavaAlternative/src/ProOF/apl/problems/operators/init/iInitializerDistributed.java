@@ -35,13 +35,13 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 	if (ind.getGenInfo().getCurrGeneration() != currGen) {
 	    currGen = ind.getGenInfo().getCurrGeneration();
 	    _initialize(mem, ind.getGenInfo());
-	    System.out.println();
+//	    System.out.println();
 	}
 
 	_PopInfo pinfo = baseValues.get(ind.getGenInfo().getRelativePopSize());
 
 
-	System.out.print("Gen: " + Double.toString(currGen) + " Ind: " + Double.toString(ind.getGenInfo().getRelativePositionInPop()) + "::  ");
+//	System.out.print("Gen: " + Double.toString(currGen) + " Ind: " + Double.toString(ind.getGenInfo().getRelativePositionInPop()) + "::  ");
 
 	for (int c = 0; c < ind.X.length; c++) {
 	    boolean ok;
@@ -60,10 +60,10 @@ public class iInitializerDistributed extends oInitializer<iProblem, iCodificatio
 	    } while (!ok);
 	    ind.X[c] = incr;
 
-	    System.out.print("[" + String.format("%f", incr) + "] ");
+//	    System.out.print("[" + String.format("%f", incr) + "] ");
 	}
 
-	System.out.println();
+//	System.out.println();
     }
 
     @Override
