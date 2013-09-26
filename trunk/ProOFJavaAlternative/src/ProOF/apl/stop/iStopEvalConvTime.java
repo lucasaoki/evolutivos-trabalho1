@@ -69,10 +69,10 @@ public class iStopEvalConvTime extends aStop {
 	time = win.Dbl("seconds", 1 * 60, 0, 1000000000, "the maximum time in seconds (0 disable)");
 	_max_sec_enable = time != 0;
 
-	max_iterations = win.Long("iterations", 10000, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
+	max_iterations = win.Long("iterations", 1000, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_enable = max_iterations != 0;
 
-	max_IterWOVary = win.Long("iterations w/o vary", 5000, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
+	max_IterWOVary = win.Long("iterations w/o vary", 500, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_wo_Vary = max_IterWOVary != 0;
     }
 

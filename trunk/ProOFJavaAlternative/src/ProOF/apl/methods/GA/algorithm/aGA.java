@@ -59,7 +59,7 @@ public abstract class aGA extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	population_size = link.Int("Population size", 1000, 1, 10000000);
+	population_size = link.Int("Population size", 1000, 10, 10000000);
     }
 
     @Override
