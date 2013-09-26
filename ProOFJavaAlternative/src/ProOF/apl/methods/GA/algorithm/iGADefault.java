@@ -71,6 +71,10 @@ public class iGADefault extends aGA {
 	    mutation.runMutation(populationList.get(c));
 	}
 
+	selection();
+
+	populationList.addAll(generate(population_size - populationList.size()));
+
 	//for (int c = 0;)
 
     }

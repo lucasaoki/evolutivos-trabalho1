@@ -4,6 +4,7 @@
  */
 package ProOF.apl.methods.GA.algorithm;
 
+import ProOF.apl.problems.functions.aFunction;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iEvaluations;
 import ProOF.apl.problems.iObjective;
@@ -21,6 +22,7 @@ import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
+import ProOF.opt.abst.problem.meta.codification.Codification;
 import ProOF.utils.GenerationInfo;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,20 +98,39 @@ public abstract class aGA extends Node {
     }
 
     protected void evaluate() throws Exception {
+
 	for (Solution s : populationList) {
 	    problemNode.evaluate(s);
 	}
 	Collections.sort(populationList, new IComp());
+
+	int c = 0;
+	for (Solution s : populationList) {
+	    iCodification codif = (iCodification) s.codif();
+	    codif.getGenInfo().setInfo(c, populationList.size());
+	    c++;
+	}
+
+
     }
 
     protected void selection() throws Exception {
 
+	int c = populationList.size() - 1;
+	aFunction iFunc = problemNode.getIFunc();
+	while (c >= 0 && !populationList.isEmpty()) {
+	    Solution<iProblem, iObjective, iCodification, Solution> sol = populationList.get(c);
 
-	for (Solution s : populationList) {
-	    iObjective obj = (iObjective) s.obj();
+	    iCodification cod = sol.codif();
+	    for (int d = 0; d < cod.getSize(); d++) {
+		if (cod.X[d] > iFunc.getMax(d) || cod.X[d] < iFunc.getMin(d)) {
+		    populationList.remove(sol);
+		    System.out.println("selected to remove!!");
 
-	    obj.abs_value();
-
+		    break;
+		}
+	    }
+	    c--;
 	}
     }
 
