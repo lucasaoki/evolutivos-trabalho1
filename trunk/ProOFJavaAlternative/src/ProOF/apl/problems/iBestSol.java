@@ -47,6 +47,22 @@ public class iBestSol extends Best {
 	    this.iteration = iteration;
 	    this.time = time;
 	}
+
+	public Solution getSol() {
+	    return sol;
+	}
+
+	public long getEval() {
+	    return eval;
+	}
+
+	public long getIteration() {
+	    return iteration;
+	}
+
+	public double getTime() {
+	    return time;
+	}
     }
     /*private pMetaSolution best;
      private long eval_best;
