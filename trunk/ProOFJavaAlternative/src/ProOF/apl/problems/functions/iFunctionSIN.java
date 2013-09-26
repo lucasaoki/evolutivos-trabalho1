@@ -13,7 +13,7 @@ import ProOF.apl.problems.iCodification;
 public class iFunctionSIN extends aFunction {
 
     private double A = 2.5;
-    private double B = 5;
+    private double B = 5.0;
     private double z = Math.PI / 6;
 
     public iFunctionSIN() {
