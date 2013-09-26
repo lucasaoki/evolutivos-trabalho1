@@ -4,16 +4,17 @@
  */
 package ProOF.apl.stop;
 
+import ProOF.apl.problems.iEvaluations;
 import ProOF.apl.problems.iProblem;
 import ProOF.com.Communication;
 import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.com.LinkerValidations;
 import ProOF.com.StreamProgress;
-import ProOF.gen.best.nEvaluations;
 import ProOF.gen.stopping.aStop;
 import ProOF.gen.stopping.pIteration;
 import ProOF.opt.abst.problem.meta.Problem;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -23,7 +24,7 @@ public class iStopEvalConvTime extends aStop {
 
     public static final iStopEvalConvTime obj = new iStopEvalConvTime();
     //eval
-    private nEvaluations eval;
+    private iEvaluations eval;
     private StreamProgress comEval;
     private long max_evaluations;
     private boolean _max_eval_enable = true;
@@ -40,9 +41,15 @@ public class iStopEvalConvTime extends aStop {
     //vary
     private iProblem problem;
     private StreamProgress comIterWOVary;
-    private double max_IterWOVary;
+    private long max_IterWOVary;
     private double lastIter;
     private boolean _max_iter_wo_Vary = true;
+    //best sol vary
+    private double max_RangeVary;
+    private double max_RangeVaryEval;
+    private StreamProgress comEvaWOVary;
+    private boolean _max_eval_wo_Vary = true;
+    private String StopResult;
 
     @Override
     public String name() {
@@ -57,7 +64,7 @@ public class iStopEvalConvTime extends aStop {
     @Override
     public void services(LinkerNodes win) throws Exception {
 	problem = (iProblem) win.need(Problem.class, problem);
-	eval = (nEvaluations) win.need(nEvaluations.class);
+	eval = (iEvaluations) win.need(iEvaluations.class);
 	iter = (pIteration) win.need(pIteration.class);
     }
 
@@ -72,8 +79,20 @@ public class iStopEvalConvTime extends aStop {
 	max_iterations = win.Long("iterations", 1000, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_enable = max_iterations != 0;
 
+	max_RangeVary = win.Dbl("BestSol evaluates w/o vary GAP", 0.01, 0, 1, "the maximum evaluate w/o vary (0 disable) gap ");
+	max_RangeVaryEval = win.Dbl("BestSol number of evaluates w/o vary", 10, 0, 1000000000, "the maximum evaluate w/o vary (0 disable) gap ");
+	_max_eval_wo_Vary = max_RangeVary != 0 && max_RangeVaryEval != 0;
+
 	max_IterWOVary = win.Long("iterations w/o vary", 500, 0, 1000000000, "the maximum iteration w/o vary (0 disable) ");
 	_max_iter_wo_Vary = max_IterWOVary != 0;
+    }
+
+    public double getMax_RangeVary() {
+	return max_RangeVary;
+    }
+
+    public double getMax_RangeVaryEval() {
+	return max_RangeVaryEval;
     }
 
     @Override
@@ -90,11 +109,15 @@ public class iStopEvalConvTime extends aStop {
 	if (_max_iter_wo_Vary) {
 	    comIterWOVary = Communication.mkProgress("Iteration w/o vary progress");
 	}
+	if (_max_eval_wo_Vary) {
+	    comEvaWOVary = Communication.mkProgress("Evaluations w/o bestValue vary progress");
+	}
     }
 
     @Override
     public void start() throws Exception {
 	initial_time = System.currentTimeMillis();
+	StopResult = "";
     }
 
     @Override
@@ -104,7 +127,7 @@ public class iStopEvalConvTime extends aStop {
 
     @Override
     public double progress() throws Exception {
-	double p = 0, pEval, pTime, pIter, pIterWOVary;
+	double p = 0, pEval, pTime, pIter, pIterWOVary, pEvalWOVary;
 
 	if (_max_eval_enable) {
 	    pEval = eval.value() * 1.0 / max_evaluations;
@@ -126,7 +149,10 @@ public class iStopEvalConvTime extends aStop {
 	    comIterWOVary.progress(pIterWOVary);
 	}
 
-
+	if (_max_eval_wo_Vary) {
+	    pEvalWOVary = eval.valueWithoutVary() / max_RangeVaryEval;
+	    comEvaWOVary.progress(pEvalWOVary);
+	}
 	return p;
     }
 
@@ -138,19 +164,43 @@ public class iStopEvalConvTime extends aStop {
 
 	if (_max_eval_enable && !result) {
 	    result = eval.value() > max_evaluations;
+	    if (result) {
+		System.out.println("Stop by Max Eval");
+	    }
 	}
 	if (_max_sec_enable && !result) {
 	    result = time() / time > 1.0;
+	    if (result) {
+		StopResult = ("Stop by time elapsed");
+	    }
 	}
 	if (_max_iter_enable && !result) {
 	    result = iter.value() > max_iterations;
+	    if (result) {
+		StopResult = ("Stop by Max Iterationss");
+	    }
 	}
 	if (_max_iter_wo_Vary && !result) {
 	    result = (iter.value() - problem.best().iter_best()) >= max_IterWOVary;
+	    if (result) {
+		StopResult = ("Stop by Max iteration Best Sol vary");
+	    }
+	}
+
+	if (_max_eval_wo_Vary && !result) {
+	    result = eval.valueWithoutVary() > max_RangeVaryEval;
+	    if (result) {
+		StopResult = ("Stop by Max Eval Best Sol vary with band");
+	    }
 	}
 
 
 	return result;
+    }
+
+    @Override
+    public void finish() throws Exception {
+	System.out.println(StopResult);
     }
 
     public double time() {
