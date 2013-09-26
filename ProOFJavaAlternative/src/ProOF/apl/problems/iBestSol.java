@@ -172,7 +172,9 @@ public class iBestSol extends Best {
 	if (best.sol != null) {
 	    iObjective iobj = (iObjective) best.sol.obj();
 	    link.writeString("BestSol", Double.toString(iobj.abs_value()));
+	    double dist = Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value());
 	    link.writeDbl("DiffBest", Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value()));
+	    link.writeString("DiffBest1", (dist < 0.01 ? ":-)" : ":-("));
 
 //	    best.sol.obj().results(prob, link);
 //	    best.sol.codif().resulter(prob, link);
