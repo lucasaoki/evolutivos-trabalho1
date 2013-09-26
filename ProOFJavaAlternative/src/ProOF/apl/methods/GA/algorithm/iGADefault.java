@@ -9,7 +9,6 @@ import ProOF.apl.problems.iObjective;
 import ProOF.apl.problems.iProblem;
 import ProOF.com.LinkerResults;
 import ProOF.opt.abst.problem.meta.Solution;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,6 +39,9 @@ public class iGADefault extends aGA {
 	//System.out.printf("ITERATING\n");
 
 	evaluate();
+	if (stopNode.end()) {
+	    return;
+	}
 
 	List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
 	List lnew = generate((int) Math.round(population_size * newPopForCrossover));

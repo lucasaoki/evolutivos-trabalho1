@@ -109,7 +109,7 @@ public class iBestSol extends Best {
 	best = new Sol(null, 0, 0, 0);
 	time.start();
 
-	printComGeneral("Eval\t\tIter\tTime\tSolution");
+	printComGeneral("Eval\t\tIter\tTime\t\tSolution\tOptimal");
     }
 
     @Override
@@ -138,7 +138,8 @@ public class iBestSol extends Best {
 		best.eval = cont_eval.value();
 		best.iteration = cont_iter.value();
 		best.time = time_now();
-		printComGeneral(String.format("%9d\t%6d\t%8f\t%.6f", best.eval, best.iteration, time_best(), iobj.abs_value()));
+		double dist = Math.floor(Math.abs(problemNode.getIFunc().getDefinedMinGlobal() - iobj.abs_value()) * 100) / 100;
+		printComGeneral(String.format("%9d\t%6d\t%8f\t%.6f\t%s", best.eval, best.iteration, time_best(), iobj.abs_value(), (dist < 0.01 ? ":-)" : ":-(")));
 //		com.printLong("eval", best.eval);
 //		com.printLong("iter", best.iteration);
 //		com.printDbl("time", time_best());
