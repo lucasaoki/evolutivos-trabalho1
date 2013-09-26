@@ -20,27 +20,29 @@ public class iMutationProviderDefault extends aMutationProvider {
 
     @Override
     public Solution<iProblem, iObjective, iCodification, Solution> runMutation(Solution<iProblem, iObjective, iCodification, Solution> s1) {
-        try {
-            Random rnd = new Random(System.currentTimeMillis());
-            if (mutationList.length != 0) {
-                mutationList[rnd.nextInt(mutationList.length)].mutation(problemNode, s1.codif());
-            } else {
-                System.out.println("Critical Error: Empty Mutation List.");
-                return s1;
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(iMutationProviderDefault.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return s1;
+	try {
+	    Random rnd = new Random(System.currentTimeMillis());
+	    if (mutationList.length != 0) {
+		if (Math.random() <= mutationRate) {
+		    mutationList[rnd.nextInt(mutationList.length)].mutation(problemNode, s1.codif());
+		}
+	    } else {
+		System.out.println("Critical Error: Empty Mutation List.");
+		return s1;
+	    }
+	} catch (Exception ex) {
+	    Logger.getLogger(iMutationProviderDefault.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return s1;
     }
 
     @Override
     public String name() {
-        return "MutationProvider Default";
+	return "MutationProvider Default";
     }
 
     @Override
     public String description() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
