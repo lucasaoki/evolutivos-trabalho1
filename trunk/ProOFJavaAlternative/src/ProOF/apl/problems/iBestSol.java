@@ -34,7 +34,7 @@ public class iBestSol extends Best {
 	return obj;
     }
 
-    private class Sol {
+    public class Sol {
 
 	private Solution sol;
 	private long eval;
@@ -207,5 +207,9 @@ public class iBestSol extends Best {
 
     public pIteration getCont_iter() {
 	return cont_iter;
+    }
+
+    public Sol getBestInfo() {
+	return best;
     }
 }
