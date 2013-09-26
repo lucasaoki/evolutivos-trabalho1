@@ -15,6 +15,7 @@ import ProOF.com.language.Node;
 import ProOF.gen.operator.oMutation;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
+import ProOF.utils.GlobalConstants;
 
 /**
  *
@@ -44,7 +45,7 @@ public abstract class aMutationProvider extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	mutationRate = link.Dbl("Mutatin Rate", 1, 0, 1);
+	mutationRate = link.Dbl("Mutatin Rate", GlobalConstants.mutationRate, 0, 1);
     }
 
     @Override

@@ -15,6 +15,7 @@ import ProOF.com.language.Node;
 import ProOF.gen.operator.oCrossover;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
+import ProOF.utils.GlobalConstants;
 
 /**
  *
@@ -52,7 +53,7 @@ public abstract class aCrossoverProvider extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	crossoverRate = link.Dbl("Crossover Rate", 0, 0, 1);
+	crossoverRate = link.Dbl("Crossover Rate", GlobalConstants.crossoverRate, 0, 1);
     }
 
     @Override

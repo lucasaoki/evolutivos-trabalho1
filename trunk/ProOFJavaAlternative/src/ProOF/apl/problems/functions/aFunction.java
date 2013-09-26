@@ -22,22 +22,6 @@ import java.util.LinkedHashMap;
 public abstract class aFunction extends Node {
 
     private StreamPrinter com;
-
-    protected class Limits {
-
-	public double max;
-	public double min;
-
-	public Limits(double min, double max) {
-	    this.max = max;
-	    this.min = min;
-	}
-
-	public void setLimits(double min, double max) {
-	    this.max = max;
-	    this.min = min;
-	}
-    }
     protected HashMap<Integer, Limits> limitList;
 
     public aFunction(int size) {
@@ -123,5 +107,37 @@ public abstract class aFunction extends Node {
     @Override
     public void results(LinkerResults link) throws Exception {
 	//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public class Limits {
+
+	public double max;
+	public double min;
+
+	public Limits(double min, double max) {
+	    this.max = max;
+	    this.min = min;
+	}
+
+	public void setLimits(double min, double max) {
+	    this.max = max;
+	    this.min = min;
+	}
+
+	public double getMax() {
+	    return max;
+	}
+
+	public void setMax(double max) {
+	    this.max = max;
+	}
+
+	public double getMin() {
+	    return min;
+	}
+
+	public void setMin(double min) {
+	    this.min = min;
+	}
     }
 }
