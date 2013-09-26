@@ -4,12 +4,12 @@
  */
 package ProOF.apl.problems;
 
+import ProOF.apl.stop.iStopEvalConvTime;
 import ProOF.com.Communication;
 import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerResults;
 import ProOF.com.StreamPrinter;
 import ProOF.com.runner.ExceptionForceFinish;
-import ProOF.gen.best.nEvaluations;
 import ProOF.gen.stopping.aStop;
 import ProOF.gen.stopping.pIteration;
 import ProOF.opt.abst.problem.meta.Best;
@@ -55,7 +55,7 @@ public class iBestSol extends Best {
      */
     private Sol best;
     private final uTime time = new uTimeMilli();
-    private final nEvaluations cont_eval = nEvaluations.object();
+    private final iEvaluations cont_eval = iEvaluations.object();
     private pIteration cont_iter;
     private aStop stop;
     private StreamPrinter com;
@@ -101,10 +101,22 @@ public class iBestSol extends Best {
 	//best = best==null ? sol : stop.evaluate() ? best : best.minimum(sol);
 	cont_eval.update();
 
+	iObjective iobj = (iObjective) sol.obj();
+	iCodification icod = (iCodification) sol.codif();
+
 	if (!stop.end()) {
 	    if (best.sol == null || sol.LT(best.sol)) {
-		iObjective iobj = (iObjective) sol.obj();
-		iCodification icod = (iCodification) sol.codif();
+
+		if (stop instanceof iStopEvalConvTime && best.sol != null) {
+		    iStopEvalConvTime sp = (iStopEvalConvTime) stop;
+		    iObjective iobjBest = (iObjective) best.sol.obj();
+		    if (Math.abs(iobj.abs_value() - iobjBest.abs_value()) < sp.getMax_RangeVary()) {
+			cont_eval.updateWithoutVary();
+		    } else {
+			cont_eval.resetWithoutVary();
+		    }
+		}
+
 
 		best.sol = sol.Clone(prob);
 		best.eval = cont_eval.value();

@@ -5,6 +5,7 @@
 package ProOF.apl.methods.GA.algorithm;
 
 import ProOF.apl.problems.iCodification;
+import ProOF.apl.problems.iEvaluations;
 import ProOF.apl.problems.iObjective;
 import ProOF.apl.problems.iProblem;
 import ProOF.apl.problems.operators.crossover.aCrossoverProvider;
@@ -19,7 +20,6 @@ import ProOF.com.language.Node;
 import ProOF.gen.best.nEvaluations;
 import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
-import ProOF.opt.abst.problem.meta.Objective;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
 import ProOF.utils.GenerationInfo;
@@ -37,7 +37,7 @@ public abstract class aGA extends Node {
     //general nodes
     protected iProblem problemNode;
     protected oInitializer<iProblem, iCodification> initializerOperatorNode;
-    protected nEvaluations evalNodeSingle;
+    protected iEvaluations evalNodeSingle;
     protected aStop stopNode;
     //CROSSOVER
     protected aCrossoverProvider cross;
@@ -51,7 +51,7 @@ public abstract class aGA extends Node {
     public void services(LinkerNodes link) throws Exception {
 	problemNode = link.need(Problem.class, problemNode);
 	stopNode = link.need(aStop.class, stopNode);
-	evalNodeSingle = link.need(nEvaluations.class, evalNodeSingle);	//added by bestsol
+	evalNodeSingle = link.need(iEvaluations.class, evalNodeSingle);	//added by bestsol
 	initializerOperatorNode = link.need(oInitializer.class, initializerOperatorNode);
 	cross = link.get(fCrossoverProvider.obj, cross);
 	mutation = link.get(fMutationProvider.obj, mutation);
