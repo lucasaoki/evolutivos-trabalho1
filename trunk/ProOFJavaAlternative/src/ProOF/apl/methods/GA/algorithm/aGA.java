@@ -99,11 +99,7 @@ public abstract class aGA extends Node {
 	for (Solution s : populationList) {
 	    problemNode.evaluate(s);
 	}
-	try {
-	    Collections.sort(populationList, new IComp());
-	} catch (Exception e) {
-	    System.err.println("Sort Error");
-	}
+	Collections.sort(populationList, new IComp());
     }
 
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> sublistClone(List<Solution<iProblem, iObjective, iCodification, Solution>> list, int start, int end) throws Exception {
@@ -134,15 +130,18 @@ public abstract class aGA extends Node {
 
 	@Override
 	public int compare(Solution<iProblem, iObjective, iCodification, Solution> t, Solution<iProblem, iObjective, iCodification, Solution> t1) {
-	    if (t.obj().abs_value() == t1.obj().abs_value()) {
-		return 0;
-	    }
 
-	    if (t.obj().abs_value() > t1.obj().abs_value()) {
-		return 1;
-	    } else {
-		return -1;
-	    }
+	    return Double.compare(t.obj().abs_value(), t1.obj().abs_value());
+
+//	    if (t.obj().abs_value() > t1.obj().abs_value()) {
+//		return 1;
+//	    } else if (t.obj().abs_value() < t1.obj().abs_value()) {
+//		return -1;
+//	    } else {
+//		return 0;
+//	    }
+//		if (t.obj().abs_value() == t1.obj().abs_value()) {
+//		    return 0;
 
 	}
     }
