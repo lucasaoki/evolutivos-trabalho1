@@ -21,6 +21,7 @@ import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
+import ProOF.utils.GenerationInfo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -57,7 +58,7 @@ public abstract class aGA extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-	population_size = link.Int("Population size", 1000, 1, 9999);
+	population_size = link.Int("Population size", 1000, 1, 10000000);
     }
 
     @Override
@@ -77,12 +78,17 @@ public abstract class aGA extends Node {
     public List<Solution<iProblem, iObjective, iCodification, Solution>> generate(int size) throws Exception {
 	List<Solution<iProblem, iObjective, iCodification, Solution>> tpop = new ArrayList<>();
 	Solution<iProblem, iObjective, iCodification, Solution> s;
-	for (int c = 0; c < size; c++) {
-	    s = problemNode.NewSolution();
-	    s.codif().setRelativePopSize(size);
-	    s.codif().setRelativePositionInPop(c);
-	    initializerOperatorNode.initialize(problemNode, s.codif());
-	    tpop.add(s);
+
+
+	if (size > 0) {
+	    GenerationInfo.newGeneration();
+
+	    for (int c = 0; c < size; c++) {
+		s = problemNode.NewSolution();
+		s.codif().getGenInfo().setInfo(c, size);
+		initializerOperatorNode.initialize(problemNode, s.codif());
+		tpop.add(s);
+	    }
 	}
 	return tpop;
     }
