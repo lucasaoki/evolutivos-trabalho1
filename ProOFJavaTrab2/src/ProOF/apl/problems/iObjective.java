@@ -4,7 +4,7 @@
  */
 package ProOF.apl.problems;
 
-import ProOF.apl.problems.functions.aMaze;
+import ProOF.apl.problems.maze.aMaze;
 import ProOF.com.StreamPrinter;
 import ProOF.gen.operator.oCrossover;
 import ProOF.gen.operator.oMutation;

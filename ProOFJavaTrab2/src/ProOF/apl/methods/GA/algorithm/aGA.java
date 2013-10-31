@@ -4,7 +4,7 @@
  */
 package ProOF.apl.methods.GA.algorithm;
 
-import ProOF.apl.problems.functions.aMaze;
+import ProOF.apl.problems.maze.aMaze;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iEvaluations;
 import ProOF.apl.problems.iObjective;
