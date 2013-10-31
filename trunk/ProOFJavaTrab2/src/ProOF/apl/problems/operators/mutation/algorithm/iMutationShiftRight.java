@@ -4,7 +4,7 @@
  */
 package ProOF.apl.problems.operators.mutation.algorithm;
 
-import ProOF.apl.problems.functions.aMaze;
+import ProOF.apl.problems.maze.aMaze;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iProblem;
 import ProOF.gen.operator.oMutation;

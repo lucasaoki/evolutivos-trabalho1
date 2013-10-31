@@ -4,8 +4,8 @@
  */
 package ProOF.apl.problems;
 
-import ProOF.apl.problems.functions.aMaze;
-import ProOF.apl.problems.functions.fFunction;
+import ProOF.apl.problems.maze.aMaze;
+import ProOF.apl.problems.maze.fFunction;
 import ProOF.apl.problems.operators.crossover.algorithm.fCrossover;
 import ProOF.apl.problems.operators.init.fOperatorInitializer;
 import ProOF.apl.problems.operators.mutation.algorithm.fMutation;
