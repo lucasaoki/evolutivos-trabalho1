@@ -24,7 +24,7 @@ public final class iMaze1 extends aMaze {
     }
 
     public iMaze1() {
-	super(new Maze());
+	super(new Maze("asdfasdf"));
     }
 
     @Override
