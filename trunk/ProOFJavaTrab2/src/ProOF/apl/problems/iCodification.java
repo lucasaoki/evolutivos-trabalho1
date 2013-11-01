@@ -5,6 +5,7 @@
 package ProOF.apl.problems;
 
 import MaD.maze.Maze;
+import MaD.maze.MazeSolution;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
@@ -13,10 +14,17 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  */
 public class iCodification extends Codification<iProblem,iCodification> {
     
-    private Maze maze;
+    private final Maze maze;
+    private final MazeSolution mazeSol;
     
     public iCodification(Maze maze) throws Exception {
         this.maze = maze;
+        mazeSol = new MazeSolution();
+    }
+    
+    public MazeSolution MazeIndividual()
+    {
+        return mazeSol;
     }
 
 

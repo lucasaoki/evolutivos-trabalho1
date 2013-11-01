@@ -22,7 +22,6 @@ import ProOF.gen.operator.oInitializer;
 import ProOF.gen.stopping.aStop;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.opt.abst.problem.meta.Solution;
-import ProOF.utils.GenerationInfo;
 import ProOF.utils.GlobalConstants;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,13 +85,11 @@ public abstract class aGA extends Node {
 
 
 	if (size > 0) {
-	    GenerationInfo.newGeneration();
 
 	    //System.out.println("Generating " + Integer.toString(size) + "individuals");
 
 	    for (int c = 0; c < size; c++) {
 		s = problemNode.NewSolution();
-		s.codif().getGenInfo().setInfo(c, size);
 		initializerOperatorNode.initialize(problemNode, s.codif());
 		tpop.add(s);
 	    }
@@ -109,33 +106,12 @@ public abstract class aGA extends Node {
 	    }
 	}
 	Collections.sort(populationList, new IComp());
-
-	int c = 0;
-	for (Solution s : populationList) {
-	    iCodification codif = (iCodification) s.codif();
-	    codif.getGenInfo().setInfo(c, populationList.size());
-	    c++;
-	}
     }
 
     protected void selection() throws Exception {
 
 	int c = populationList.size() - 1;
-	aMaze iFunc = problemNode.getIFunc();
-	while (c >= 0 && !populationList.isEmpty()) {
-	    Solution<iProblem, iObjective, iCodification, Solution> sol = populationList.get(c);
-
-	    iCodification cod = sol.codif();
-	    for (int d = 0; d < cod.getSize(); d++) {
-		if (cod.X[d] > iFunc.getMax(d) || cod.X[d] < iFunc.getMin(d)) {
-		    populationList.remove(sol);
-		    System.out.println("selected to remove!!");
-
-		    break;
-		}
-	    }
-	    c--;
-	}
+	aMaze iFunc = problemNode.getIMaze();
     }
 
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> sublistClone(List<Solution<iProblem, iObjective, iCodification, Solution>> list, int start, int end) throws Exception {

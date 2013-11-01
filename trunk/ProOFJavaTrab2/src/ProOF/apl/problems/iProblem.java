@@ -5,7 +5,7 @@
 package ProOF.apl.problems;
 
 import ProOF.apl.problems.maze.aMaze;
-import ProOF.apl.problems.maze.fFunction;
+import ProOF.apl.problems.maze.fMaze;
 import ProOF.apl.problems.operators.crossover.algorithm.fCrossover;
 import ProOF.apl.problems.operators.init.fOperatorInitializer;
 import ProOF.apl.problems.operators.mutation.algorithm.fMutation;
@@ -23,15 +23,15 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
 public class iProblem extends Problem<iBestSol> {
 
     private iBestSol bestSol;
-    private aMaze ifunction;
+    private aMaze imaze;
 
     public iProblem() {
 	bestSol = iBestSol.object();
 	BestSol.force_finish(false);
     }
 
-    public aMaze getIFunc() {
-	return ifunction;
+    public aMaze getIMaze() {
+	return imaze;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class iProblem extends Problem<iBestSol> {
     @Override
     public void services(LinkerNodes link) throws Exception {
 	super.services(link);
-	ifunction = link.get(fFunction.obj, ifunction);
+	imaze = link.get(fMaze.obj, imaze);
 	link.add(fOperatorInitializer.obj);
 	link.add(fCrossover.obj);
 	link.add(fMutation.obj);
@@ -55,7 +55,7 @@ public class iProblem extends Problem<iBestSol> {
 
     @Override
     public Codification NewCodification() throws Exception {
-	return new iCodification(ifunction.getSize());
+	return new iCodification(imaze.getMaze());
     }
 
     @Override

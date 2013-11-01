@@ -26,8 +26,6 @@ public class fOperatorInitializer extends Factory<oInitializer<iProblem, iCodifi
     public oInitializer NewNode(int index) {
 	switch (index) {
 	    case 0:
-		return new iInitializerDistributed();
-	    case 1:
 		return new iInitializerDefault();
 	}
 	return null;
