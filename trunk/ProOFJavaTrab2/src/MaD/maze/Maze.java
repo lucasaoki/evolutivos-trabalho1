@@ -9,7 +9,7 @@ import MaD.maze.components.MazeEdge;
 import MaD.maze.components.MazeVertex;
 import java.util.ArrayList;
 import java.util.List;
-import org.jgrapht.WeightedGraph;
+import java.util.Set;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
@@ -17,28 +17,48 @@ import org.jgrapht.graph.SimpleWeightedGraph;
  *
  * @author aoki
  */
-public class Maze {
+public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
 
-    private WeightedGraph<MazeVertex, MazeEdge> maze;
+//    private WeightedGraph<MazeVertex, MazeEdge> maze;
+    private String dataFile;
     private ArrayList<MazeVertex> vertices;
     private ArrayList<MazeEdge> edges;
     private MazeVertex startVert;
     private MazeVertex endVert;
     private DijkstraShortestPath dijPath;
 
-    public Maze(String mazeInfoFile) {
+    public Maze(String dataFile) {
 
-        maze = new SimpleWeightedGraph<MazeVertex, MazeEdge>(MazeEdge.class);
+        super(MazeEdge.class);
+        this.dataFile = dataFile;
+//        maze = new SimpleWeightedGraph<MazeVertex, MazeEdge>(MazeEdge.class);
         //vertices
         //startVert
         //endVert
         //edges and its weights
-        dijPath = new DijkstraShortestPath(maze, startVert, endVert);
+        dijPath = new DijkstraShortestPath(this, startVert, endVert);
     }
 
     public boolean loadMaze() {
         /* @TODO Read maze info, setup model. */
+        /* Load dataFile */
         return false;
+    }
+
+    public MazeVertex getStartVert() {
+        return startVert;
+    }
+
+    public MazeVertex getEndVert() {
+        return endVert;
+    }
+
+    public ArrayList<MazeVertex> getVertices() {
+        return vertices;
+    }
+
+    Set<MazeEdge> getEdgesFromVertex(MazeVertex vert) {
+        return this.edgesOf(vert);
     }
 
     /* @TODO Maybe, return MazeSolution */
