@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jgrapht.alg.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
 /**
@@ -28,7 +27,7 @@ import org.jgrapht.graph.SimpleWeightedGraph;
 public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
 
 //    private WeightedGraph<MazeVertex, MazeEdge> maze;
-    private String dataFile;
+    private final String dataFile;
     private ArrayList<MazeVertex> vertices;
     private ArrayList<MazeEdge> edges;
     private MazeVertex startVert;
@@ -41,8 +40,8 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         this.dataFile = dataFile;
         loadMaze();
         //vertices
-//        startVert = vertices.get(0);
-//        endVert = vertices.get(vertices.size() - 1);
+        startVert = vertices.get(0);
+        endVert = vertices.get(vertices.size() - 1);
         //edges and its weights
         dijPath = new DijkstraShortestPath(this, startVert, endVert);
     }
@@ -69,11 +68,12 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
                     int n = input.nextInt();
                     edges = new ArrayList<>(n);
                     for (int i = 0; i < n; i++) {
-                        edges.add(new MazeEdge(String.valueOf(i)));
+                        MazeEdge e = new MazeEdge(String.valueOf(i));
                         MazeVertex v1 = vertices.get(input.nextInt());
                         MazeVertex v2 = vertices.get(input.nextInt());
-
-                        this.addEdge(v1, v2, edges.get(i));
+                        edges.add(e);
+                        this.addEdge(v1, v2, e);
+                        this.setEdgeWeight(e, MazeEdge.calcEdgeWeight(v1, v2));
                     }
                 }
 
