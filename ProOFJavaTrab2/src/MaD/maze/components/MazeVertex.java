@@ -28,4 +28,28 @@ public class MazeVertex {
         this._posY = y;
     }
 
+    public void showVert() {
+        System.out.println("v" + id + " [" + _posX + "," + _posY + "]");
+    }
+
+//    @Override
+//    public int hashCode() {
+//        return id.hashCode();
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (!(obj instanceof MazeVertex)) {
+//            return false;
+//        }
+//
+//        MazeVertex vertex = (MazeVertex) obj;
+//        return id.equals(vertex.id);
+//    }
 }
