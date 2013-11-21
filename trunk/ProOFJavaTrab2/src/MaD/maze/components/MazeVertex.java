@@ -28,6 +28,14 @@ public class MazeVertex {
         this._posY = y;
     }
 
+    public int getPosX() {
+        return _posX;
+    }
+
+    public int getPosY() {
+        return _posY;
+    }
+
     public void showVert() {
         System.out.println("v" + id + " [" + _posX + "," + _posY + "]");
     }

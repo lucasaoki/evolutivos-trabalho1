@@ -19,6 +19,15 @@ public class MazeEdge extends DefaultWeightedEdge {
         this.id = id;
     }
 
+    public static double calcEdgeWeight(MazeVertex v1, MazeVertex v2) {
+        double wgt = 0;
+
+        wgt = Math.sqrt((Math.pow(v1.getPosX() + v2.getPosX(), 2))
+                + Math.pow(v1.getPosY() + v2.getPosY(), 2));
+
+        return wgt;
+    }
+
 //    @Override
 //    public int hashCode() {
 //        return id.hashCode();
