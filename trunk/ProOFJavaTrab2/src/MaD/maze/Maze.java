@@ -7,10 +7,18 @@ package MaD.maze;
 
 import MaD.maze.components.MazeEdge;
 import MaD.maze.components.MazeVertex;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jgrapht.alg.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
 /**
@@ -31,18 +39,48 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
 
         super(MazeEdge.class);
         this.dataFile = dataFile;
-//        maze = new SimpleWeightedGraph<MazeVertex, MazeEdge>(MazeEdge.class);
+        loadMaze();
         //vertices
-        //startVert
-        //endVert
+//        startVert = vertices.get(0);
+//        endVert = vertices.get(vertices.size() - 1);
         //edges and its weights
         dijPath = new DijkstraShortestPath(this, startVert, endVert);
     }
 
-    public boolean loadMaze() {
+    private void loadMaze() {
         /* @TODO Read maze info, setup model. */
         /* Load dataFile */
-        return false;
+        try {
+            File f = new File(dataFile);
+            InputStream is = new FileInputStream(f);
+            Scanner input = new Scanner(is);
+
+            while (input.hasNext()) {
+                String nextToken = input.nextLine();
+                if (nextToken.equals("Vertice")) {
+                    int n = input.nextInt();
+                    vertices = new ArrayList<>(n);
+                    for (int i = 0; i < n; i++) {
+                        vertices.add(new MazeVertex(String.valueOf(i), input.nextInt(), input.nextInt()));
+                        addVertex(vertices.get(i));
+                    }
+                }
+                if (nextToken.equals("Edge")) {
+                    int n = input.nextInt();
+                    edges = new ArrayList<>(n);
+                    for (int i = 0; i < n; i++) {
+                        edges.add(new MazeEdge(String.valueOf(i)));
+                        MazeVertex v1 = vertices.get(input.nextInt());
+                        MazeVertex v2 = vertices.get(input.nextInt());
+
+                        this.addEdge(v1, v2, edges.get(i));
+                    }
+                }
+
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public MazeVertex getStartVert() {
@@ -77,5 +115,11 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
 
         double tmp = dijPath.getPathLength();
         return tmp;
+    }
+
+    public static void main(String[] args) {
+        Maze mz = new Maze("media/Graph.txt");
+
+//        System.out.println(mz.optimalSolutionWeight());
     }
 }
