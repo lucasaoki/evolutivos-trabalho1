@@ -9,6 +9,7 @@ import ProOF.apl.problems.iProblem;
 import ProOF.com.LinkerNodes;
 import ProOF.com.LinkerParameters;
 import ProOF.gen.operator.oInitializer;
+import ProOF.opt.abst.problem.meta.Problem;
 
 /**
  *
@@ -21,7 +22,6 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
     @Override
     public void services(LinkerNodes com) throws Exception {
         //super.services(com);
-        problemNode = link.need(Problem.class, problemNode);
     }
 
     @Override
@@ -31,7 +31,8 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
 
     @Override
     public void initialize(iProblem prob, iCodification codif) throws Exception {
-       codif.MazeIndividual().getVertexList();
+      
+    
     }
 
     @Override

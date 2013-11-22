@@ -64,13 +64,11 @@ public class rGA extends MetaHeuristic {
 	    _algorithm.iterate();
 	    _iteration.iteration();
 	    iProblem p = (iProblem) _prob;
-	    // iObjective obj =;
 	    Solution sol = p.best().getBestInfo().getSol();
 	    if (sol != null) {
 		iObjective obj = (iObjective) sol.obj();
 		if (obj != null) {
 		    _iteration.iterationWithoutVary(obj.abs_value());
-
 		}
 	    }
 	}
