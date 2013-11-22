@@ -23,11 +23,14 @@ public abstract class MazeSolution{
     
     protected int solutionLimitSize;
     protected boolean solutionFound;
+    
+    protected Maze maze;
 
-    public MazeSolution(int solutionLimitSize) {
+    public MazeSolution(Maze maze, int solutionLimitSize) {
         this.solutionLimitSize = solutionLimitSize;
         solutionFound = false;
         totalDistanceValid =false;
+        this.maze = maze;
     }
 
     public boolean isTotalDistanceValid() {
