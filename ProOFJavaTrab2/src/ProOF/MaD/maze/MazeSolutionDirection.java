@@ -162,6 +162,11 @@ public class MazeSolutionDirection extends MazeSolution{
 		return null;
 	}
 
+    @Override
+    public void Copy(MazeSolution mazesol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
   
     
 }

@@ -157,7 +157,7 @@ public class iBestSol extends Best {
 
     @Override
     public void finish() throws Exception {
-	if (best.sol.obj() != null) {
+	if (best.sol != null && best.sol.obj() != null) {
 	    iObjective iobj = (iObjective) best.sol.obj();
 	    iCodification icod = (iCodification) best.sol.codif();
 	    System.out.println("=================================================");

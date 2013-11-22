@@ -55,6 +55,6 @@ public class iCodification extends Codification<iProblem,iCodification> {
 
     @Override
     public void Copy(iProblem prob, iCodification source) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.mazeSol.Copy(source.getMazeSol());
     }
 }

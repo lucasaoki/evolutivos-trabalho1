@@ -343,4 +343,23 @@ public class MazeSolutionVertex extends MazeSolution{
 				return null;
 		}
 	}  
+
+    @Override
+    public void Copy(MazeSolution mazesol) {
+       if (mazesol instanceof MazeSolutionVertex)
+       {
+           MazeSolutionVertex m = (MazeSolutionVertex)mazesol;
+           
+           this.totalDistance = m.totalDistance;
+           this.totalDistanceValid = m.totalDistanceValid;
+           this.solutionFound = m.solutionFound;
+           this.mazeVertex.clear();
+           
+           for(int c = 0 ;c < m.mazeVertex.size(); c++)
+           {
+               this.mazeVertex.add(m.mazeVertex.get(c));
+           }
+           
+       }
+    }
 }

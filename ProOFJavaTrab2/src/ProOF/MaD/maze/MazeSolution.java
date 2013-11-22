@@ -8,7 +8,6 @@ package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeVertex;
 import java.util.List;
-import java.util.Set;
 
 
 
@@ -103,6 +102,8 @@ public abstract class MazeSolution{
         public abstract boolean removeAt(int index);
     
     public abstract boolean removeRange(int indexStart, int indexEnd);
+    
+    public abstract void Copy(MazeSolution mazesol);
     
 
 }
