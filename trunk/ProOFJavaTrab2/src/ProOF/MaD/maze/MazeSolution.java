@@ -50,7 +50,15 @@ public abstract class MazeSolution{
     
     public abstract boolean addVertex(MazeVertex vertex);
     
+    public abstract boolean addVertexAt(int index, MazeVertex vertex);
+    
     public abstract boolean addDirection(Directions direction);
+    
+    public abstract boolean addDirectionAt(int index, Directions direction);
+    
+    public abstract boolean removeVertexAt(int index);
+    
+    public abstract boolean removeDirectionAt(int index);
     
     public abstract MazeVertex getVertexAt(int index);
     
