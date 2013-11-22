@@ -13,11 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jgrapht.GraphPath;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
@@ -82,6 +82,12 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         }
     }
 
+    public void initialize(MazeVertex first, MazeVertex last) {
+
+        startVert = first;
+        endVert = last;
+    }
+
     public MazeVertex getStartVert() {
         return startVert;
     }
@@ -91,29 +97,66 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
     }
 
     public ArrayList<MazeVertex> getVertices() {
-        return vertices;
+        return (ArrayList<MazeVertex>) vertices.clone();
     }
 
     Set<MazeEdge> getEdgesFromVertex(MazeVertex vert) {
         return this.edgesOf(vert);
     }
 
-    public MazeVertex getEdgeFrom(int index) {
+    public MazeVertex getVertexFromIndex(int index) {
 
         return vertices.get(index);
     }
 
-//    List optimalVertexPath(int startIndex, int finalIndex) {
-//
-//        DijkstraShortestPath dijPath = new DijkstraShortestPath(this, vertices.get(startIndex), vertices.get(finalIndex));
-//        List edgePath = dijPath.getPathEdgeList();
-//        List<MazeVertex> verticesPath = new ArrayList<>();
-//
-//        return null;
-//    }
+    public List<MazeVertex> getConnectedVertices(MazeVertex v) {
+
+        List<MazeVertex> vertList = new ArrayList<>();
+        Set<MazeEdge> vEdges = edgesOf(v);
+        for (MazeEdge mazeEdge : vEdges) {
+            if (mazeEdge.getV1().equals(v)) {
+                vertList.add(mazeEdge.getV2());
+            } else {
+                vertList.add(mazeEdge.getV1());
+            }
+        }
+
+        return vertList;
+    }
+
+    ArrayList<MazeVertex> optimalVerticesPath(MazeVertex start, MazeVertex dest) {
+
+        if (this.containsVertex(start) && this.containsVertex(dest)) {
+
+            DijkstraShortestPath dijPath = new DijkstraShortestPath(this, start, dest);
+            List edgePath = dijPath.getPathEdgeList();
+            ArrayList<MazeVertex> verticesPath = new ArrayList<>();
+
+            verticesPath.add(start);
+            MazeVertex last = start;
+            ListIterator it = edgePath.listIterator();
+            while (it.hasNext()) {
+                MazeEdge e = (MazeEdge) it.next();
+
+                if (!e.getV1().equals(last)) {
+//                    verticesPath.add(e.getV1());
+                    last = e.getV1();
+                } else {
+//                    verticesPath.add(e.getV2());
+                    last = e.getV2();
+                }
+                verticesPath.add(last);
+            }
+
+            return verticesPath;
+        } else {
+            System.out.println("Vertices not in the Graph");
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         Maze mz = new Maze("media/Graph.txt");
-
 //        System.out.println(mz.optimalSolutionWeight());
     }
 }
