@@ -7,7 +7,10 @@
 package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeVertex;
+import ProOF.MaD.maze.utils.MazeUtils;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,8 +21,8 @@ public class MazeSolutionVertex extends MazeSolution{
 
     ArrayList<MazeVertex> mazeVertex;
 
-    public MazeSolutionVertex(int solutionLimitSize) {
-        super(solutionLimitSize);
+    public MazeSolutionVertex(Maze maze, int solutionLimitSize) {
+        super(maze, solutionLimitSize);
          mazeVertex = new ArrayList<>();
     }
 
@@ -43,7 +46,25 @@ public class MazeSolutionVertex extends MazeSolution{
 
     @Override
     public boolean addDirection(Directions direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		MazeVertex vtx;
+    	
+		if( mazeVertex.size() >= 0 ){
+			if( mazeVertex.size() == 1 ){
+				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(0), mazeVertex.get(0), direction);
+			} else {
+				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(mazeVertex.size()-2), mazeVertex.get(mazeVertex.size()-1), direction);
+			}
+			if(vtx != null){
+				mazeVertex.add(vtx);
+				
+				return true;
+			} else
+				return false;
+			
+		}
+		else
+			return false;
+        
     }
 
     @Override
@@ -78,7 +99,13 @@ public class MazeSolutionVertex extends MazeSolution{
 
     @Override
     public boolean addVertexAt(int index, MazeVertex vertex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	if (index >= 0 && index < mazeVertex.size()){
+    		mazeVertex.add(index, vertex);
+    		
+    		return true;
+    	}
+    	else
+    		return false;
     }
 
     @Override
@@ -103,10 +130,6 @@ public class MazeSolutionVertex extends MazeSolution{
         }
     }
 
-    @Override
-    public boolean addVertexRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public boolean addDirectionRange(List<MazeVertex> vertices) {
@@ -114,19 +137,80 @@ public class MazeSolutionVertex extends MazeSolution{
     }
 
     @Override
-    public boolean addDirectionRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean removeAt(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (index >= 0 && index < mazeVertex.size()){
+        	mazeVertex.remove(index);
+        	
+        	return true;
+        }
+        else
+        	return false;
     }
 
     @Override
     public boolean removeRange(int indexStart, int indexEnd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	if( indexStart >= 0 && indexEnd < mazeVertex.size() && indexEnd > indexStart )
+    	{
+    		for (int i = indexStart; i < indexEnd+1; i++) {
+				mazeVertex.remove(indexStart);
+			}
+    		
+    		return true;
+    	}
+    	else
+    		return false;
     }
+
+	@Override
+	public boolean addVertexRangeAt(int indexStart, List<MazeVertex> vertices) {
+		int index = 0;
+    	if (indexStart >= 0 && indexStart <= mazeVertex.size()){
+    		for (int i = indexStart; i < vertices.size(); i++) {
+				mazeVertex.add(i, vertices.get(index++));
+			}
+    		
+    		return true;
+    	}
+    	else
+    		return false;
+	}
+
+	@Override
+	public boolean addDirectionRangeAt(int indexStart, List<MazeVertex> vertices) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<MazeVertex> getVertexRange(int indexStart, int indexEnd) {
+		
+		List<MazeVertex> list;
+		
+		if( indexEnd > indexStart){
+			if( indexStart >= 0 && indexEnd < mazeVertex.size() ){
+			
+				return mazeVertex.subList(indexStart, indexEnd);
+			} 
+			else
+				return null;
+			
+		} else {
+			if( indexEnd >=0 && indexStart < mazeVertex.size() ){
+				list = mazeVertex.subList(indexEnd, indexStart);
+				Collections.reverse(list);
+				
+				return list;
+			}
+			else
+				return null;
+		}
+	}
+
+	@Override
+	public List<Directions> getDirectionsRange(int indexStart, int indexEnd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
   
     
