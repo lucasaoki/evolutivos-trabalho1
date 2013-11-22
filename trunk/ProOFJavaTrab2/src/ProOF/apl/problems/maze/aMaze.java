@@ -107,7 +107,7 @@ public abstract class aMaze extends Node {
         //init code here if any
         ArrayList<MazeVertex> optimalVerticesPath = maze.optimalVerticesPath(maze.getVertexFromIndex(startVertexIndex), maze.getVertexFromIndex(endVertexIndex));
 
-        optimalSolution = new MazeSolutionVertex(maze.getVertices().size());
+        optimalSolution = new MazeSolutionVertex(maze,maze.getVertices().size());
         optimalSolution.addVertexRange(optimalVerticesPath);
         
         for (int c= 0;c < optimalVerticesPath.size(); c++)
