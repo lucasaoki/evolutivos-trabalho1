@@ -17,8 +17,9 @@ public class MazeSolutionVertex extends MazeSolution{
 
     ArrayList<MazeVertex> mazeVertex;
 
-    public MazeSolutionVertex() {
-        mazeVertex = new ArrayList<>();
+    public MazeSolutionVertex(int solutionLimitSize) {
+        super(solutionLimitSize);
+         mazeVertex = new ArrayList<>();
     }
 
     @Override

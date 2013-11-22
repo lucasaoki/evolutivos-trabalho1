@@ -4,7 +4,6 @@
  */
 package ProOF.apl.problems;
 
-import ProOF.MaD.maze.MazeSolutionDirection;
 import ProOF.apl.problems.maze.aMaze;
 import ProOF.apl.problems.maze.fMaze;
 import ProOF.apl.problems.operators.crossover.algorithm.fCrossover;
@@ -25,9 +24,10 @@ import ProOF.utils.GlobalConstants;
  */
 public class iProblem extends Problem<iBestSol> {
 
-    private iBestSol bestSol;
+    private final iBestSol bestSol;
     private aMaze imaze;    
     private boolean useVertex;
+    private int limitSize;
     
 
     public iProblem() {
@@ -36,6 +36,12 @@ public class iProblem extends Problem<iBestSol> {
         
         useVertex = GlobalConstants.use_vertex;
     }
+
+    public boolean isUsingVertex() {
+        return useVertex;
+    }
+    
+    
     
     public aMaze getIMaze() {
 	return imaze;
@@ -60,10 +66,8 @@ public class iProblem extends Problem<iBestSol> {
         int iuse;
         iuse =  link.Int("0->Direction / 1->Vertex", (GlobalConstants.use_vertex ? 1 : 0), 0, 1);
         
-        if (iuse == 1)
-            useVertex = true;
-        else
-            useVertex = false;
+        limitSize =  link.Int("Limit size of individual", GlobalConstants.limitIndividualSize , 1, 9999999);
+        useVertex = iuse == 1;
 
     }
 
@@ -75,7 +79,7 @@ public class iProblem extends Problem<iBestSol> {
     @Override
     public Codification NewCodification() throws Exception {
         
-        return new iCodification(useVertex,imaze);
+        return new iCodification(useVertex,imaze,limitSize);
     }
 
     @Override

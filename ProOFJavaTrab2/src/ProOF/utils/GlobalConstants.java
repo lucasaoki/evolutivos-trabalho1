@@ -11,6 +11,9 @@ package ProOF.utils;
 public class GlobalConstants {
     
     public final static boolean use_vertex = false;
+    
+    public final static int limitIndividualSize = 10000;
+    public final static int startIndividualSize = 5000;
 
     //aGA
     public final static int population_size = 300;

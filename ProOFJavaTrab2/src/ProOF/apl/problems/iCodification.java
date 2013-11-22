@@ -16,19 +16,21 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  */
 public class iCodification extends Codification<iProblem,iCodification> {
     
-    private final aMaze maze;
+    private final int limitSize;
+    private final aMaze maze;   //FIXME: nao precisa estar aqui no codification
     private final MazeSolution mazeSol;
     private final boolean useVertex;
     
-    public iCodification(boolean useVertex, aMaze maze) throws Exception {
+    public iCodification(boolean useVertex, aMaze maze, int limitSize) throws Exception {
         this.maze = maze;
+        this.limitSize = limitSize;
         
         this.useVertex = useVertex;
         
         if (useVertex)
-            mazeSol = new MazeSolutionVertex();
+            mazeSol = new MazeSolutionVertex(limitSize);
         else
-            mazeSol = new MazeSolutionDirection();
+            mazeSol = new MazeSolutionDirection(limitSize);
         
     }
 
@@ -48,7 +50,7 @@ public class iCodification extends Codification<iProblem,iCodification> {
     
     @Override
     public iCodification New(iProblem prob) throws Exception {
-	return new iCodification(useVertex,maze);
+	return new iCodification(useVertex,maze, limitSize);
     }
 
     @Override

@@ -14,6 +14,10 @@ import ProOF.MaD.maze.components.MazeVertex;
  */
 public class MazeSolutionDirection extends MazeSolution{
 
+    public MazeSolutionDirection(int solutionLimitSize) {
+        super(solutionLimitSize);
+    }
+
     @Override
     public int getSize() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
