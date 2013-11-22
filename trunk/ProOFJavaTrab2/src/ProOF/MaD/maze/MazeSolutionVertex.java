@@ -197,8 +197,19 @@ public class MazeSolutionVertex extends MazeSolution{
 
 
     @Override
-    public boolean addDirectionRange(List<MazeVertex> vertices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addDirectionRange(List<Directions> directions) {
+    	boolean res = false;
+    	
+    	if( directions != null ){
+    		if( mazeVertex.size() + directions.size() >= solutionLimitSize ){
+    			for (int i = 0; i < directions.size(); i++) {
+					res = this.addDirection(directions.get(i));
+				}
+    			return res;
+    		} else
+    			return false;
+    	} else
+    		return false;
     }
 
     @Override
