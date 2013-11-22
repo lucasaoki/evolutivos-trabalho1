@@ -17,7 +17,7 @@ public class MazeVertex {
     private int index;
     private Double location;
 
-    public MazeVertex(String id, int x, int y) {
+    public MazeVertex(String id, double x, double y) {
 
         this.id = id;
         index = Integer.parseInt(id);
