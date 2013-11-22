@@ -88,7 +88,19 @@ public class MazeSolutionVertex extends MazeSolution{
 
     @Override
     public boolean addVertexRange(List<MazeVertex> vertices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+      if (mazeVertex.size() > solutionLimitSize + vertices.size() ){
+            System.out.println("Solution is full of vertex!");
+            return false;
+        }
+        else
+        {
+            for (int c= 0; c< vertices.size();c++)
+            {
+                 mazeVertex.add(vertices.get(c));
+            }           
+            return true;
+        }
     }
 
     @Override
