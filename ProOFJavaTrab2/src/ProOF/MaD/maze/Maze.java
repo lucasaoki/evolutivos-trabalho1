@@ -124,7 +124,7 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         return vertList;
     }
 
-    ArrayList<MazeVertex> optimalVerticesPath(MazeVertex start, MazeVertex dest) {
+    public ArrayList<MazeVertex> optimalVerticesPath(MazeVertex start, MazeVertex dest) {
 
         if (this.containsVertex(start) && this.containsVertex(dest)) {
 
