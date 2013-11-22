@@ -5,6 +5,8 @@
  */
 package ProOF.MaD.maze.components;
 
+import java.awt.geom.Point2D;
+
 /**
  *
  * @author lucasaoki
@@ -12,52 +14,55 @@ package ProOF.MaD.maze.components;
 public class MazeVertex {
 
     private String id;
-    private int _posX;
-    private int _posY;
+    private Point2D.Double position;
 
-    public MazeVertex(String id, int posX, int posY) {
+    public MazeVertex(String id, int x, int y) {
 
         this.id = id;
-        this._posX = posX;
-        this._posY = posY;
+        position = new Point2D.Double(x, y);
+    }
+
+    public MazeVertex(String id, Point2D.Double pos) {
+
+        this.id = id;
+        position = pos;
     }
 
     void setPosition(int x, int y) {
 
-        this._posX = x;
-        this._posY = y;
+        position.setLocation(x, y);
     }
 
-    public int getPosX() {
-        return _posX;
+    public double getPosX() {
+        return position.getX();
     }
 
-    public int getPosY() {
-        return _posY;
+    public double getPosY() {
+        return position.getY();
     }
 
     public void showVert() {
-        System.out.println("v" + id + " [" + _posX + "," + _posY + "]");
+        System.out.println("v" + id + " [" + position.x + "," + position.y + "]");
     }
 
-//    @Override
-//    public int hashCode() {
-//        return id.hashCode();
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (!(obj instanceof MazeVertex)) {
-//            return false;
-//        }
-//
-//        MazeVertex vertex = (MazeVertex) obj;
-//        return id.equals(vertex.id);
-//    }
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof MazeVertex)) {
+            return false;
+        }
+
+        MazeVertex vertex = (MazeVertex) obj;
+        return id.equals(vertex.id);
+    }
 }
