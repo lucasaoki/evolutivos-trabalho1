@@ -9,6 +9,8 @@ package ProOF.utils;
  * @author ito
  */
 public class GlobalConstants {
+    
+    public final static boolean use_vertex = false;
 
     //aGA
     public final static int population_size = 300;

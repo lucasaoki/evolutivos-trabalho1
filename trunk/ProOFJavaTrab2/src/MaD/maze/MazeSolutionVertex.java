@@ -6,12 +6,10 @@
 
 package MaD.maze;
 
-
-
 /**
  *
  * @author ito
  */
-public abstract class MazeSolution{
-
+public class MazeSolutionVertex extends MazeSolution{
+    
 }

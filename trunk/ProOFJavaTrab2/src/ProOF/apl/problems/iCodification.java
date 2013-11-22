@@ -4,8 +4,10 @@
  */
 package ProOF.apl.problems;
 
-import MaD.maze.Maze;
 import MaD.maze.MazeSolution;
+import MaD.maze.MazeSolutionDirection;
+import MaD.maze.MazeSolutionVertex;
+import ProOF.apl.problems.maze.aMaze;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 
 /**
@@ -14,23 +16,39 @@ import ProOF.opt.abst.problem.meta.codification.Codification;
  */
 public class iCodification extends Codification<iProblem,iCodification> {
     
-    private final Maze maze;
+    private final aMaze maze;
     private final MazeSolution mazeSol;
+    private final boolean useVertex;
     
-    public iCodification(Maze maze) throws Exception {
+    public iCodification(boolean useVertex, aMaze maze) throws Exception {
         this.maze = maze;
-        mazeSol = new MazeSolution();
+        
+        this.useVertex = useVertex;
+        
+        if (useVertex)
+            mazeSol = new MazeSolutionVertex();
+        else
+            mazeSol = new MazeSolutionDirection();
+        
     }
-    
-    public MazeSolution MazeIndividual()
-    {
+
+    public aMaze getMaze() {
+        return maze;
+    }
+
+    public MazeSolution getMazeSol() {
         return mazeSol;
     }
 
-
+    public boolean useVertex() {
+        return useVertex;
+    }
+    
+    
+    
     @Override
     public iCodification New(iProblem prob) throws Exception {
-	return new iCodification(maze);
+	return new iCodification(useVertex,maze);
     }
 
     @Override
