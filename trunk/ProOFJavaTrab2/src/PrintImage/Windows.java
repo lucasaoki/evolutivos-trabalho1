@@ -5,7 +5,7 @@
  */
 package PrintImage;
 
-import MaD.maze.Maze;
+import ProOF.MaD.maze.Maze;
 import javax.swing.JFrame;
 
 /**

@@ -9,9 +9,9 @@ package PrintImage;
  *
  * @author Seiji
  */
-import MaD.maze.Maze;
-import MaD.maze.components.MazeEdge;
-import MaD.maze.components.MazeVertex;
+import ProOF.MaD.maze.Maze;
+import ProOF.MaD.maze.components.MazeEdge;
+import ProOF.MaD.maze.components.MazeVertex;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -61,7 +61,7 @@ public class Screen extends JPanel {
         Set<MazeEdge > edges = maze.edgeSet();
         for(MazeEdge edge : edges){
            MazeVertex vertex =  maze.getEdgeSource(edge) ;
-            g2d.drawOval(vertex.getPosX(), vertex.getPosY(), 2, 2);
+            g2d.drawOval((int)vertex.getX(), (int)vertex.getY(), 2, 2);
         }
     }
 

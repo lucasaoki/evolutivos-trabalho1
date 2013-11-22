@@ -17,10 +17,7 @@ import ProOF.com.LinkerValidations;
 import ProOF.com.StreamPrinter;
 import ProOF.com.language.Node;
 import ProOF.utils.GlobalConstants;
-import java.awt.Dialog;
-import java.awt.Frame;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
