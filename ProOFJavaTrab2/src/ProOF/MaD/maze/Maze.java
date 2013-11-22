@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MaD.maze;
+package ProOF.MaD.maze;
 
-import MaD.maze.components.MazeEdge;
-import MaD.maze.components.MazeVertex;
+import ProOF.MaD.maze.components.MazeEdge;
+import ProOF.MaD.maze.components.MazeVertex;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

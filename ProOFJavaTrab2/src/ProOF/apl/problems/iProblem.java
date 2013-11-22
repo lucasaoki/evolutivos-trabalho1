@@ -4,7 +4,7 @@
  */
 package ProOF.apl.problems;
 
-import MaD.maze.MazeSolutionDirection;
+import ProOF.MaD.maze.MazeSolutionDirection;
 import ProOF.apl.problems.maze.aMaze;
 import ProOF.apl.problems.maze.fMaze;
 import ProOF.apl.problems.operators.crossover.algorithm.fCrossover;

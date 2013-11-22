@@ -4,12 +4,19 @@
  * and open the template in the editor.
  */
 
-package MaD.maze;
+package ProOF.MaD.maze;
+
+
 
 /**
  *
  * @author ito
  */
-public class MazeSolutionVertex extends MazeSolution{
+public abstract class MazeSolution{
     
+    
+    
+    public abstract int getSize();
+    
+
 }
