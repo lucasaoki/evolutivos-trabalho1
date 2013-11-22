@@ -7,7 +7,6 @@ package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeEdge;
 import ProOF.MaD.maze.components.MazeVertex;
-import com.sun.org.apache.xpath.internal.compiler.OpCodes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,6 +45,24 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         //edges and its weights
     }
 
+    public MazeVertex addNewVertex(String id, int x, int y) {
+
+        MazeVertex v = new MazeVertex(id, x, y);
+        vertices.add(v);
+        addVertex(v);
+
+        return v;
+    }
+
+    public MazeEdge addNewEdge(String id, MazeVertex v1, MazeVertex v2) {
+
+        MazeEdge e = new MazeEdge(id, v1, v2);
+        edges.add(e);
+        addEdge(v1, v2, e);
+        setEdgeWeight(e, e.calcEdgeWeight());
+        return e;
+    }
+
     private void loadMaze() {
         /* @TODO Read maze info, setup model. */
         /* Load dataFile */
@@ -60,8 +77,7 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
                     int n = input.nextInt();
                     vertices = new ArrayList<>(n);
                     for (int i = 0; i < n; i++) {
-                        vertices.add(new MazeVertex(String.valueOf(i), input.nextInt(), input.nextInt()));
-                        addVertex(vertices.get(i));
+                        addNewVertex(String.valueOf(i), input.nextInt(), input.nextInt());
                     }
                 }
                 if (nextToken.equals("Edge")) {
@@ -70,10 +86,7 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
                     for (int i = 0; i < n; i++) {
                         MazeVertex v1 = vertices.get(input.nextInt());
                         MazeVertex v2 = vertices.get(input.nextInt());
-                        MazeEdge e = new MazeEdge(String.valueOf(i), v1, v2);
-                        edges.add(e);
-                        this.addEdge(v1, v2, e);
-                        this.setEdgeWeight(e, e.calcEdgeWeight());
+                        addNewEdge(String.valueOf(i), v1, v2);
                     }
                 }
             }
@@ -152,6 +165,31 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         } else {
             System.out.println("Vertices not in the Graph");
             return null;
+        }
+    }
+
+    public void mazeGeneration(int w, int h) {
+
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                if (i != w - 1) {
+                    int v1 = i + j * w;
+                    int v2 = i + 1 + j * w;
+                    MazeVertex dir = addNewVertex(String.valueOf(v1), i, j);
+                    MazeVertex esq = addNewVertex(String.valueOf(v2), i + 1, j);
+                    addNewEdge(String.valueOf(i + j), dir, esq);
+                    //matrix.add((A) new par<Integer, Integer>(i + j * w, i + 1 + j * w));
+                }
+
+                if (j != h - 1) {
+                    int v1 = i + j * w;
+                    int v2 = i + (j + 1) * w;
+                    MazeVertex dir = addNewVertex(String.valueOf(v1), i, j);
+                    MazeVertex esq = addNewVertex(String.valueOf(v2), i + 1, j);
+                    addNewEdge(String.valueOf(i + j), dir, esq);
+                    //matriz.add((A) new par<Integer, Integer>(i + j * w, i + (j + 1) * w));
+                }
+            }
         }
     }
 
