@@ -40,22 +40,6 @@ public final class iMaze1 extends aMaze {
     @Override
     public double Evaluate(iCodification codif) throws Exception {
         
-        double sum = 0;
-        MazeSolution sol = codif.getMazeSol();
-        
-        sum +=  maze.getEdgeWeight(maze.getVertexFromIndex(startVertexIndex),sol.getVertexAt(0));
-        
-        for (int c= 0 ;c < codif.getMazeSol().getSize()- 1; c++)
-        {
-            sum+=  maze.getEdgeWeight(maze.getEdge(sol.getVertexAt(c), sol.getVertexAt(c+1)));
-        }
-        
-        if (sol.getVertexAt(sol.getSize() - 1).getIndex() != endVertexIndex){
-            sol.setSolutionFound(false);
-            sum+=1000;  //FIXME: parametrizar esse 1000
-        }
-        
-        return sum;
-
+        return _evaluate(codif.getMazeSol());
     }
 }

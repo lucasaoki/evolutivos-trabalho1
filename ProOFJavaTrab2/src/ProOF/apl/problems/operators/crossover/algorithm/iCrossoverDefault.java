@@ -10,6 +10,7 @@ import ProOF.MaD.maze.MazeSolution;
 import ProOF.MaD.maze.components.MazeVertex;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iProblem;
+import ProOF.opt.abst.problem.meta.codification.Codification;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,6 +22,7 @@ public class iCrossoverDefault extends aCrossover{
 
     @Override
     public iCodification crossover(iProblem mem, iCodification ind1, iCodification ind2) throws Exception {
+        
        
         if (mem.isUsingVertex())
         {
@@ -44,13 +46,9 @@ public class iCrossoverDefault extends aCrossover{
                     vind2Index.add(c);
                 }
             }
-            
-            
-           
-            
-            mem.NewCodification();
         }
-        
+       
+        return (iCodification) mem.NewCodification();
     }
 
     @Override

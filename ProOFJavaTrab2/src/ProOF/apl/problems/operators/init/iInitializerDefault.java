@@ -4,6 +4,7 @@
  */
 package ProOF.apl.problems.operators.init;
 
+import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
 import ProOF.MaD.maze.components.MazeVertex;
 import ProOF.apl.problems.iCodification;
@@ -47,19 +48,20 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
     public void initialize(iProblem prob, iCodification codif) throws Exception {
         
         MazeSolution mazeSol = codif.getMazeSol();
-        aMaze maze = codif.getMaze();
+        aMaze amaze = codif.getMaze();
         
         if (prob.isUsingVertex()){           
-            MazeVertex vinit=  maze.getVertexFromIndex(maze.getStartVertexIndex());
+            Maze maze = amaze.getMaze();
+            MazeVertex vinit=  maze.getVertexFromIndex(amaze.getStartVertexIndex());
             
-            List<MazeVertex> conectedVertexs =  vinit.getConnectedVertex();
+            List<MazeVertex> conectedVertexs =  maze.getConnectedVertices(vinit);
             do
             {
                 Collections.shuffle(conectedVertexs);
                 mazeSol.addVertex(conectedVertexs.get(0));
-                conectedVertexs = conectedVertexs.get(0).getConnectedVertex();
+                conectedVertexs = maze.getConnectedVertices( conectedVertexs.get(0));
             
-            }while (mazeSol.getSize() < initializeSize && mazeSol.getVertexAt(mazeSol.getSize() -1).getId() != codif.getMaze().getEndVertexIndex());
+            }while (mazeSol.getSize() < initializeSize && mazeSol.getVertexAt(mazeSol.getSize() -1).getIndex() != codif.getMaze().getEndVertexIndex());
            //condicao de parada na inicializacao eh de encher o limite ou achar o nó desejado
             
         }

@@ -6,6 +6,7 @@
 
 package ProOF.apl.problems.operators.mutation.algorithm;
 
+import ProOF.MaD.maze.Maze;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -26,7 +27,8 @@ public class iMutationDefault extends aMutation{
     @Override
     public void mutation(iProblem mem, iCodification ind) throws Exception {
     	MazeSolution mazeSol = ind.getMazeSol();
-        aMaze maze = ind.getMaze();
+        aMaze amaze = ind.getMaze();
+        Maze maze = amaze.getMaze();
         Random rand = new Random();
         int index;
         
@@ -40,14 +42,14 @@ public class iMutationDefault extends aMutation{
 				shortcut.addVertex(mazeSol.getVertexAt(i));
 			}
                   
-            List<MazeVertex> conectedVertices = vinit.getConnectedVertex();
+            List<MazeVertex> conectedVertices = maze.getConnectedVertices(vinit);
             index = -1;
             do
             {
                 Collections.shuffle(conectedVertices);
                 vinit = conectedVertices.get(0);
                 shortcut.addVertex(vinit);
-                conectedVertices = conectedVertices.get(0).getConnectedVertex();
+                conectedVertices =  maze.getConnectedVertices( conectedVertices.get(0));
                 
                 for (int i = 0; i < mazeSol.getSize(); i++) {
 					if( mazeSol.getVertexAt(i).equals(vinit) ){

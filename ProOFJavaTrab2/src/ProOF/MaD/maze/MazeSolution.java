@@ -17,13 +17,32 @@ import java.util.List;
  */
 public abstract class MazeSolution{
     
+    protected double totalDistance;
+    protected boolean totalDistanceValid;
+    
     protected int solutionLimitSize;
     protected boolean solutionFound;
 
     public MazeSolution(int solutionLimitSize) {
         this.solutionLimitSize = solutionLimitSize;
         solutionFound = false;
+        totalDistanceValid =false;
     }
+
+    public boolean isTotalDistanceValid() {
+        return totalDistanceValid;
+    }
+
+    public double getTotalDistance() {
+        return totalDistance;
+    }
+
+    public void setTotalDistance(double totalDistance) {
+        this.totalDistance = totalDistance;
+        totalDistanceValid = true;
+    }
+    
+    
 
     public boolean isSolutionFound() {
         return solutionFound;
