@@ -32,6 +32,8 @@ public class iObjective extends SingleObjective<iProblem, iCodification, iObject
 
     @Override
     public void Evaluate(iProblem prob, iCodification codif) throws Exception {
+        
+        
 	set(prob.getIMaze().Evaluate(codif));
 	eval_count++;
     }

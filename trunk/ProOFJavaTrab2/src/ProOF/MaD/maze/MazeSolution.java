@@ -17,10 +17,22 @@ import ProOF.MaD.maze.components.MazeVertex;
 public abstract class MazeSolution{
     
     protected int solutionLimitSize;
+    protected boolean solutionFound;
 
-    public MazeSolution() {
-        solutionLimitSize = 10000;
+    public MazeSolution(int solutionLimitSize) {
+        this.solutionLimitSize = solutionLimitSize;
+        solutionFound = false;
     }
+
+    public boolean isSolutionFound() {
+        return solutionFound;
+    }
+
+    public void setSolutionFound(boolean solutionFound) {
+        this.solutionFound = solutionFound;
+    }
+    
+    
 
     public int getSolutionLimitSize() {
         return solutionLimitSize;
