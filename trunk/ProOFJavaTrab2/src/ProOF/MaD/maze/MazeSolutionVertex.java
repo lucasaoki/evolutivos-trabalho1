@@ -40,6 +40,7 @@ public class MazeSolutionVertex extends MazeSolution{
         else
         {
             mazeVertex.add(vertex);
+            totalDistanceValid = false;
             return true;
         }
     }
@@ -47,24 +48,30 @@ public class MazeSolutionVertex extends MazeSolution{
     @Override
     public boolean addDirection(Directions direction) {
 		MazeVertex vtx;
-    	
-		if( mazeVertex.size() >= 0 ){
-			if( mazeVertex.size() == 1 ){
-				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(0), mazeVertex.get(0), direction);
-			} else {
-				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(mazeVertex.size()-2), mazeVertex.get(mazeVertex.size()-1), direction);
-			}
-			if(vtx != null){
-				mazeVertex.add(vtx);
-				
-				return true;
-			} else
-				return false;
-			
-		}
-		else
-			return false;
-        
+    	if (mazeVertex.size() >= solutionLimitSize){
+    		System.out.println("Solution is full of vertex!");
+            return false;
+    	} else {
+    		if( mazeVertex.size() >= 0 ){
+    			if( mazeVertex.size() == 0 ){
+    				vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
+    			} else if (mazeVertex.size() == 1) {
+    				vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(mazeVertex.size()-1), direction);
+    			} else {
+    				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(mazeVertex.size()-2), mazeVertex.get(mazeVertex.size()-1), direction);
+    			}
+
+    			if(vtx != null){
+    				mazeVertex.add(vtx);
+    				totalDistanceValid = false;
+    				return true;
+    			} else
+    				return false;
+
+    		}
+    		else
+    			return false;
+    	}
     }
 
     @Override
@@ -77,7 +84,17 @@ public class MazeSolutionVertex extends MazeSolution{
 
     @Override
     public Directions getDirectionAt(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if( index >= 0 ){
+        	if( index == 0 ){
+        		return MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), mazeVertex.get(index).getLocation());
+        	} else if ( index == 1) {
+				return MazeUtils.GetDirections(maze.getStartVert().getLocation(), mazeVertex.get(index-1).getLocation(), mazeVertex.get(index).getLocation());
+			} else {
+				return MazeUtils.GetDirections(mazeVertex.get(index-2).getLocation(), mazeVertex.get(index-1).getLocation(), mazeVertex.get(index).getLocation());
+			}
+        }
+        else
+        	return null;
     }
 
     @Override
@@ -85,8 +102,8 @@ public class MazeSolutionVertex extends MazeSolution{
        if (index >= 0 && index < mazeVertex.size())
        {
           mazeVertex.set(index, vertex);
-       
-           return true;
+          totalDistanceValid = false;
+          return true;
        }
        else
            return false;
@@ -94,40 +111,88 @@ public class MazeSolutionVertex extends MazeSolution{
 
     @Override
     public boolean setDirectionAt(int index, Directions direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean addVertexAt(int index, MazeVertex vertex) {
-    	if (index >= 0 && index < mazeVertex.size()){
-    		mazeVertex.add(index, vertex);
+    	MazeVertex vtx;
+    	
+    	if( index >= 0 && index < mazeVertex.size() ){
+    		if(index == 0){
+    			vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
+    		} else if (index == 1) {
+				vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(index-1), direction);
+			} else {
+				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index-2), mazeVertex.get(index-1), direction);
+			}
+    		if(vtx != null)
+    			return this.setVertexAt(index, vtx);
+    		else
+    			return false;
     		
-    		return true;
-    	}
-    	else
+    	} else
     		return false;
     }
 
     @Override
+    public boolean addVertexAt(int index, MazeVertex vertex) {
+    	if( mazeVertex.size() >= solutionLimitSize){
+    		System.out.println("Solution is full of vertex!");
+            return false;
+    	} else {
+    		if (index >= 0 && index < mazeVertex.size()){
+    			mazeVertex.add(index, vertex);
+    			totalDistanceValid = false;
+    			return true;
+    		}
+    		else
+    			return false;
+    	}
+    }
+
+    @Override
     public boolean addDirectionAt(int index, Directions direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MazeVertex vtx;
+    	
+    	if(mazeVertex.size() >= solutionLimitSize){
+        	System.out.println("Solution is full of vertex!");
+            return false;
+        } else {
+        	if( index >= 0 && index < mazeVertex.size() ){
+        		if( index == 0 ){
+        			vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
+        		} else if (index == 1) {
+					vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(index-1), direction);
+				} else {
+					vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index-2), mazeVertex.get(index-1), direction);
+				}
+        		
+        		if(vtx != null ){
+        			return this.addVertexAt(index, vtx);
+        		} else
+        			return false;
+        	} else 
+        		return false;
+        }
     }
 
     @Override
     public boolean addVertexRange(List<MazeVertex> vertices) {
         
-      if (mazeVertex.size() > solutionLimitSize + vertices.size() ){
-            System.out.println("Solution is full of vertex!");
-            return false;
-        }
-        else
-        {
-            for (int c= 0; c< vertices.size();c++)
-            {
-                 mazeVertex.add(vertices.get(c));
-            }           
-            return true;
-        }
+    	if(vertices == null ){
+    		System.out.println("MazeSolutionVertex.addVertexRange: ERROR: Null Parameter.");
+    		return false;
+    	} else {
+    		if (mazeVertex.size() > solutionLimitSize + vertices.size() ){
+    			System.out.println("Solution is full of vertex!");
+    			return false;
+    		}
+    		else
+    		{
+    			for (int c= 0; c< vertices.size();c++)
+    			{
+    				mazeVertex.add(vertices.get(c));
+    			}   
+    			totalDistanceValid = false;
+    			return true;
+    		}
+    	}
     }
 
 
@@ -140,7 +205,7 @@ public class MazeSolutionVertex extends MazeSolution{
     public boolean removeAt(int index) {
         if (index >= 0 && index < mazeVertex.size()){
         	mazeVertex.remove(index);
-        	
+        	totalDistanceValid = false;
         	return true;
         }
         else
@@ -149,35 +214,74 @@ public class MazeSolutionVertex extends MazeSolution{
 
     @Override
     public boolean removeRange(int indexStart, int indexEnd) {
-    	if( indexStart >= 0 && indexEnd < mazeVertex.size() && indexEnd > indexStart )
-    	{
-    		for (int i = indexStart; i < indexEnd+1; i++) {
-				mazeVertex.remove(indexStart);
-			}
-    		
-    		return true;
+    	
+    	if(indexEnd > indexStart){
+    		if( indexStart >= 0 && indexEnd < mazeVertex.size() )
+    		{
+    			for (int i = indexStart; i < indexEnd+1; i++) {
+    				mazeVertex.remove(indexStart);
+    			}
+    			totalDistanceValid = false;
+    			return true;
+    		}
+    		else
+    			return false;
+    	} else {
+    		if( indexEnd >= 0 && indexStart < mazeVertex.size() )
+    		{
+    			for (int i = indexEnd; i < indexStart; i++) {
+					mazeVertex.remove(indexEnd);
+				}
+    			totalDistanceValid = false;
+    			return true;
+    		}
+    		else
+    			return false;
     	}
-    	else
-    		return false;
     }
 
 	@Override
 	public boolean addVertexRangeAt(int indexStart, List<MazeVertex> vertices) {
 		int index = 0;
-    	if (indexStart >= 0 && indexStart <= mazeVertex.size()){
-    		for (int i = indexStart; i < vertices.size(); i++) {
-				mazeVertex.add(i, vertices.get(index++));
+		
+		if( mazeVertex.size() + vertices.size() > solutionLimitSize ){
+			System.out.println("Solution is full of vertex!");
+            return false;
+		} else {
+			if (indexStart >= 0 && indexStart <= mazeVertex.size()){
+				for (int i = indexStart; i < vertices.size(); i++) {
+					mazeVertex.add(i, vertices.get(index++));
+				}
+				totalDistanceValid = false;
+				return true;
 			}
-    		
-    		return true;
-    	}
-    	else
-    		return false;
+			else
+				return false;
+		}
 	}
 
 	@Override
-	public boolean addDirectionRangeAt(int indexStart, List<MazeVertex> vertices) {
-		// TODO Auto-generated method stub
+	public boolean addDirectionRangeAt(int indexStart, List<Directions> directions) {
+		
+		int index = 0;
+		
+		if(directions == null ){
+			System.out.println("MazeSolutionVertex.addDirectionRangeAt: ERROR: Null Parameter.");
+			return false;
+		}
+		
+		if( mazeVertex.size() + directions.size() >= solutionLimitSize ){
+			System.out.println("Solution is full of vertex!");
+            return false;
+		} else {
+			if( indexStart >= 0 && indexStart < mazeVertex.size() ){
+				for (int i = indexStart; i < indexStart+directions.size(); i++) {
+					this.addDirectionAt(i, directions.get(index++));
+				}
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
@@ -208,10 +312,24 @@ public class MazeSolutionVertex extends MazeSolution{
 
 	@Override
 	public List<Directions> getDirectionsRange(int indexStart, int indexEnd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
-  
-    
+		List<Directions> directions = new ArrayList<Directions>();
+		
+		if(indexStart < indexEnd ){
+			if( indexStart >= 0 && indexEnd < mazeVertex.size() ){
+				for (int i = indexStart; i < indexEnd+1; i++) {
+					directions.add(this.getDirectionAt(i));
+				}
+				return directions;
+			} else
+				return null;
+		} else {
+			if( indexEnd >= 0 && indexStart < mazeVertex.size() ){
+				for (int i = indexStart; i > indexEnd-1; i--) {
+					directions.add(this.getDirectionAt(i));
+				}
+				return directions;
+			} else
+				return null;
+		}
+	}  
 }
