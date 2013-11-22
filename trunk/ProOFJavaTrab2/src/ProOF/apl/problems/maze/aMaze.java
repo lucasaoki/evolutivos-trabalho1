@@ -24,9 +24,9 @@ public abstract class aMaze extends Node {
     private StreamPrinter com;
     protected Maze maze;
 
-    public aMaze(Maze maze) {
+    public aMaze() {
 	com = null;
-        this.maze = maze;
+        maze = null;
     }
     
     public Maze getMaze()
