@@ -7,6 +7,7 @@
 package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeVertex;
+import java.util.List;
 
 
 
@@ -52,13 +53,17 @@ public abstract class MazeSolution{
     
     public abstract boolean addVertexAt(int index, MazeVertex vertex);
     
+    public abstract boolean addVertexRange( List<MazeVertex> vertices);
+    
+    public abstract boolean addVertexRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices);
+    
     public abstract boolean addDirection(Directions direction);
     
     public abstract boolean addDirectionAt(int index, Directions direction);
     
-    public abstract boolean removeVertexAt(int index);
-    
-    public abstract boolean removeDirectionAt(int index);
+     public abstract boolean addDirectionRange( List<MazeVertex> vertices);
+     
+     public abstract boolean addDirectionRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices);
     
     public abstract MazeVertex getVertexAt(int index);
     
@@ -67,6 +72,10 @@ public abstract class MazeSolution{
     public abstract boolean setVertexAt(int index, MazeVertex vertex);
     
     public abstract boolean setDirectionAt(int index, Directions direction);
+    
+        public abstract boolean removeAt(int index);
+    
+    public abstract boolean removeRange(int indexStart, int indexEnd);
     
 
 }

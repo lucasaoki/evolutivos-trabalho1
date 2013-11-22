@@ -8,6 +8,7 @@ package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeVertex;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -86,12 +87,32 @@ public class MazeSolutionVertex extends MazeSolution{
     }
 
     @Override
-    public boolean removeVertexAt(int index) {
+    public boolean addVertexRange(List<MazeVertex> vertices) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean removeDirectionAt(int index) {
+    public boolean addVertexRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean addDirectionRange(List<MazeVertex> vertices) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean addDirectionRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removeAt(int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removeRange(int indexStart, int indexEnd) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
