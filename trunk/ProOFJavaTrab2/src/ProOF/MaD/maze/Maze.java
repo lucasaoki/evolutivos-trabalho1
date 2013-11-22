@@ -17,6 +17,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jgrapht.GraphPath;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
@@ -32,7 +33,6 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
     private ArrayList<MazeEdge> edges;
     private MazeVertex startVert;
     private MazeVertex endVert;
-    private DijkstraShortestPath dijPath;
 
     public Maze(String dataFile) {
 
@@ -40,10 +40,9 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         this.dataFile = dataFile;
         loadMaze();
         //vertices
-        startVert = vertices.get(0);
-        endVert = vertices.get(vertices.size() - 1);
+//        startVert = vertices.get(0);
+//        endVert = vertices.get(vertices.size() - 1);
         //edges and its weights
-        dijPath = new DijkstraShortestPath(this, startVert, endVert);
     }
 
     private void loadMaze() {
@@ -99,24 +98,19 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         return this.edgesOf(vert);
     }
 
-    /* @TODO Maybe, return MazeSolution */
-    List optimalSolutionPath() {
+    public MazeVertex getEdgeFrom(int index) {
 
-        List path = dijPath.getPathEdgeList();
-        if (path != null) {
-            System.out.println("Shortest path between " + startVert + " - " + endVert);
-            System.out.println(path);
-        }
-        /* @TODO set a return or write it to a file */
-        return path;
+        return vertices.get(index);
     }
 
-    double optimalSolutionWeight() {
-
-        double tmp = dijPath.getPathLength();
-        return tmp;
-    }
-
+//    List optimalVertexPath(int startIndex, int finalIndex) {
+//
+//        DijkstraShortestPath dijPath = new DijkstraShortestPath(this, vertices.get(startIndex), vertices.get(finalIndex));
+//        List edgePath = dijPath.getPathEdgeList();
+//        List<MazeVertex> verticesPath = new ArrayList<>();
+//
+//        return null;
+//    }
     public static void main(String[] args) {
         Maze mz = new Maze("media/Graph.txt");
 

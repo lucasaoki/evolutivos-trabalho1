@@ -5,7 +5,7 @@
  */
 package ProOF.MaD.maze.components;
 
-import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
 /**
  *
@@ -14,17 +14,20 @@ import java.awt.geom.Point2D;
 public class MazeVertex {
 
     private String id;
-    private Point2D.Double position;
+    private int index;
+    private Double position;
 
     public MazeVertex(String id, int x, int y) {
 
         this.id = id;
-        position = new Point2D.Double(x, y);
+        index = Integer.parseInt(id);
+        position = new Double(x, y);
     }
 
-    public MazeVertex(String id, Point2D.Double pos) {
+    public MazeVertex(String id, Double pos) {
 
         this.id = id;
+        index = Integer.parseInt(id);
         position = pos;
     }
 
@@ -39,6 +42,14 @@ public class MazeVertex {
 
     public double getPosY() {
         return position.getY();
+    }
+
+    public Double getPosition() {
+        return position;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public void showVert() {
