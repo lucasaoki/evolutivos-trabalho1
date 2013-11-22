@@ -4,12 +4,17 @@
  * and open the template in the editor.
  */
 
-package MaD.maze;
+package ProOF.MaD.maze;
 
 /**
  *
  * @author ito
  */
 public class MazeSolutionDirection extends MazeSolution{
+
+    @Override
+    public int getSize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

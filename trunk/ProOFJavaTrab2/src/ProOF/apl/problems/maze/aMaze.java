@@ -4,8 +4,8 @@
  */
 package ProOF.apl.problems.maze;
 
-import MaD.maze.Maze;
-import MaD.maze.MazeSolution;
+import ProOF.MaD.maze.Maze;
+import ProOF.MaD.maze.MazeSolution;
 import ProOF.apl.problems.iCodification;
 import ProOF.com.Communication;
 import ProOF.com.LinkerNodes;

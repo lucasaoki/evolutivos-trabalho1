@@ -4,9 +4,9 @@
  */
 package ProOF.apl.problems;
 
-import MaD.maze.MazeSolution;
-import MaD.maze.MazeSolutionDirection;
-import MaD.maze.MazeSolutionVertex;
+import ProOF.MaD.maze.MazeSolution;
+import ProOF.MaD.maze.MazeSolutionDirection;
+import ProOF.MaD.maze.MazeSolutionVertex;
 import ProOF.apl.problems.maze.aMaze;
 import ProOF.opt.abst.problem.meta.codification.Codification;
 

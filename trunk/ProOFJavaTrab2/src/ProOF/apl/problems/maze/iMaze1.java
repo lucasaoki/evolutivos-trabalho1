@@ -4,8 +4,9 @@
  */
 package ProOF.apl.problems.maze;
 
-import MaD.maze.Maze;
+import ProOF.MaD.maze.Maze;
 import ProOF.apl.problems.iCodification;
+import java.io.File;
 
 /**
  *
@@ -24,7 +25,8 @@ public final class iMaze1 extends aMaze {
     }
 
     public iMaze1() {
-	super(new Maze("asdfasdf"));
+
+	super(new Maze(new File(".").getAbsolutePath()));
     }
 
     @Override
