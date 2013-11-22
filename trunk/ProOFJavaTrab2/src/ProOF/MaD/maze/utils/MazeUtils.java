@@ -1,13 +1,15 @@
 package ProOF.MaD.maze.utils;
 
 import java.awt.geom.Point2D.Double;
-
+import java.util.Set;
 import ProOF.MaD.maze.Directions;
+import ProOF.MaD.maze.Maze;
+import ProOF.MaD.maze.components.MazeEdge;
 import ProOF.MaD.maze.components.MazeVertex;
 
 public class MazeUtils {
 	
-	public Directions GetDirections(Double previous, Double current, Double next){
+	static public Directions GetDirections(Double previous, Double current, Double next){
 		if( (previous.x == current.x) && (previous.y == current.y) ){
 			if( Math.abs( next.y - current.y ) > Math.abs( next.x - current.x ) ){
 				if( next.y < current.y ){
@@ -87,12 +89,283 @@ public class MazeUtils {
 		return Directions.FORWARD;
 	}
 	
-//	public MazeVertex GetDestiny( MazeVertex previous, MazeVertex current, Directions direction ){
-//		
-//		if(current.equals(previous)){
-//			
-//		}
-//	}
+	static public MazeVertex GetDestiny( Maze maze, MazeVertex previous, MazeVertex current, Directions direction ){
+		
+		Set<MazeEdge> edges;
+		MazeEdge[] edges_array;
+		MazeVertex target;
+		
+		edges = maze.edgesOf(current);
+		edges_array = edges.toArray(new MazeEdge[0]);
+		
+		if(current.equals(previous)){
+			
+			if( direction == Directions.RIGHT ){
+				for (int i = 0; i < edges_array.length; i++) {
+					target = edges_array[i].getV1();
+					if( target.equals(current) ){
+						target = edges_array[i].getV2();
+					}
+					
+					if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+						if( target.getPosX() > current.getPosX() ){
+							return target;
+						}
+					}
+				}
+				return null;
+			}
+			if( direction == Directions.LEFT ){
+				for (int i = 0; i < edges_array.length; i++) {
+					target = edges_array[i].getV1();
+					if( target.equals(current) ){
+						target = edges_array[i].getV2();
+					}
+					
+					if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+						if( target.getPosX() < current.getPosX() ){
+							return target;
+						}
+					}
+				}
+				return null;
+			}
+			if( direction == Directions.FORWARD ){
+				for (int i = 0; i < edges_array.length; i++) {
+					target = edges_array[i].getV1();
+					if( target.equals(current) ){
+						target = edges_array[i].getV2();
+					}
+					
+					if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+						if( target.getPosY() < current.getPosY() ){
+							return target;
+						}
+					}
+				}
+				return null;
+			}
+			if( direction == Directions.BACKWARD ){
+				for (int i = 0; i < edges_array.length; i++) {
+					target = edges_array[i].getV1();
+					if( target.equals(current) ){
+						target = edges_array[i].getV2();
+					}
+					
+					if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+						if( target.getPosY() > current.getPosY() ){
+							return target;
+						}
+					}
+				}
+				return null;
+			}
+		} else {
+			if( Math.abs( current.getPosX() - previous.getPosX() ) > Math.abs( current.getPosY() - previous.getPosY() ) ){
+				if( current.getPosX() > previous.getPosX() ){
+					if( direction == Directions.RIGHT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+								if( target.getPosY() > current.getPosY() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.LEFT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+								if( target.getPosY() < current.getPosY() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.FORWARD ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+								if( target.getPosX() > current.getPosX() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.BACKWARD ){
+						return previous;
+					}
+				} else {
+					if( direction == Directions.RIGHT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+								if( target.getPosY() < current.getPosY() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.LEFT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+								if( target.getPosY() > current.getPosY() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.FORWARD ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+								if( target.getPosX() < current.getPosX() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.BACKWARD ){
+						return previous;
+					}
+				}
+			} else {
+				if( current.getPosY() > previous.getPosY() ){
+					if( direction == Directions.RIGHT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+								if( target.getPosX() < current.getPosX() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.LEFT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+								if( target.getPosX() > current.getPosX() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.FORWARD ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+								if( target.getPosY() > current.getPosY() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.BACKWARD ){
+						return previous;
+					}
+				} else {
+					if( direction == Directions.RIGHT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+								if( target.getPosX() > current.getPosX() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.LEFT ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
+								if( target.getPosX() < current.getPosX() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.FORWARD ){
+						for (int i = 0; i < edges_array.length; i++) {
+							target = edges_array[i].getV1();
+							if( target.equals(current) ){
+								target = edges_array[i].getV2();
+							}
+							
+							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
+								if( target.getPosY() < current.getPosY() ){
+									return target;
+								}
+							}
+						}
+						return null;
+					}
+					if( direction == Directions.BACKWARD ){
+						return previous;
+					}
+				}
+			}
+		}
+		System.out.println("MazeUtils.GetDestiny: ERROR! Reached End of Function! Default return: null");		
+		return null;
+	}
 	
 
 }
