@@ -24,7 +24,7 @@ public class fCrossover extends Factory<oCrossover> {
     public oCrossover NewNode(int index) {
 	switch (index) {
 	    case 0:
-		return null;
+		return new iCrossoverDefault();
 //
 //            case 1:
 //                return new iCrossArithmetic();

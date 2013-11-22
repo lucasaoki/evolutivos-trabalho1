@@ -24,7 +24,7 @@ public class fMutation extends Factory<oMutation> {
     public oMutation NewNode(int index) {
         switch (index) {
             case 0:
-                return null;
+                return new iMutationDefault();
 //            case 1:
 //                return new iMutationSwapChance();
 //            case 2:
