@@ -90,11 +90,11 @@ public abstract class MazeSolution{
     
     public abstract MazeVertex getVertexAt(int index);
     
-    public abstract Set<MazeVertex> getVertexRange(int indexStart, int indexEnd);
+    public abstract List<MazeVertex> getVertexRange(int indexStart, int indexEnd);
     
     public abstract Directions getDirectionAt(int index);
     
-     public abstract Set<Directions> getDirectionsRange(int indexStart, int indexEnd);
+     public abstract List<Directions> getDirectionsRange(int indexStart, int indexEnd);
     
     public abstract boolean setVertexAt(int index, MazeVertex vertex);
     
