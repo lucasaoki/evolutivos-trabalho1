@@ -30,7 +30,7 @@ public class iCodification extends Codification<iProblem,iCodification> {
         if (useVertex)
             mazeSol = new MazeSolutionVertex(maze.getMaze() ,limitSize);
         else
-            mazeSol = new MazeSolutionDirection(limitSize);
+            mazeSol = new MazeSolutionDirection(maze.getMaze(), limitSize);
         
     }
 

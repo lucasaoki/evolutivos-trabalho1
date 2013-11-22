@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class MazeSolutionDirection extends MazeSolution{
 
-    public MazeSolutionDirection(int solutionLimitSize) {
-        super(solutionLimitSize);
+    public MazeSolutionDirection(Maze maze, int solutionLimitSize) {
+        super(maze, solutionLimitSize);
     }
 
     @Override
@@ -70,17 +70,7 @@ public class MazeSolutionDirection extends MazeSolution{
     }
 
     @Override
-    public boolean addVertexRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean addDirectionRange(List<MazeVertex> vertices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean addDirectionRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -93,6 +83,31 @@ public class MazeSolutionDirection extends MazeSolution{
     public boolean removeRange(int indexStart, int indexEnd) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+	@Override
+	public boolean addVertexRangeAt(int indexStart, List<MazeVertex> vertices) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addDirectionRangeAt(int indexStart,
+			List<Directions> directions) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<MazeVertex> getVertexRange(int indexStart, int indexEnd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Directions> getDirectionsRange(int indexStart, int indexEnd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
   
     

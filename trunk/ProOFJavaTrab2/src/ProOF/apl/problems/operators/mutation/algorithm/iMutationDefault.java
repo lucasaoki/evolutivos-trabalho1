@@ -36,7 +36,7 @@ public class iMutationDefault extends aMutation{
         	index = rand.nextInt(mazeSol.getSize());
             MazeVertex vinit = mazeSol.getVertexAt(index);
             
-            MazeSolutionVertex shortcut = new MazeSolutionVertex(mazeSol.getSolutionLimitSize());
+            MazeSolutionVertex shortcut = new MazeSolutionVertex(maze, mazeSol.getSolutionLimitSize());
             
             for (int i = 0; i < index+1; i++) {
 				shortcut.addVertex(mazeSol.getVertexAt(i));
