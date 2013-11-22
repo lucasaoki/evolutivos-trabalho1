@@ -10,7 +10,7 @@ package ProOF.utils;
  */
 public class GlobalConstants {
     
-    public final static boolean use_vertex = false;
+    public final static boolean use_vertex = true;
     
     public final static int limitIndividualSize = 10000;
     public final static int startIndividualSize = 5000;

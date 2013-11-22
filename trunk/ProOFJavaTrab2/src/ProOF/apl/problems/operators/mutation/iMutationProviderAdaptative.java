@@ -35,16 +35,8 @@ public class iMutationProviderAdaptative extends aMutationProvider{
             } catch (Exception ex) {
                 Logger.getLogger(iMutationProviderAdaptative.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return s1;
-        } else {
-            try {
-                mutationList[1].mutation(problemNode, s1.codif());
-            } catch (Exception ex) {
-                Logger.getLogger(iMutationProviderAdaptative.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return s1;
         }
-        
+         return s1;
     }
 
     @Override
