@@ -8,6 +8,7 @@ package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeVertex;
 import java.util.List;
+import java.util.Set;
 
 
 
@@ -86,7 +87,11 @@ public abstract class MazeSolution{
     
     public abstract MazeVertex getVertexAt(int index);
     
+    public abstract Set<MazeVertex> getVertexRange(int indexStart, int indexEnd);
+    
     public abstract Directions getDirectionAt(int index);
+    
+     public abstract Set<Directions> getDirectionsRange(int indexStart, int indexEnd);
     
     public abstract boolean setVertexAt(int index, MazeVertex vertex);
     
