@@ -59,13 +59,15 @@ public class iMutationDefault extends aMutation{
 				}
                 
             
-            }while (index == -1);
+            }while (index == -1 || shortcut.getSize() >= mazeSol.getSolutionLimitSize());
             
-            for (int i = index+1; i < mazeSol.getSolutionLimitSize(); i++) {
-				if(!shortcut.addVertex(mazeSol.getVertexAt(i))){
-					break;
+            if( index != -1 ){
+            	for (int i = index+1; i < mazeSol.getSize(); i++) {
+					if(!shortcut.addVertex(mazeSol.getVertexAt(i))){
+						break;
+					}
 				}
-			}
+            }
             
             mazeSol.removeRange(0, mazeSol.getSize()-1);
             for (int i = 0; i < shortcut.getSize(); i++) {
