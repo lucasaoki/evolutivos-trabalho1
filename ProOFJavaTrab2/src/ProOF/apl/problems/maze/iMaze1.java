@@ -34,7 +34,7 @@ public final class iMaze1 extends aMaze {
     public iMaze1() {
         super();
         
-        maze = new Maze("media/Graph.txt");	
+        maze = new Maze("media/Graph.txt");
     }
 
     @Override
@@ -43,16 +43,16 @@ public final class iMaze1 extends aMaze {
         double sum = 0;
         MazeSolution sol = codif.getMazeSol();
         
-        sum+= maze.getdistance( maze.getVertexFromIndex(startVertexIndex),  sol.getVertexAt(c));
+        sum +=  maze.getEdgeWeight(maze.getVertexFromIndex(startVertexIndex),sol.getVertexAt(0));
         
         for (int c= 0 ;c < codif.getMazeSol().getSize()- 1; c++)
         {
-            sum+= maze.getdistance( sol.getVertexAt(c), sol.getVertexAt(c+1));
+            sum+=  maze.getEdgeWeight(maze.getEdge(sol.getVertexAt(c), sol.getVertexAt(c+1)));
         }
         
-        if (sol.getVertexAt(sol.getSize() - 1).getId() != endVertexIndex){
+        if (sol.getVertexAt(sol.getSize() - 1).getIndex() != endVertexIndex){
             sol.setSolutionFound(false);
-            sum+=1000;
+            sum+=1000;  //FIXME: parametrizar esse 1000
         }
         
         return sum;
