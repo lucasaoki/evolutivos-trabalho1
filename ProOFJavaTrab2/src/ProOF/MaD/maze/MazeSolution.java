@@ -75,7 +75,7 @@ public abstract class MazeSolution{
     
     public abstract boolean addVertexRange( List<MazeVertex> vertices);
     
-    public abstract boolean addVertexRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices);
+    public abstract boolean addVertexRangeAt(int indexStart, List<MazeVertex> vertices);
     
     public abstract boolean addDirection(Directions direction);
     
@@ -83,7 +83,7 @@ public abstract class MazeSolution{
     
      public abstract boolean addDirectionRange( List<MazeVertex> vertices);
      
-     public abstract boolean addDirectionRangeAt(int indexStart, int indexEnd, List<MazeVertex> vertices);
+     public abstract boolean addDirectionRangeAt(int indexStart, List<MazeVertex> vertices);
     
     public abstract MazeVertex getVertexAt(int index);
     
