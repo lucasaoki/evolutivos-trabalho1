@@ -6,6 +6,7 @@ package ProOF.apl.problems.maze;
 
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
+import ProOF.MaD.maze.MazeSolutionVertex;
 import ProOF.MaD.maze.components.MazeVertex;
 import ProOF.apl.problems.iCodification;
 import ProOF.com.Communication;
@@ -15,7 +16,11 @@ import ProOF.com.LinkerResults;
 import ProOF.com.LinkerValidations;
 import ProOF.com.StreamPrinter;
 import ProOF.com.language.Node;
+import ProOF.utils.GlobalConstants;
+import java.awt.Dialog;
+import java.awt.Frame;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +38,7 @@ public abstract class aMaze extends Node {
     public aMaze() {
         com = null;
         maze = null;
+        optimalSolution = null;
     }
 
     public Maze getMaze() {
@@ -85,14 +91,9 @@ public abstract class aMaze extends Node {
 
     @Override
     public void parameters(LinkerParameters link) throws Exception {
-        startVertexIndex = link.Int("start Vertex", maze.getStartVert().getIndex(), 0, maze.vertexSet().size());
-        endVertexIndex = link.Int("end Vertex", maze.getEndVert().getIndex(), 0, maze.vertexSet().size());
-        ArrayList<MazeVertex> optimalVerticesPath = maze.optimalVerticesPath(maze.getVertexFromIndex(startVertexIndex), maze.getVertexFromIndex(endVertexIndex));
 
-        optimalSolution.addDirectionRange(optimalVerticesPath);
-        
-        _evaluate(optimalSolution);
-
+        startVertexIndex = link.Int("start Vertex", GlobalConstants.vertexDefaultStartIndex, 0, 999999);
+        endVertexIndex = link.Int("end Vertex", GlobalConstants.vertexDefaultStartIndex, 0, 999999);
     }
 
     @Override
@@ -104,6 +105,11 @@ public abstract class aMaze extends Node {
     @Override
     public void start() throws Exception {
         //init code here if any
+        ArrayList<MazeVertex> optimalVerticesPath = maze.optimalVerticesPath(maze.getVertexFromIndex(startVertexIndex), maze.getVertexFromIndex(endVertexIndex));
+
+        optimalSolution.addDirectionRange(optimalVerticesPath);
+
+        _evaluate(optimalSolution);
     }
 
     @Override
