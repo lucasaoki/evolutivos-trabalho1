@@ -26,7 +26,7 @@ public class MazeEdge extends DefaultWeightedEdge {
     public double calcEdgeWeight() {
         double wgt = 0;
 
-        wgt = Math.sqrt((Math.pow(v1.getPosX() + v2.getPosX(), 2)) + Math.pow(v1.getPosY() + v2.getPosY(), 2));
+        wgt = Math.sqrt((Math.pow(v1.getX() + v2.getX(), 2)) + Math.pow(v1.getY() + v2.getY(), 2));
 
         return wgt;
     }

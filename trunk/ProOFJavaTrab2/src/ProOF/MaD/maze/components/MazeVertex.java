@@ -15,37 +15,37 @@ public class MazeVertex {
 
     private String id;
     private int index;
-    private Double position;
+    private Double location;
 
     public MazeVertex(String id, int x, int y) {
 
         this.id = id;
         index = Integer.parseInt(id);
-        position = new Double(x, y);
+        location = new Double(x, y);
     }
 
     public MazeVertex(String id, Double pos) {
 
         this.id = id;
         index = Integer.parseInt(id);
-        position = pos;
+        location = pos;
     }
 
     void setPosition(int x, int y) {
 
-        position.setLocation(x, y);
+        location.setLocation(x, y);
     }
 
-    public double getPosX() {
-        return position.getX();
+    public double getX() {
+        return location.getX();
     }
 
-    public double getPosY() {
-        return position.getY();
+    public double getY() {
+        return location.getY();
     }
 
-    public Double getPosition() {
-        return position;
+    public Double getLocation() {
+        return location;
     }
 
     public int getIndex() {
@@ -53,7 +53,7 @@ public class MazeVertex {
     }
 
     public void showVert() {
-        System.out.println("v" + id + " [" + position.x + "," + position.y + "]");
+        System.out.println("v" + id + " [" + location.x + "," + location.y + "]");
     }
 
     @Override

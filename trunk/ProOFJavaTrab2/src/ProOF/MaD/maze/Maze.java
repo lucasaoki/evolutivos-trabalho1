@@ -7,6 +7,7 @@ package ProOF.MaD.maze;
 
 import ProOF.MaD.maze.components.MazeEdge;
 import ProOF.MaD.maze.components.MazeVertex;
+import com.sun.org.apache.xpath.internal.compiler.OpCodes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,8 +41,8 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
         this.dataFile = dataFile;
         loadMaze();
         //vertices
-//        startVert = vertices.get(0);
-//        endVert = vertices.get(vertices.size() - 1);
+        startVert = vertices.get(0);
+        endVert = vertices.get(vertices.size() - 1);
         //edges and its weights
     }
 
@@ -75,7 +76,6 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
                         this.setEdgeWeight(e, e.calcEdgeWeight());
                     }
                 }
-
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,6 +157,12 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
 
     public static void main(String[] args) {
         Maze mz = new Maze("media/Graph.txt");
-//        System.out.println(mz.optimalSolutionWeight());
+
+        List lst = mz.optimalVerticesPath(mz.getStartVert(), mz.getEndVert());
+        ListIterator it = lst.listIterator();
+        while (it.hasNext()) {
+            MazeVertex v = (MazeVertex) it.next();
+            System.out.println(v.getIndex());
+        }
     }
 }

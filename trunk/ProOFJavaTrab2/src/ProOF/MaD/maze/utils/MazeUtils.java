@@ -107,8 +107,8 @@ public class MazeUtils {
 						target = edges_array[i].getV2();
 					}
 					
-					if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-						if( target.getPosX() > current.getPosX() ){
+					if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+						if( target.getX() > current.getX() ){
 							return target;
 						}
 					}
@@ -122,8 +122,8 @@ public class MazeUtils {
 						target = edges_array[i].getV2();
 					}
 					
-					if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-						if( target.getPosX() < current.getPosX() ){
+					if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+						if( target.getX() < current.getX() ){
 							return target;
 						}
 					}
@@ -137,8 +137,8 @@ public class MazeUtils {
 						target = edges_array[i].getV2();
 					}
 					
-					if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-						if( target.getPosY() < current.getPosY() ){
+					if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+						if( target.getY() < current.getY() ){
 							return target;
 						}
 					}
@@ -152,8 +152,8 @@ public class MazeUtils {
 						target = edges_array[i].getV2();
 					}
 					
-					if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-						if( target.getPosY() > current.getPosY() ){
+					if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+						if( target.getY() > current.getY() ){
 							return target;
 						}
 					}
@@ -161,8 +161,8 @@ public class MazeUtils {
 				return null;
 			}
 		} else {
-			if( Math.abs( current.getPosX() - previous.getPosX() ) > Math.abs( current.getPosY() - previous.getPosY() ) ){
-				if( current.getPosX() > previous.getPosX() ){
+			if( Math.abs( current.getX() - previous.getX() ) > Math.abs( current.getY() - previous.getY() ) ){
+				if( current.getX() > previous.getX() ){
 					if( direction == Directions.RIGHT ){
 						for (int i = 0; i < edges_array.length; i++) {
 							target = edges_array[i].getV1();
@@ -170,8 +170,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-								if( target.getPosY() > current.getPosY() ){
+							if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+								if( target.getY() > current.getY() ){
 									return target;
 								}
 							}
@@ -185,8 +185,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-								if( target.getPosY() < current.getPosY() ){
+							if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+								if( target.getY() < current.getY() ){
 									return target;
 								}
 							}
@@ -200,8 +200,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-								if( target.getPosX() > current.getPosX() ){
+							if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+								if( target.getX() > current.getX() ){
 									return target;
 								}
 							}
@@ -219,8 +219,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-								if( target.getPosY() < current.getPosY() ){
+							if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+								if( target.getY() < current.getY() ){
 									return target;
 								}
 							}
@@ -234,8 +234,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-								if( target.getPosY() > current.getPosY() ){
+							if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+								if( target.getY() > current.getY() ){
 									return target;
 								}
 							}
@@ -249,8 +249,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-								if( target.getPosX() < current.getPosX() ){
+							if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+								if( target.getX() < current.getX() ){
 									return target;
 								}
 							}
@@ -262,7 +262,7 @@ public class MazeUtils {
 					}
 				}
 			} else {
-				if( current.getPosY() > previous.getPosY() ){
+				if( current.getY() > previous.getY() ){
 					if( direction == Directions.RIGHT ){
 						for (int i = 0; i < edges_array.length; i++) {
 							target = edges_array[i].getV1();
@@ -270,8 +270,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-								if( target.getPosX() < current.getPosX() ){
+							if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+								if( target.getX() < current.getX() ){
 									return target;
 								}
 							}
@@ -285,8 +285,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-								if( target.getPosX() > current.getPosX() ){
+							if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+								if( target.getX() > current.getX() ){
 									return target;
 								}
 							}
@@ -300,8 +300,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-								if( target.getPosY() > current.getPosY() ){
+							if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+								if( target.getY() > current.getY() ){
 									return target;
 								}
 							}
@@ -319,8 +319,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-								if( target.getPosX() > current.getPosX() ){
+							if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+								if( target.getX() > current.getX() ){
 									return target;
 								}
 							}
@@ -334,8 +334,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosX() - current.getPosX() ) > Math.abs( target.getPosY() - current.getPosY() ) ){
-								if( target.getPosX() < current.getPosX() ){
+							if( Math.abs( target.getX() - current.getX() ) > Math.abs( target.getY() - current.getY() ) ){
+								if( target.getX() < current.getX() ){
 									return target;
 								}
 							}
@@ -349,8 +349,8 @@ public class MazeUtils {
 								target = edges_array[i].getV2();
 							}
 							
-							if( Math.abs( target.getPosY() - current.getPosY() ) > Math.abs( target.getPosX() - current.getPosX() ) ){
-								if( target.getPosY() < current.getPosY() ){
+							if( Math.abs( target.getY() - current.getY() ) > Math.abs( target.getX() - current.getX() ) ){
+								if( target.getY() < current.getY() ){
 									return target;
 								}
 							}
