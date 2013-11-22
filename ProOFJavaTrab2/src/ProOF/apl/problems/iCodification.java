@@ -28,7 +28,7 @@ public class iCodification extends Codification<iProblem,iCodification> {
         this.useVertex = useVertex;
         
         if (useVertex)
-            mazeSol = new MazeSolutionVertex(limitSize);
+            mazeSol = new MazeSolutionVertex(maze.getMaze() ,limitSize);
         else
             mazeSol = new MazeSolutionDirection(limitSize);
         
