@@ -59,8 +59,8 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
                 mazeSol.addVertex(conectedVertexs.get(0));
                 conectedVertexs = conectedVertexs.get(0).getConnectedVertex();
             
-            }while (mazeSol.getSize() < initializeSize && mazeSol.getVertexAt(mazeSol.getSize() -1).getId() != codif.getMaze().getEndVertexIndex())
-           
+            }while (mazeSol.getSize() < initializeSize && mazeSol.getVertexAt(mazeSol.getSize() -1).getId() != codif.getMaze().getEndVertexIndex());
+           //condicao de parada na inicializacao eh de encher o limite ou achar o nó desejado
             
         }
         else
