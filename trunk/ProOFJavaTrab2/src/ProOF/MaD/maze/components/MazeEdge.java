@@ -14,18 +14,29 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 public class MazeEdge extends DefaultWeightedEdge {
 
     private String id;
+    private final MazeVertex v1;
+    private final MazeVertex v2;
 
-    public MazeEdge(String id) {
+    public MazeEdge(String id, MazeVertex v1, MazeVertex v2) {
         this.id = id;
+        this.v1 = v1;
+        this.v2 = v2;
     }
 
-    public static double calcEdgeWeight(MazeVertex v1, MazeVertex v2) {
+    public double calcEdgeWeight() {
         double wgt = 0;
 
-        wgt = Math.sqrt((Math.pow(v1.getPosX() + v2.getPosX(), 2))
-                + Math.pow(v1.getPosY() + v2.getPosY(), 2));
+        wgt = Math.sqrt((Math.pow(v1.getPosX() + v2.getPosX(), 2)) + Math.pow(v1.getPosY() + v2.getPosY(), 2));
 
         return wgt;
+    }
+
+    public MazeVertex getV1() {
+        return v1;
+    }
+
+    public MazeVertex getV2() {
+        return v2;
     }
 
 //    @Override
