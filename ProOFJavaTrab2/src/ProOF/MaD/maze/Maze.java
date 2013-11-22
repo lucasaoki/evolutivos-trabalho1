@@ -68,12 +68,12 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
                     int n = input.nextInt();
                     edges = new ArrayList<>(n);
                     for (int i = 0; i < n; i++) {
-                        MazeEdge e = new MazeEdge(String.valueOf(i));
                         MazeVertex v1 = vertices.get(input.nextInt());
                         MazeVertex v2 = vertices.get(input.nextInt());
+                        MazeEdge e = new MazeEdge(String.valueOf(i), v1, v2);
                         edges.add(e);
                         this.addEdge(v1, v2, e);
-                        this.setEdgeWeight(e, MazeEdge.calcEdgeWeight(v1, v2));
+                        this.setEdgeWeight(e, e.calcEdgeWeight());
                     }
                 }
 
