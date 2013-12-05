@@ -94,7 +94,7 @@ public abstract class aMaze extends Node {
     public void parameters(LinkerParameters link) throws Exception {
 
         startVertexIndex = link.Int("start Vertex", GlobalConstants.vertexDefaultStartIndex, 0, 999999);
-        endVertexIndex = link.Int("end Vertex", GlobalConstants.vertexDefaultStartIndex, 0, 999999);
+        endVertexIndex = link.Int("end Vertex", GlobalConstants.vertexDefaultEndIndex, 0, 999999);
     }
 
     @Override
