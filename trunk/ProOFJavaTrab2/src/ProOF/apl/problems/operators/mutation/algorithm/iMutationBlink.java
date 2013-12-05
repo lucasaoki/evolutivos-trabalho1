@@ -49,7 +49,7 @@ public class iMutationBlink extends aMutation{
 			
 			for (int i = 0; i < freq.size(); i++) {
 				if(bcorr == true){
-					if( freq.get(i) > num ){
+					if( freq.get(i) > num && freq.get(i) > 1){
 						index1 = i;
 						num = freq.get(i);
 					}
@@ -63,23 +63,24 @@ public class iMutationBlink extends aMutation{
 			
 			int first = -1;
 			int last = -1;
-			for (int i = 0; i < mazeSol.getSize(); i++) {
-				if( num > 1 ){
-					if(mazeSol.getVertexAt(i).getIndex() == index1){
-						num--;
-						if( first == -1){
-							first = i;
+			if( first != -1 && last != -1){
+				for (int i = 0; i < mazeSol.getSize(); i++) {
+					if( num > 1 ){
+						if(mazeSol.getVertexAt(i).getIndex() == index1){
+							num--;
+							if( first == -1){
+								first = i;
+							}
+						}
+					} else {
+						if(mazeSol.getVertexAt(i).getIndex() == index1){
+							last = i;
 						}
 					}
-				} else {
-					if(mazeSol.getVertexAt(i).getIndex() == index1){
-						last = i;
-					}
 				}
+
+				mazeSol.removeRange(first+1, last);
 			}
-			
-			mazeSol.removeRange(first+1, last);
-			
 		} else {
 			//TODO Blink Mutation Directions
 		}
