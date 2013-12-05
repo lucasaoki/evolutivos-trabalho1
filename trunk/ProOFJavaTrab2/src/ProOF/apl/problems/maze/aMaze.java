@@ -106,6 +106,9 @@ public abstract class aMaze extends Node {
     @Override
     public void start() throws Exception {
         //init code here if any
+        
+        maze.initialize(maze.getVertexFromIndex(startVertexIndex), maze.getVertexFromIndex(endVertexIndex));
+        
         ArrayList<MazeVertex> optimalVerticesPath = maze.optimalVerticesPath(maze.getVertexFromIndex(startVertexIndex), maze.getVertexFromIndex(endVertexIndex));
 
         optimalSolution = new MazeSolutionVertex(maze,maze.getVertices().size());

@@ -97,8 +97,11 @@ public class Maze extends SimpleWeightedGraph<MazeVertex, MazeEdge> {
 
     public void initialize(MazeVertex first, MazeVertex last) {
 
-        startVert = first;
-        endVert = last;
+        if (vertices.contains(first))
+            startVert = first;
+        
+        if (vertices.contains(last))
+            endVert = last;
     }
 
     public MazeVertex getStartVert() {
