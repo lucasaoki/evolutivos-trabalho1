@@ -121,6 +121,7 @@ public class Screen extends JPanel {
     }
 
     public void drawMazeSolution(MazeSolution mazeS) {
+        this.getGraphics().setColor(Color.lightGray);
         for (int c = 0; c < mazeS.getSize() - 1; c++) {
             MazeVertex vertexAt = mazeS.getVertexAt(c);
             MazeVertex vertexAt1 = mazeS.getVertexAt(c + 1);
@@ -128,5 +129,6 @@ public class Screen extends JPanel {
             this.getGraphics().drawLine((int) vertexAt.getX(), (int) vertexAt.getY(), (int) vertexAt1.getX(), (int) vertexAt1.getY());
         }
 
+        
     }
 }
