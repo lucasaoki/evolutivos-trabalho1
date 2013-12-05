@@ -31,7 +31,7 @@ public class iMutationShortcut extends aMutation{
         Maze maze = amaze.getMaze();
         Random rand = new Random();
         int index;
-        int maxShortcut = 50;
+        int maxShortcut = mazeSol.getSolutionLimitSize();
         
         if (mem.isUsingVertex()){
         	index = rand.nextInt(mazeSol.getSize());
