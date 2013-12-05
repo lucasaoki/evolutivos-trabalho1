@@ -24,8 +24,6 @@ import ProOF.apl.problems.maze.aMaze;
  */
 public class iMutationShortcut extends aMutation{
 
-    
-    
     @Override
     public void mutation(iProblem mem, iCodification ind) throws Exception {
     	MazeSolution mazeSol = ind.getMazeSol();
