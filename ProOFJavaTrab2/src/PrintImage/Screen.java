@@ -36,6 +36,7 @@ public class Screen extends JPanel {
     private int screen_width, screen_height;
     private BufferedImage img;
     private Maze maze;
+    private int flag;
 
     public Screen(int width, int height, Maze maze, String imageFail) {
         try {
@@ -63,7 +64,6 @@ public class Screen extends JPanel {
         //Image newimg = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
         //g2d.drawImage(newimg, 0, 0, null);
         g2d.setColor(Color.red);
-
         ArrayList<MazeVertex> vertices = maze.getVertices();
         Set<MazeEdge> edges = maze.edgeSet();
 
@@ -97,16 +97,16 @@ public class Screen extends JPanel {
     }
 
     public void drawMazeSolution(MazeSolution mazeS) {
-        this.getGraphics().setColor(Color.green);
         double max_x, max_y;
+        double angle  = 20;
         max_x = img.getWidth();
         max_y = img.getHeight();
         for (int c = 0; c < mazeS.getSize() - 1; c++) {
             MazeVertex vertexAt = mazeS.getVertexAt(c);
             MazeVertex vertexAt1 = mazeS.getVertexAt(c + 1);
-
-            this.getGraphics().drawLine((int) ((vertexAt.getX()* screen_width / max_x)), (int) ((vertexAt.getY()* screen_height / max_y)), (int) ((vertexAt1.getX()* screen_width / max_x)), (int) ((vertexAt1.getY()* screen_height / max_y)));
-            this.getGraphics().drawString("" + c + "", (int) ((vertexAt.getX() * screen_width / max_x)-4), (int) ((vertexAt.getY() * screen_height / max_y)-10));
+            this.getGraphics().setColor(Color.green);
+            this.getGraphics().drawLine((int)((vertexAt.getX()* screen_width / max_x)), (int) ((vertexAt.getY()* screen_height / max_y)), (int) ((vertexAt1.getX()* screen_width / max_x)), (int) ((vertexAt1.getY()* screen_height / max_y)));
+            this.getGraphics().drawString("" + c + "", (int) (((vertexAt.getX() * screen_width / max_x)-4)*Math.cos(c*angle)), (int) (((vertexAt.getY() * screen_height / max_y)-10)*Math.sin(c*angle)));
            
         }
     }
