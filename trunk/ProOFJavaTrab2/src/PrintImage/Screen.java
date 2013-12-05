@@ -82,7 +82,7 @@ public class Screen extends JPanel {
             g2d.fillOval((int) ((vertex.getX()* screen_width / max_x)-4), (int) ((vertex.getY() * screen_height / max_y)-4), 8, 8);
         }
         if(mazeS != null){
-            double angle  = 90;
+            double angle  = 60;
             double[] contador = new double[mazeS.getSize()];
             for(int c = 0 ; c < mazeS.getSize(); c++){
                 contador[c] = 0;
@@ -95,20 +95,21 @@ public class Screen extends JPanel {
                 int pos_x1 = (int) ((vertex1.getX() * screen_width / max_x));
                 int pos_y1 = (int) ((vertex1.getY() * screen_height / max_y));
                 
-                if(c == mazeS.getSize() - 1){
-                    g2d.setColor(Color.ORANGE);
+                if(c == mazeS.getSize() - 2){
+                    g2d.setColor(Color.orange);
                     g2d.fillOval(pos_x1-4, pos_y1-4, 10, 10);
                 }
                 else{
                     if(c == 0){
-                        g2d.setColor(Color.magenta);
+                        g2d.setColor(Color.blue);
                         g2d.fillOval(pos_x-4, pos_y-4, 10, 10);
                     }
                 }
                 g2d.setColor(Color.green);
                 g2d.drawLine(pos_x, pos_y, pos_x1, pos_y1);  
-                double pos_angle = 15*Math.cos(Math.toRadians( contador[vertex.getIndex()]*angle));
-                g2d.drawString("" + c + "", (int) ((pos_x-4) + pos_angle), (int) ((pos_y-10) - pos_angle));
+                double pos_angle_cos = 10*Math.cos(Math.toRadians( contador[vertex.getIndex()]*angle));
+                double pos_angle_sin = 10*Math.sin(Math.toRadians( contador[vertex.getIndex()]*angle));
+                g2d.drawString("" + c + "", (int) ((pos_x-4) + pos_angle_cos), (int) ((pos_y-10) + pos_angle_sin));
                 contador[vertex.getIndex()]++;
             }
         }
