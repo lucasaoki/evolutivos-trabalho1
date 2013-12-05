@@ -13,6 +13,7 @@ import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
 import ProOF.MaD.maze.components.MazeEdge;
 import ProOF.MaD.maze.components.MazeVertex;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -66,6 +67,7 @@ public class Screen extends JPanel {
         max_y = img.getHeight();
 
         g2d.setFont(new Font("TimesRoman", Font.BOLD, 10)); 
+        g2d.setStroke(new BasicStroke(1));
         
         BufferedImage tmpImage = getGraphicsConfiguration().createCompatibleImage(screen_width, screen_height, Transparency.TRANSLUCENT);
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -134,9 +136,12 @@ public class Screen extends JPanel {
                     g2d.setColor(Color.orange);
                     g2d.fillOval(pos_x1 - 4, pos_y1 - 4, 10, 10);
                 }
-
-                g2d.setColor(Color.red);
+                //Green
+                g2d.setStroke(new BasicStroke(3));
+                float[] hsb = Color.RGBtoHSB(200, 255, 200, null);
+                g2d.setColor(Color.getHSBColor(hsb[0],hsb[1],hsb[2]));
                 g2d.drawLine(pos_x, pos_y, pos_x1, pos_y1);
+                g2d.setStroke(new BasicStroke(1));
 
                 double pos_angle_cos = 10 * Math.cos(Math.toRadians(contador[vertex.getIndex()] * angle));
                 double pos_angle_sin = 10 * Math.sin(Math.toRadians(contador[vertex.getIndex()] * angle));
