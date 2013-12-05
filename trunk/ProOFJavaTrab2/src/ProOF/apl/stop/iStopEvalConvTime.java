@@ -13,7 +13,6 @@ import ProOF.com.LinkerParameters;
 import ProOF.com.LinkerValidations;
 import ProOF.com.StreamProgress;
 import ProOF.gen.stopping.aStop;
-import ProOF.gen.stopping.pIteration;
 import ProOF.opt.abst.problem.meta.Problem;
 import ProOF.utils.GlobalConstants;
 
