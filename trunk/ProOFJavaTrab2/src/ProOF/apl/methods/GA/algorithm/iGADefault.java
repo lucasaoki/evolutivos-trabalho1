@@ -4,6 +4,7 @@
  */
 package ProOF.apl.methods.GA.algorithm;
 
+import PrintImage.Windows;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iObjective;
 import ProOF.apl.problems.iProblem;
@@ -30,6 +31,12 @@ public class iGADefault extends aGA {
     @Override
     public void initialize() throws Exception {
 	populationList.addAll(generate(population_size));
+        
+        for (int c = 0 ;c < populationList.size(); c++)
+        {
+            Windows w = new Windows(640, 480, populationList.get(c).codif().getMaze().getMaze(), "../../../media/mapa.png");
+            w.setSolution(populationList.get(c).codif().getMazeSol());
+        }
 
 	System.out.printf("INITIALIZATED\n");
     }
@@ -43,6 +50,9 @@ public class iGADefault extends aGA {
 	    return;
 	}
         
+        if (true)
+            return;
+        
 	List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
 //	List lnew = generate((int) Math.round(population_size * newPopForCrossover));
         
@@ -50,6 +60,8 @@ public class iGADefault extends aGA {
 
 	populationList.addAll(lold);
 
+        System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
+        
 //	populationList.addAll(lnew);
 
 
@@ -64,9 +76,7 @@ public class iGADefault extends aGA {
 
 //	    System.out.print(Integer.toString(c) + " ");
 	}
-	System.out.println("End Conting: ");
 	System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
-	System.out.println("AfterCompleting Pop size: " + Integer.toString(populationList.size()));
 
 	for (int c = 0; c < populationList.size(); c++) {
 	    mutation.runMutation(populationList.get(c));
