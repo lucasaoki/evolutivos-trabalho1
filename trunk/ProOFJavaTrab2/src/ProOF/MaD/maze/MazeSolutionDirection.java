@@ -378,7 +378,9 @@ public class MazeSolutionDirection extends MazeSolution{
                 this.mazeDirections.add(m.mazeDirections.get(c));
             }
             
-        }    }
+        }    
+    	
+    }
 
   
     

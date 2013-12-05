@@ -1,7 +1,9 @@
 package ProOF.MaD.maze.utils;
 
 import java.awt.geom.Point2D.Double;
+import java.util.ArrayList;
 import java.util.Set;
+
 import ProOF.MaD.maze.Directions;
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.components.MazeEdge;
@@ -365,6 +367,27 @@ public class MazeUtils {
 		}
 		System.out.println("MazeUtils.GetDestiny: ERROR! Reached End of Function! Default return: null");		
 		return null;
+	}
+	
+	static public MazeVertex getVertex( Maze maze, ArrayList<Directions> directions, int index){
+		
+		MazeVertex vtx1, vtx2, tmp;
+		
+		vtx1 = maze.getStartVert();
+		vtx2 = vtx1;
+		
+		for (int i = 0; i < index; i++) {
+			if( i == 0 ){
+				vtx1 = MazeUtils.GetDestiny(maze, vtx1, vtx1, directions.get(i));
+			}
+			if( i > 0 ){
+				tmp = vtx1;
+				vtx1 = MazeUtils.GetDestiny(maze, vtx2, vtx1, directions.get(i));
+				vtx2 = tmp;
+			}
+		}
+		
+		return vtx1;
 	}
 	
 
