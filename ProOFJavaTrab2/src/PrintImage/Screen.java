@@ -109,7 +109,6 @@ public class Screen extends JPanel {
         Draw((Graphics2D) screen);
 
         Toolkit.getDefaultToolkit().sync();
-        screen.dispose();
     }
 
     public void callback(String[][] m) {
