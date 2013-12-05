@@ -6,7 +6,6 @@ package ProOF.apl.problems.maze;
 
 import ProOF.MaD.maze.Maze;
 import ProOF.apl.problems.iCodification;
-import java.nio.file.Paths;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class iMaze1 extends aMaze {
 
     @Override
     public void load() throws Exception {
-        super.load(); 
+        super.load();      
     }
     
     
@@ -35,6 +34,8 @@ public final class iMaze1 extends aMaze {
         super();
         
         maze = new Maze("../../../media/Graph.txt");
+       
+        
     }
 
     @Override

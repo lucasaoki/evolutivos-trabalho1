@@ -110,8 +110,6 @@ public abstract class aGA extends Node {
 
     protected void selection() throws Exception {
 
-	int c = populationList.size() - 1;
-	aMaze iFunc = problemNode.getIMaze();
     }
 
     protected List<Solution<iProblem, iObjective, iCodification, Solution>> sublistClone(List<Solution<iProblem, iObjective, iCodification, Solution>> list, int start, int end) throws Exception {

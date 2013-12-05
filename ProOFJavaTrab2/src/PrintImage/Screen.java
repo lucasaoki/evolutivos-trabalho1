@@ -21,13 +21,8 @@ import java.awt.Dimension;
 
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 import javax.swing.JPanel;
 
@@ -38,9 +33,9 @@ public class Screen extends JPanel {
     private Maze maze;
 
     public Screen(int width, int height, Maze maze, String imageFail) {
-        try {
+
             this.maze = maze;
-            this.img = ImageIO.read(new File(imageFail));
+//            this.img = ImageIO.read(new File(imageFail));
 
             screen_width = width;
             screen_height = height;
@@ -48,9 +43,6 @@ public class Screen extends JPanel {
             setPreferredSize(new Dimension(width, height));
             setBackground(Color.white);
             setDoubleBuffered(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void draw(Graphics2D g) {
@@ -62,7 +54,7 @@ public class Screen extends JPanel {
         g2.dispose();   
         double max_x, max_y;
         double min_x, min_y;
-        g2d.drawImage(img, 0, 0, null);
+//        g2d.drawImage(img, 0, 0, null);
         g2d.setColor(Color.red);
 
         ArrayList<MazeVertex> vertices = maze.getVertices();

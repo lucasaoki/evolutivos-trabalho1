@@ -4,6 +4,7 @@
  */
 package ProOF.apl.problems.maze;
 
+import PrintImage.Windows;
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
 import ProOF.MaD.maze.MazeSolutionVertex;
@@ -17,6 +18,7 @@ import ProOF.com.LinkerValidations;
 import ProOF.com.StreamPrinter;
 import ProOF.com.language.Node;
 import ProOF.utils.GlobalConstants;
+import java.awt.Window;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +28,8 @@ import java.util.ArrayList;
 public abstract class aMaze extends Node {
 
     private StreamPrinter com;
+    
+    protected Windows winMaze;
 
     protected Maze maze;
     protected int startVertexIndex;
