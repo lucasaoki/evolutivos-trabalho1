@@ -36,7 +36,6 @@ public class Screen extends JPanel {
     private BufferedImage img;
     private Maze maze;
     private MazeSolution mazeS;
-    private int flag = 0;
 
     public Screen(int width, int height, Maze maze, String imageFail) {
         try {
@@ -79,7 +78,7 @@ public class Screen extends JPanel {
             int pos_x = (int) ((vertex.getX() * screen_width / max_x));
             int pos_y = (int) ((vertex.getY() * screen_height / max_y));
             g2d.drawString("" + vertex.getIndex() + "", (pos_x-4), (pos_y-10));
-            g2d.fillOval((int) ((vertex.getX()* screen_width / max_x)-4), (int) ((vertex.getY() * screen_height / max_y)-4), 8, 8);
+            g2d.fillOval((int) (pos_x-4), (int) (pos_y-4), 8, 8);
         }
         if(mazeS != null){
             double angle  = 60;

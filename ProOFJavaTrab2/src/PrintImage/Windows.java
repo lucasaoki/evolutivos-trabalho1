@@ -67,6 +67,7 @@ public class Windows extends JFrame {
     
     public void setSolution(MazeSolution mazeS){
         graph.drawMazeSolution(mazeS);
+        graph.repaint();
     }
     
     public static void main(String[] args) {
