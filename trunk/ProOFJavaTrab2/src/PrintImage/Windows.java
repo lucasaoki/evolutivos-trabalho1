@@ -12,6 +12,7 @@ package PrintImage;
 
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
+import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 
 /**
@@ -56,7 +57,7 @@ public class Windows extends JFrame {
         Resize(width, height);
         add(graph);
         pack();
-        
+        setLocationRelativeTo( null );
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -72,12 +73,18 @@ public class Windows extends JFrame {
     }
     
     public static void main(String[] args) {
+        Windows a;  
+        Windows b;
         if (args.length >= 1 && args[0].equals("lap")) {
-            Windows a = new Windows("name",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            a = new Windows("a",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            b = new Windows("b",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            
         } else if (args.length >= 1 && args[0].equals("mini")) {
-            Windows a = new Windows("name",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+             a = new Windows("a",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+             b = new Windows("b",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         } else {
-            Windows a = new Windows("name",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-        }
+             a = new Windows("a",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+             b = new Windows("b",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+        } 
     }
 }
