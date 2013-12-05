@@ -57,7 +57,7 @@ public class Windows extends JFrame {
         add(graph);
         pack();
         
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Labirinto");
         setResizable(false);
