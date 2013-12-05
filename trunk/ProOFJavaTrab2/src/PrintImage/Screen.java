@@ -18,11 +18,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import java.awt.Dimension;
+import java.awt.Image;
 
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javax.swing.JPanel;
 
@@ -33,9 +39,9 @@ public class Screen extends JPanel {
     private Maze maze;
 
     public Screen(int width, int height, Maze maze, String imageFail) {
-
+        try {
             this.maze = maze;
-//            this.img = ImageIO.read(new File(imageFail));
+            this.img = ImageIO.read(new File(imageFail));
 
             screen_width = width;
             screen_height = height;
@@ -43,18 +49,22 @@ public class Screen extends JPanel {
             setPreferredSize(new Dimension(width, height));
             setBackground(Color.white);
             setDoubleBuffered(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void draw(Graphics2D g) {
-
-        Graphics2D g2d = (Graphics2D) g;
-        BufferedImage resizedImage = new BufferedImage(screen_width, screen_height, img.getType());
-        Graphics2D g2 = resizedImage.createGraphics();
-        g2.drawImage(img, 0, 0, screen_width, screen_height, null);
-        g2.dispose();   
+    public void Draw(Graphics2D g) {
+    Graphics2D g2d = (Graphics2D) g;
+        
         double max_x, max_y;
         double min_x, min_y;
-//        g2d.drawImage(img, 0, 0, null);
+        int scaleX = (int) (screen_width );
+        int scaleY = (int) (screen_height);
+
+        Image newimg = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
+        
+        g2d.drawImage(newimg, 0, 0, null);
         g2d.setColor(Color.red);
 
         ArrayList<MazeVertex> vertices = maze.getVertices();
@@ -79,23 +89,24 @@ public class Screen extends JPanel {
             }
         }
 
+        g2d.setColor(Color.LIGHT_GRAY);
         for (MazeEdge edge : edges) {
             MazeVertex vertex = maze.getEdgeSource(edge);
             MazeVertex vertex2 = maze.getEdgeTarget(edge);
             g2d.drawLine((int) ((vertex.getX() * screen_width / max_x)), (int) ((vertex.getY() * screen_height / max_y)), (int) ((vertex2.getX() * screen_width / max_x)), (int) ((vertex2.getY() * screen_height / max_y)));
         }
 
-        g2d.setColor(Color.blue);
+        g2d.setColor(Color.red);
         for (MazeVertex vertex : vertices) {
-            g2d.drawString("" + vertex.getIndex() + "", (int) ((vertex.getX() * screen_width / max_x)), (int) ((vertex.getY() * screen_height / max_y) + 20));
-            g2d.fillOval((int) ((vertex.getX() * screen_width / max_x)), (int) ((vertex.getY() * screen_height / max_y)), 8, 8);
+            g2d.drawString("" + vertex.getIndex() + "", (int) ((vertex.getX() * screen_width / max_x)-4), (int) ((vertex.getY() * screen_height / max_y)-10));
+            g2d.fillOval((int) ((vertex.getX()* screen_width / max_x)-4), (int) ((vertex.getY() * screen_height / max_y)-4), 8, 8);
         }
     }
 
     public void paint(Graphics screen) {
         super.paint(screen);
 
-        draw((Graphics2D) screen);
+        Draw((Graphics2D) screen);
 
         Toolkit.getDefaultToolkit().sync();
         screen.dispose();

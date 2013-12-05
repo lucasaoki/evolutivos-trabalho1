@@ -11,6 +11,7 @@ package PrintImage;
  */
 
 import ProOF.MaD.maze.Maze;
+import ProOF.MaD.maze.MazeSolution;
 import javax.swing.JFrame;
 
 /**
@@ -36,7 +37,7 @@ public class Windows extends JFrame {
         }
     }
 
-    public void re_size(int w, int h) {
+    public void Resize(int w, int h) {
 
         if (graph != null) {
             remove(graph);
@@ -52,7 +53,7 @@ public class Windows extends JFrame {
         this.imageFail = imageFail;
         this.maze = maze;
         
-        re_size(width, height);
+        Resize(width, height);
         add(graph);
         pack();
 
@@ -60,9 +61,12 @@ public class Windows extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Labirinto");
         setResizable(false);
-//        setVisible(true);
+        setVisible(true);
     }
-
+    public void setMap(MazeSolution mazeS){
+        graph.drawMazeSolution(mazeS);
+    }
+    
     public static void main(String[] args) {
         if (args.length >= 1 && args[0].equals("lap")) {
             new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
