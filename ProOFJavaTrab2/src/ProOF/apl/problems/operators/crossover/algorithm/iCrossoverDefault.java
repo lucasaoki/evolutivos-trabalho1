@@ -75,6 +75,7 @@ public class iCrossoverDefault extends aCrossover {
                     if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(0, vind2Index.get(n1)))) {
                         if (newMazeSol.addVertexRange(mazeSol1.getVertexRange(vind1Index.get(n1) + (vind1Index.get(n1) > vind1Index.get(n2) ? -1 : 1), vind2Index.get(n2)))) {
                             if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(vind2Index.get(n2) + 1, mazeSol2.getSize() - 1))) {
+                                System.out.println("NOVO INDIVIDUO!!!");
                                 return newInd;
                             }
                         }
@@ -96,6 +97,7 @@ public class iCrossoverDefault extends aCrossover {
             //should never goes here
             return null;
         } else {
+            //not using vertex
             if (mazeSol1.getTotalDistance()
                     > mazeSol2.getTotalDistance()) {
                 return ind2;
