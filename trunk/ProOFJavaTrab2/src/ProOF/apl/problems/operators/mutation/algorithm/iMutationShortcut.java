@@ -31,6 +31,7 @@ public class iMutationShortcut extends aMutation{
         Maze maze = amaze.getMaze();
         Random rand = new Random();
         int index;
+        int maxShortcut = 50;
         
         if (mem.isUsingVertex()){
         	index = rand.nextInt(mazeSol.getSize());
@@ -41,15 +42,15 @@ public class iMutationShortcut extends aMutation{
             for (int i = 0; i < index+1; i++) {
 				shortcut.addVertex(mazeSol.getVertexAt(i));
 			}
-                  
-            List<MazeVertex> conectedVertices = maze.getConnectedVertices(vinit);
+            
+            List<MazeVertex> connectedVertices = maze.getConnectedVertices(vinit);
             index = -1;
             do
             {
-                Collections.shuffle(conectedVertices);
-                vinit = conectedVertices.get(0);
+                Collections.shuffle(connectedVertices);
+                vinit = connectedVertices.get(0);
                 shortcut.addVertex(vinit);
-                conectedVertices =  maze.getConnectedVertices( conectedVertices.get(0));
+                connectedVertices = maze.getConnectedVertices(vinit);
                 
                 for (int i = 0; i < mazeSol.getSize(); i++) {
 					if( mazeSol.getVertexAt(i).equals(vinit) ){
@@ -59,7 +60,7 @@ public class iMutationShortcut extends aMutation{
 				}
                 
             
-            }while (index == -1 || shortcut.getSize() >= mazeSol.getSolutionLimitSize());
+            }while (index == -1 || shortcut.getSize() >= maxShortcut);
             
             if( index != -1 ){
             	for (int i = index+1; i < mazeSol.getSize(); i++) {
@@ -69,7 +70,7 @@ public class iMutationShortcut extends aMutation{
 				}
             }
             
-            mazeSol.removeRange(0, mazeSol.getSize()-1);
+            mazeSol.removeRange(0, mazeSol.getSize());
             for (int i = 0; i < shortcut.getSize(); i++) {
 				mazeSol.addVertex(shortcut.getVertexAt(i));
 			}
