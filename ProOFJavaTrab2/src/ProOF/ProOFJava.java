@@ -20,7 +20,7 @@ public class ProOFJava {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        //args = new String[]{"run", "D:/Dropbox/ProOF/ProOFClient/work_space/job/finished/nldc", "D:/Dropbox/ProOF/ProOFClient/work_space/input/"};
+        args = new String[]{"run", "D:\\dev\\ec\\evtrab2\\work_space\\job\\finished\\mbkh", "D:\\dev\\ec\\evtrab2\\work_space\\input"};
         if (args == null || args.length < 1) {
             throw new Exception("don't have arguments");
         } else if (args[0].equals("model")) {
