@@ -89,13 +89,13 @@ public class Screen extends JPanel {
             int pos_y = (int) ((vertex.getY() * screen_height / max_y));
             g2d.setColor(Color.magenta);
             g2d.fillOval((int) (pos_x - 4), (int) (pos_y - 4), 8, 8);
-            g2d.setColor(Color.gray);
+            g2d.setColor(Color.blue);
             g2d.drawString("" + vertex.getIndex() + "", (pos_x - 4), (pos_y - 5));
         }
         if (mazeS != null) {
             double angle = 60;
-            double[] contador = new double[mazeS.getSize()];
-            for (int c = 0; c < mazeS.getSize(); c++) {
+            double[] contador = new double[vertices.size()];
+            for (int c = 0; c < vertices.size(); c++) {
                 contador[c] = 0;
             }
             for (int c = 0; c < mazeS.getSize() - 1; c++) {
