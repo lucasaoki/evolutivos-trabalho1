@@ -47,7 +47,7 @@ public class Windows extends JFrame {
         new Thread(new thr(graph)).start();
     }
 
-    public Windows(int w, int h, Maze maze, String imageFail) {
+    public Windows(String Title, int w, int h, Maze maze, String imageFail) {
         width = w;
         height = h;
         this.imageFail = imageFail;
@@ -60,7 +60,8 @@ public class Windows extends JFrame {
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setTitle("Labirinto");
+        String name = "Labirinto " + Title;
+        setTitle(name);
         setResizable(false);
         setVisible(true);
     }
@@ -72,11 +73,11 @@ public class Windows extends JFrame {
     
     public static void main(String[] args) {
         if (args.length >= 1 && args[0].equals("lap")) {
-            Windows a = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            Windows a = new Windows("name",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         } else if (args.length >= 1 && args[0].equals("mini")) {
-            Windows a = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            Windows a = new Windows("name",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         } else {
-            Windows a = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            Windows a = new Windows("name",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         }
     }
 }
