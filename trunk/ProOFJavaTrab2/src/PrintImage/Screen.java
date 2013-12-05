@@ -83,7 +83,7 @@ public class Screen extends JPanel {
                 MazeVertex vertexAt1 = mazeS.getVertexAt(c + 1);
                 g2d.setColor(Color.green);
                 g2d.drawLine((int)((vertexAt.getX()* screen_width / max_x)), (int) ((vertexAt.getY()* screen_height / max_y)), (int) ((vertexAt1.getX()* screen_width / max_x)), (int) ((vertexAt1.getY()* screen_height / max_y)));
-                g2d.drawString("" + c + "", (int) (((vertexAt.getX() * screen_width / max_x)-4)*Math.cos(c*angle)), (int) (((vertexAt.getY() * screen_height / max_y)-10)*Math.sin(c*angle)));
+                g2d.drawString("" + c + "", (int) (((vertexAt.getX() * screen_width / max_x)-4)+10*Math.cos(Math.toRadians(c*angle))), (int) (((vertexAt.getY() * screen_height / max_y)-10)+10*Math.cos(Math.toRadians(c*angle))));
             }
         }
     }
