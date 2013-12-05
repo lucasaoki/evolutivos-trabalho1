@@ -15,8 +15,8 @@ public class GlobalConstants {
     public final static int limitIndividualSize = 10000;
     public final static int startIndividualSize = 5000;
     
-    public final static int vertexDefaultStartIndex = 0;
-    public final static int vertexDefaultEndIndex = 0;
+    public final static int vertexDefaultStartIndex = 25;
+    public final static int vertexDefaultEndIndex = 75;
     
 
     
