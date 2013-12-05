@@ -66,9 +66,6 @@ public abstract class MazeSolution{
     }
     
     
-    
-    
-    
     public abstract int getSize();
     
     public abstract boolean addVertex(MazeVertex vertex);
@@ -83,9 +80,9 @@ public abstract class MazeSolution{
     
     public abstract boolean addDirectionAt(int index, Directions direction);
     
-     public abstract boolean addDirectionRange( List<Directions> directions);
+    public abstract boolean addDirectionRange( List<Directions> directions);
      
-     public abstract boolean addDirectionRangeAt(int indexStart, List<Directions> directions);
+    public abstract boolean addDirectionRangeAt(int indexStart, List<Directions> directions);
     
     public abstract MazeVertex getVertexAt(int index);
     
@@ -93,13 +90,13 @@ public abstract class MazeSolution{
     
     public abstract Directions getDirectionAt(int index);
     
-     public abstract List<Directions> getDirectionsRange(int indexStart, int indexEnd);
+    public abstract List<Directions> getDirectionsRange(int indexStart, int indexEnd);
     
     public abstract boolean setVertexAt(int index, MazeVertex vertex);
     
     public abstract boolean setDirectionAt(int index, Directions direction);
     
-        public abstract boolean removeAt(int index);
+    public abstract boolean removeAt(int index);
     
     public abstract boolean removeRange(int indexStart, int indexEnd);
     
