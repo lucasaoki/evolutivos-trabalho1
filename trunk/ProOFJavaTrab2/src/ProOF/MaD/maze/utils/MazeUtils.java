@@ -376,7 +376,7 @@ public class MazeUtils {
 		vtx1 = maze.getStartVert();
 		vtx2 = vtx1;
 		
-		for (int i = 0; i < index; i++) {
+		for (int i = 0; i < index+1; i++) {
 			if( i == 0 ){
 				vtx1 = MazeUtils.GetDestiny(maze, vtx1, vtx1, directions.get(i));
 			}
