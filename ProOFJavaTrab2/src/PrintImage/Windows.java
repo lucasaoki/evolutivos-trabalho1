@@ -73,13 +73,10 @@ public class Windows extends JFrame {
     public static void main(String[] args) {
         if (args.length >= 1 && args[0].equals("lap")) {
             Windows a = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-            Windows b = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         } else if (args.length >= 1 && args[0].equals("mini")) {
             Windows a = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-            Windows b = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         } else {
             Windows a = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-            Windows b = new Windows(664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
         }
     }
 }
