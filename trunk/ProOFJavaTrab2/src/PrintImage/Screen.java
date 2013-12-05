@@ -135,7 +135,7 @@ public class Screen extends JPanel {
                     g2d.fillOval(pos_x1 - 4, pos_y1 - 4, 10, 10);
                 }
 
-                g2d.setColor(Color.green);
+                g2d.setColor(Color.red);
                 g2d.drawLine(pos_x, pos_y, pos_x1, pos_y1);
 
                 double pos_angle_cos = 10 * Math.cos(Math.toRadians(contador[vertex.getIndex()] * angle));
