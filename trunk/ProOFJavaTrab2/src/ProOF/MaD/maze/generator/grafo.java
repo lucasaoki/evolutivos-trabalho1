@@ -8,6 +8,7 @@ package ProOF.MaD.maze.generator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Stack;
 
 /**
@@ -222,6 +223,17 @@ public class grafo<
 
         }
 
+        int count = 0;
+        Random rnd = new Random(System.currentTimeMillis());
+        while (count < 20) {
+            int k = rnd.nextInt(width - 2) + 1;
+            int m = rnd.nextInt(height - 1) + 1;
+            if (paredes[k][m] == true && checkHorizWalls(paredes, k, m)) {
+                paredes[k][m] = false;
+                count++;
+            }
+        }
+
         return paredes;
     }
 
@@ -233,9 +245,8 @@ public class grafo<
             }
         }
 
-        paredes[0][0] = false;
-        paredes[width][height - 1] = false;
-
+//        paredes[0][0] = false;
+//        paredes[width][height - 1] = false;
         for (A p : matriz) {
             int y1 = p.esq / width;
             int y2 = p.dir / width;
@@ -245,7 +256,43 @@ public class grafo<
             }
         }
 
+        int count = 0;
+        Random rnd = new Random(System.currentTimeMillis());
+        while (count < 20) {
+            int k = rnd.nextInt(width - 1) + 1;
+            int m = rnd.nextInt(height - 2) + 1;
+            if (paredes[k][m] == true && checkVertWalls(paredes, k, m)) {
+                paredes[k][m] = false;
+                count++;
+            }
+        }
+
         return paredes;
+    }
+
+    private boolean checkVertWalls(boolean walls[][], int w, int h) {
+
+        int count = 0;
+
+        for (int j = h - 1; j <= h + 1; j = j + 2) {
+            if (walls[w][j] == true) {
+                count++;
+            }
+        }
+        return (count == 2);
+    }
+
+    private boolean checkHorizWalls(boolean walls[][], int w, int h) {
+
+        int count = 0;
+
+        for (int i = w - 1; i <= w + 1; i = i + 2) {
+            if (walls[i][h] == true) {
+                count++;
+            }
+        }
+
+        return (count == 2);
     }
 
     public void print() {

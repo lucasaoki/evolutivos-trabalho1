@@ -152,7 +152,8 @@ public class MazeGen extends JFrame {
         scr.add(q);
 
 //        re_size(cell_w, cell_h);
-        re_size(25, 25);
+        int sz = 25;
+        re_size(sz, sz);
         scr.add(canvas);
 
         add(scr);
@@ -161,11 +162,12 @@ public class MazeGen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Maze");
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        MazeGen maze = new MazeGen(2500, 25000);
+        int sz = 2500;
+        MazeGen maze = new MazeGen(sz, sz);
     }
 }
