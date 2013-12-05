@@ -63,6 +63,7 @@ public class Windows extends JFrame {
         setResizable(false);
         setVisible(true);
     }
+    
     public void setSolution(MazeSolution mazeS){
         graph.drawMazeSolution(mazeS);
     }
