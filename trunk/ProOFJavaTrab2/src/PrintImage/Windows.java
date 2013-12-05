@@ -60,7 +60,7 @@ public class Windows extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Labirinto");
         setResizable(false);
-        setVisible(true);
+//        setVisible(true);
     }
 
     public static void main(String[] args) {
