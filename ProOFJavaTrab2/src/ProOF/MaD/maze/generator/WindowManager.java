@@ -27,6 +27,7 @@ public class WindowManager extends JPanel implements gancho {
 
     int border;
     int windowWidth, windowHeight;
+    int linestroke;
 
     int passo_x, passo_y;
 
@@ -45,6 +46,8 @@ public class WindowManager extends JPanel implements gancho {
 
         this.border = border;
 
+        linestroke = spaces_h + spaces_w;
+
         passo_x = (windowWidth - 2 * border) / spaces_w;
         passo_y = (windowHeight - 2 * border) / spaces_h;
 
@@ -54,7 +57,7 @@ public class WindowManager extends JPanel implements gancho {
     }
 
     public void drawLine(Graphics2D g, int x0, int y0, int x1, int y1) {
-        g.setStroke(new BasicStroke(50));
+        g.setStroke(new BasicStroke(linestroke));
         g.drawLine(border + x0 * passo_x,
                 border + y0 * passo_y,
                 border + x1 * passo_x,
@@ -133,27 +136,21 @@ public class WindowManager extends JPanel implements gancho {
     @Override
     public void paint(Graphics tela) {
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        tela = bi.createGraphics();
+//        tela = bi.createGraphics();
+        Graphics g = bi.createGraphics();
+        super.paint(g);
+        draw((Graphics2D) g);
+
         super.paint(tela);
-
         draw((Graphics2D) tela);
-
         Toolkit.getDefaultToolkit().sync();
         try {
             ImageIO.write(bi, "PNG", new File("media/mapa.png"));
-//        BufferedImage awtImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-//        printAll(g);
-//        try {
-//            String pathImg = "media/img.jpg";
-//            File f = new File("saved.png");
-//            ImageIO.write(g, "png", f);
-//        } catch (IOException ex) {
-//            Logger.getLogger(WindowManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         } catch (IOException ex) {
             Logger.getLogger(WindowManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         tela.dispose();
+        g.dispose();
     }
 
     static private String[][] array_copy(String[][] a) {
@@ -168,6 +165,7 @@ public class WindowManager extends JPanel implements gancho {
         return r;
     }
 
+    @Override
     public void callback(String[][] m) {
         state = array_copy(m);
         repaint();
