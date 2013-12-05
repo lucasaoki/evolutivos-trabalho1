@@ -16,7 +16,6 @@ import ProOF.gen.operator.oInitializer;
 import ProOF.utils.GlobalConstants;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  *
@@ -67,7 +66,7 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
         }
         else
         {
-            
+            System.out.println("ïnitializr usando direction nao implementada");
         }
     
     }
