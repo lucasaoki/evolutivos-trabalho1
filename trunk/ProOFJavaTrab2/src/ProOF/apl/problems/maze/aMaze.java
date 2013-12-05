@@ -110,13 +110,20 @@ public abstract class aMaze extends Node {
 
         optimalSolution = new MazeSolutionVertex(maze,maze.getVertices().size());
         optimalSolution.addVertexRange(optimalVerticesPath);
+        optimalSolution.removeAt(0);
         
+        System.out.println("Melhor solucao: ");
         for (int c= 0;c < optimalVerticesPath.size(); c++)
         {
             System.out.println(optimalVerticesPath.get(c).getIndex());
         }
 
         _evaluate(optimalSolution);
+        
+        System.out.println("Distancia: " + optimalSolution.getTotalDistance());
+        
+        Windows w = new Windows(640, 480, maze, "../../../media/mapa.png");
+        w.setSolution(optimalSolution);
     }
 
     @Override

@@ -17,6 +17,8 @@ import java.util.List;
  * @author ito
  */
 public class iGADefault extends aGA {
+    
+    Windows w;
 
     @Override
     public String name() {
@@ -32,11 +34,7 @@ public class iGADefault extends aGA {
     public void initialize() throws Exception {
 	populationList.addAll(generate(population_size));
         
-        for (int c = 0 ;c < populationList.size(); c++)
-        {
-            Windows w = new Windows(640, 480, populationList.get(c).codif().getMaze().getMaze(), "../../../media/mapa.png");
-            w.setSolution(populationList.get(c).codif().getMazeSol());
-        }
+        w = new Windows(640, 480, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
 
 	System.out.printf("INITIALIZATED\n");
     }
@@ -49,6 +47,13 @@ public class iGADefault extends aGA {
 	if (stopNode.end()) {
 	    return;
 	}
+        
+        mutation.runMutation(populationList.get(0));
+         w.setSolution(populationList.get(0).codif().getMazeSol());
+         
+         System.out.println("aqui: ");
+         Thread.sleep(1000);
+        
         
         if (true)
             return;
