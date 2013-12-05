@@ -138,7 +138,7 @@ public class Screen extends JPanel {
                 }
                 //Green
                 g2d.setStroke(new BasicStroke(3));
-                float[] hsb = Color.RGBtoHSB(200, 255, 200, null);
+                float[] hsb = Color.RGBtoHSB(0, 100, 0, null);
                 g2d.setColor(Color.getHSBColor(hsb[0],hsb[1],hsb[2]));
                 g2d.drawLine(pos_x, pos_y, pos_x1, pos_y1);
                 g2d.setStroke(new BasicStroke(1));
