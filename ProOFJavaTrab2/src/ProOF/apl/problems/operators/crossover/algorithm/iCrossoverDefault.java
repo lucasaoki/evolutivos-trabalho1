@@ -49,6 +49,8 @@ public class iCrossoverDefault extends aCrossover {
                 iCodification newInd = (iCodification) mem.NewCodification();
                 MazeSolution newMazeSol = newInd.getMazeSol();
                 if (vind1Index.size() == 1) {
+                    System.out.println("NOVO INDIVIDUO unico ponto!!!");
+                    System.out.println("index " + vind2Index.get(0));
                     if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(0, vind2Index.get(0)))
                             && newMazeSol.addVertexRange(mazeSol1.getVertexRange(vind1Index.get(0) + 1, mazeSol1.getSize() - 1))) {
                         return newInd;
@@ -64,18 +66,28 @@ public class iCrossoverDefault extends aCrossover {
 
                     do {
                         n2 = mem.rmd.nextInt(vind2Index.size());
-                    } while (n1 != n2);
+                    } while (n1 == n2);
 
                     if (n2 < n1) {
                         int tmp = n1;
                         n1 = n2;
                         n2 = tmp;
                     }
+                    
+                    int v1n1 = vind1Index.get(n1);
+                    int v1n2 = vind1Index.get(n2);
+                    int v2n1 = vind2Index.get(n1);
+                    int v2n2 = vind2Index.get(n2);
 
-                    if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(0, vind2Index.get(n1)))) {
-                        if (newMazeSol.addVertexRange(mazeSol1.getVertexRange(vind1Index.get(n1) + (vind1Index.get(n1) > vind1Index.get(n2) ? -1 : 1), vind2Index.get(n2)))) {
+                    if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(0, vind2Index.get(n1)-1))) {
+                        System.out.println("index ind2 corte " + Integer.toString( vind2Index.get(n1) - 1));
+                        if (newMazeSol.addVertexRange(mazeSol1.getVertexRange(vind1Index.get(n1) , vind1Index.get(n2)))) {
+                            System.out.println("index ind1 inicio " + vind1Index.get(n1));
+                            System.out.println("index ind1 fim " + vind1Index.get(n2));
                             if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(vind2Index.get(n2) + 1, mazeSol2.getSize() - 1))) {
-                                System.out.println("NOVO INDIVIDUO!!!");
+
+                                System.out.println("index ind2 retorno " + Integer.toString( vind2Index.get(n2) + 1));
+
                                 return newInd;
                             }
                         }
