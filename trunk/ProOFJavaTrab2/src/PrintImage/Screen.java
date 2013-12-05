@@ -20,7 +20,6 @@ import java.awt.Graphics2D;
 import java.awt.Dimension;
 import java.awt.Image;
 
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -62,32 +61,15 @@ public class Screen extends JPanel {
         int scaleX = (int) (screen_width );
         int scaleY = (int) (screen_height);
 
-        Image newimg = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
-        
-        g2d.drawImage(newimg, 0, 0, null);
+        //Image newimg = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
+        //g2d.drawImage(newimg, 0, 0, null);
         g2d.setColor(Color.red);
 
         ArrayList<MazeVertex> vertices = maze.getVertices();
         Set<MazeEdge> edges = maze.edgeSet();
 
-        max_x = vertices.get(0).getX();
-        max_y = vertices.get(0).getY();
-        min_x = vertices.get(0).getX();
-        min_y = vertices.get(0).getY();
-        for (MazeVertex vertex : vertices) {
-            if (vertex.getX() > max_x) {
-                max_x = vertex.getX();
-            }
-            if (vertex.getY() > max_y) {
-                max_y = vertex.getY();
-            }
-            if (vertex.getX() < min_x) {
-                min_x = vertex.getX();
-            }
-            if (vertex.getY() < min_y) {
-                min_y = vertex.getY();
-            }
-        }
+        max_x = img.getWidth();
+        max_y = img.getHeight();
 
         g2d.setColor(Color.LIGHT_GRAY);
         for (MazeEdge edge : edges) {
@@ -103,31 +85,25 @@ public class Screen extends JPanel {
         }
     }
 
+    @Override
     public void paint(Graphics screen) {
         super.paint(screen);
 
         Draw((Graphics2D) screen);
 
-        Toolkit.getDefaultToolkit().sync();
     }
 
     public void callback(String[][] m) {
-        repaint();
-        try {
-            Thread.sleep(3);
-        } catch (InterruptedException ie) {
-        }
+   
     }
 
     public void drawMazeSolution(MazeSolution mazeS) {
-        this.getGraphics().setColor(Color.lightGray);
+        this.getGraphics().setColor(Color.green);
         for (int c = 0; c < mazeS.getSize() - 1; c++) {
             MazeVertex vertexAt = mazeS.getVertexAt(c);
             MazeVertex vertexAt1 = mazeS.getVertexAt(c + 1);
 
             this.getGraphics().drawLine((int) vertexAt.getX(), (int) vertexAt.getY(), (int) vertexAt1.getX(), (int) vertexAt1.getY());
         }
-
-        
     }
 }
