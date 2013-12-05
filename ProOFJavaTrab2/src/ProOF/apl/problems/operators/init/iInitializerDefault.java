@@ -55,6 +55,7 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
             MazeVertex vinit=  maze.getVertexFromIndex(amaze.getStartVertexIndex());
             
             List<MazeVertex> conectedVertexs =  maze.getConnectedVertices(vinit);
+            last = vinit;
             do
             {
                 Collections.shuffle(conectedVertexs);
