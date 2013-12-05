@@ -18,7 +18,8 @@ import java.util.List;
  */
 public class iGADefault extends aGA {
     
-    Windows w;
+    Windows[] w;
+    int resetcount;
 
     @Override
     public String name() {
@@ -34,8 +35,14 @@ public class iGADefault extends aGA {
     public void initialize() throws Exception {
 	populationList.addAll(generate(population_size));
         
-        w = new Windows(640, 480, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
+        resetcount = 0;
+        
+        w = new Windows[population_size+1];
+        
+        for (int c = 0; c< w.length - 1; c++)
+            w[c] = new Windows( "ind " + Integer.toString(c), 640, 480, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
 
+         w[w.length - 1] = new Windows( "crossover ", 640, 480, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
 	System.out.printf("INITIALIZATED\n");
     }
 
@@ -48,12 +55,40 @@ public class iGADefault extends aGA {
 	    return;
 	}
         
-        mutation.runMutation(populationList.get(0));
-         w.setSolution(populationList.get(0).codif().getMazeSol());
-         
-         System.out.println("aqui: ");
-         Thread.sleep(1000);
         
+        resetcount++;
+        if (resetcount > 15)
+        {
+       populationList.clear();
+       populationList.addAll(generate(population_size));
+       
+        for (int c=  0; c < populationList.size(); c++)
+        {
+            w[c].setSolution(populationList.get(c).codif().getMazeSol());
+        }  
+        resetcount = 0;
+        }
+//        
+//        Thread.sleep(2000);
+//         if (true)
+//            return;
+         
+         System.out.println("running mutation: ");
+        for (int c=  0; c < populationList.size(); c++)
+        {
+            mutation.runMutation(populationList.get(c));
+            w[c].setSolution(populationList.get(c).codif().getMazeSol());
+        }        
+ 
+        Thread.sleep(1000);
+//          if (true)
+//            return;
+          
+         System.out.println("running crossover: ");
+        Solution<iProblem, iObjective, iCodification, Solution> runCross = cross.runCross(populationList.get(0), populationList.get(1));
+         
+        w[w.length-1].setSolution(runCross.codif().getMazeSol());
+        Thread.sleep(2000);
         
         if (true)
             return;

@@ -24,7 +24,10 @@ public class iMutationProviderDefault extends aMutationProvider {
 	    Random rnd = new Random(System.currentTimeMillis());
 	    if (mutationList.length != 0) {
 		if (Math.random() <= mutationRate) {
-		    mutationList[rnd.nextInt(mutationList.length)].mutation(problemNode, s1.codif());
+                    int index = rnd.nextInt(mutationList.length);
+                    
+                    index = 0;
+		    mutationList[index].mutation(problemNode, s1.codif());
 		}
 	    } else {
 		System.out.println("Critical Error: Empty Mutation List.");

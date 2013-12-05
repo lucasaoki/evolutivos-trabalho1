@@ -125,7 +125,7 @@ public abstract class aMaze extends Node {
         
         System.out.println("Distancia: " + optimalSolution.getTotalDistance());
         
-        Windows w = new Windows(640, 480, maze, "../../../media/mapa.png");
+        Windows w = new Windows("Solucao otima",640, 480, maze, "../../../media/mapa.png");
         w.setSolution(optimalSolution);
     }
 

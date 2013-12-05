@@ -25,8 +25,8 @@ public class fMutation extends Factory<oMutation> {
         switch (index) {
             case 0:
                 return new iMutationBlink();
-//            case 1:
-//                return new iMutationSwapChance();
+            case 1:
+                return new iMutationShortcut();
 //            case 2:
 //                return new iMutationShiftRight();
 //            case 4:
