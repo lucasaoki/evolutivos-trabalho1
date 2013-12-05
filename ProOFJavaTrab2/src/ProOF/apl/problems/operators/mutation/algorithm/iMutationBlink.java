@@ -32,10 +32,12 @@ public class iMutationBlink extends aMutation{
         Integer num;
         
         ArrayList<Integer> freq = new ArrayList<Integer>(maze.getVertices().size());
+        for (int c = 0; c < maze.getVertices().size();c ++)
+            freq.add(0);
         
 		if(mem.isUsingVertex()){
 			
-			for (int i = 0; i < maze.getVertices().size(); i++) {
+			for (int i = 0; i < mazeSol.getSize(); i++) {
 				freq.set(mazeSol.getVertexAt(i).getIndex(), freq.get(mazeSol.getVertexAt(i).getIndex())+1);
 			}
 			

@@ -49,7 +49,8 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
         MazeSolution mazeSol = codif.getMazeSol();
         aMaze amaze = codif.getMaze();
         
-        if (prob.isUsingVertex()){           
+        if (prob.isUsingVertex()){    
+            MazeVertex last = null;
             Maze maze = amaze.getMaze();
             MazeVertex vinit=  maze.getVertexFromIndex(amaze.getStartVertexIndex());
             
@@ -58,7 +59,13 @@ public class iInitializerDefault extends oInitializer<iProblem, iCodification> {
             {
                 Collections.shuffle(conectedVertexs);
                 mazeSol.addVertex(conectedVertexs.get(0));
+                last  =conectedVertexs.get(0);
                 conectedVertexs = maze.getConnectedVertices( conectedVertexs.get(0));
+                
+                if (conectedVertexs.size() > 1)
+                {
+                    conectedVertexs.remove(last);
+                }
             
             }while (mazeSol.getSize() < initializeSize && mazeSol.getVertexAt(mazeSol.getSize() -1).getIndex() != codif.getMaze().getEndVertexIndex());
            //condicao de parada na inicializacao eh de encher o limite ou achar o nó desejado
