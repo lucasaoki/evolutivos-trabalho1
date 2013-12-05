@@ -121,9 +121,10 @@ public class MazeSolutionVertex extends MazeSolution{
 			} else {
 				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index-2), mazeVertex.get(index-1), direction);
 			}
-    		if(vtx != null)
+    		if(vtx != null){
+    			totalDistanceValid = false;
     			return this.setVertexAt(index, vtx);
-    		else
+    		} else
     			return false;
     		
     	} else
@@ -164,6 +165,7 @@ public class MazeSolutionVertex extends MazeSolution{
 				}
         		
         		if(vtx != null ){
+        			totalDistanceValid = false;
         			return this.addVertexAt(index, vtx);
         		} else
         			return false;
@@ -205,6 +207,7 @@ public class MazeSolutionVertex extends MazeSolution{
     			for (int i = 0; i < directions.size(); i++) {
 					res = this.addDirection(directions.get(i));
 				}
+    			totalDistanceValid = false;
     			return res;
     		} else
     			return false;
@@ -289,6 +292,7 @@ public class MazeSolutionVertex extends MazeSolution{
 				for (int i = indexStart; i < indexStart+directions.size(); i++) {
 					this.addDirectionAt(i, directions.get(index++));
 				}
+				totalDistanceValid = false;
 				return true;
 			}
 		}
