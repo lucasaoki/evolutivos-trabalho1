@@ -5,10 +5,12 @@
  */
 package ProOF.apl.problems.operators.mutation.algorithm;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
+import ProOF.MaD.maze.Directions;
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
 import ProOF.MaD.maze.MazeSolutionVertex;
@@ -16,8 +18,6 @@ import ProOF.MaD.maze.components.MazeVertex;
 import ProOF.apl.problems.iCodification;
 import ProOF.apl.problems.iProblem;
 import ProOF.apl.problems.maze.aMaze;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
@@ -103,56 +103,55 @@ public class iMutationShortcut extends aMutation {
             }
 
         } else {
-
+        	
+        	int changeChance = 6;
+        	int includeChance = 3;
+        	int index;
+        	
+        	
+        	for (int i = 0; i < mazeSol.getSize(); i++) {
+				index = mem.rmd.nextInt(10);
+				if( index < changeChance ){
+					index = mem.rmd.nextInt(4);
+					switch (index) {
+					case 0:
+						mazeSol.setDirectionAt(i, Directions.RIGHT);
+						break;
+					case 1:
+						mazeSol.setDirectionAt(i, Directions.LEFT);
+						break;
+					case 2:
+						mazeSol.setDirectionAt(i, Directions.FORWARD);
+						break;
+					case 3:
+						mazeSol.setDirectionAt(i, Directions.BACKWARD);
+						break;
+					default:
+						break;
+					}
+				}
+				index = mem.rmd.nextInt(10);
+				if( index < includeChance ){
+					index = mem.rmd.nextInt(4);
+					switch (index) {
+					case 0:
+						mazeSol.addDirectionAt(i, Directions.RIGHT);
+						break;
+					case 1:
+						mazeSol.addDirectionAt(i, Directions.LEFT);
+						break;
+					case 2:
+						mazeSol.addDirectionAt(i, Directions.FORWARD);
+						break;
+					case 3:
+						mazeSol.addDirectionAt(i, Directions.BACKWARD);
+						break;
+					default:
+						break;
+					}
+				}
+			}
         }
-
-        return;
-
-//        int index;
-//        int maxShortcut = mazeSol.getSolutionLimitSize();
-//
-//        if (mem.isUsingVertex()) {
-//
-//            index = mem.rmd.nextInt(mazeSol.getSize());
-//            MazeVertex vinit = mazeSol.getVertexAt(index);
-//
-//            for (int i = 0; i < index + 1; i++) {
-//                shortcut.addVertex(mazeSol.getVertexAt(i));
-//            }
-//
-//            List<MazeVertex> connectedVertices = maze.getConnectedVertices(vinit);
-//            index = -1;
-//            do {
-//                Collections.shuffle(connectedVertices);
-//                vinit = connectedVertices.get(0);
-//                shortcut.addVertex(vinit);
-//                connectedVertices = maze.getConnectedVertices(vinit);
-//
-//                for (int i = 0; i < mazeSol.getSize(); i++) {
-//                    if (mazeSol.getVertexAt(i).equals(vinit)) {
-//                        index = i;
-//                        break;
-//                    }
-//                }
-//
-//            } while (index == -1 || shortcut.getSize() >= maxShortcut);
-//
-//            if (index != -1) {
-//                for (int i = index + 1; i < mazeSol.getSize(); i++) {
-//                    if (!shortcut.addVertex(mazeSol.getVertexAt(i))) {
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            mazeSol.removeRange(0, mazeSol.getSize() - 1);
-//            for (int i = 0; i < shortcut.getSize(); i++) {
-//                mazeSol.addVertex(shortcut.getVertexAt(i));
-//            }
-//
-//        } else {
-//            //TODO shortcut
-//        }
     }
 
     @Override
