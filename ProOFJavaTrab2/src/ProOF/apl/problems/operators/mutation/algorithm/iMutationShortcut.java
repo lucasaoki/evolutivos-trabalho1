@@ -97,11 +97,24 @@ public class iMutationShortcut extends aMutation {
                     endIndex = mazeSol.getSize() - 1;
                 }
 
-                if (startIndex <= endIndex) {
+                if (startIndex >= endIndex) {
                     break;
                 }
-
+//                List<MazeVertex> connectedVertices1 = maze.getConnectedVertices(mazeSol.getVertexAt(index));
+//                List<MazeVertex> connectedVertices2 = maze.getConnectedVertices(shortcut.getVertexAt(shortcut.getSize()-1));
+//                
+//                if (connectedVertices1.contains(shortcut.getVertexAt(0)) && connectedVertices2.contains(mazeSol.getVertexAt(endIndex+1)))
+//                {
+//                    System.out.println("tudo certo");
+//                }
+//                else
+//                    System.out.println("tudo errado");
+                
+                
                 startIndex++;
+
+                
+                
 
                 if (startIndex >= mazeSol.getSize()) {
                     mazeSol.addVertexRange(shortcut.getVertexRange(0, shortcut.getSize() - 1));

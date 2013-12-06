@@ -75,7 +75,7 @@ public class Screen extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        //g2d.drawImage(img, 0, 0, screen_width, screen_height, null);
+        g2d.drawImage(img, 0, 0, screen_width, screen_height, null);
 
         for (MazeEdge edge : edges) {
             MazeVertex vertex = maze.getEdgeSource(edge);

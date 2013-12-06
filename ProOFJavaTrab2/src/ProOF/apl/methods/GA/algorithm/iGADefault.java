@@ -59,14 +59,14 @@ public class iGADefault extends aGA {
             return;
         }
         
-         List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
-
-
-        populationList.clear();
-
-        populationList.addAll(lold);
-        
-        int popToCross =  population_size - populationList.size();
+//         List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
+//
+//
+//        populationList.clear();
+//
+//        populationList.addAll(lold);
+//        
+//        int popToCross =  population_size - populationList.size();
         
 //        for (int c = 0; c < popToCross; c++) {
 //            Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c), populationList.get(c+1));
@@ -79,7 +79,7 @@ public class iGADefault extends aGA {
 //        Thread.sleep(1000);
         for (int c = 0; c < populationList.size(); c++) {
             mutation.runMutation(populationList.get(c));
-//          w[c].setSolution(populationList.get(c).codif().getMazeSol());
+          w[c].setSolution(populationList.get(c).codif().getMazeSol());
         }
     }
 
