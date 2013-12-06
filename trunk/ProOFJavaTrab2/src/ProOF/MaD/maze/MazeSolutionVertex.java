@@ -84,7 +84,7 @@ public class MazeSolutionVertex extends MazeSolution {
 
     @Override
     public Directions getDirectionAt(int index) {
-        if (index >= 0) {
+        if (index >= 0 &&  index < mazeVertex.size() ) {
             if (index == 0) {
                 return MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), mazeVertex.get(index).getLocation());
             } else if (index == 1) {
@@ -99,37 +99,43 @@ public class MazeSolutionVertex extends MazeSolution {
 
     @Override
     public boolean setVertexAt(int index, MazeVertex vertex) {
-        if (index >= 0 && index < mazeVertex.size()) {
-            mazeVertex.set(index, vertex);
-            totalDistanceValid = false;
-            return true;
-        } else {
-            return false;
-        }
+    	if(vertex != null ){
+    		if (index >= 0 && index < mazeVertex.size()) {
+    			mazeVertex.set(index, vertex);
+    			totalDistanceValid = false;
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	}
+    	return false;
     }
 
     @Override
     public boolean setDirectionAt(int index, Directions direction) {
         MazeVertex vtx;
+        
+        if(direction == Directions.RIGHT || direction == Directions.LEFT || direction == Directions.FORWARD || direction == Directions.BACKWARD ){
+        	if (index >= 0 && index < mazeVertex.size() ) {
+        		if (index == 0) {
+        			vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
+        		} else if (index == 1) {
+        			vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(index - 1), direction);
+        		} else {
+        			vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index - 2), mazeVertex.get(index - 1), direction);
+        		}
+        		if (vtx != null) {
+        			totalDistanceValid = false;
+        			return this.setVertexAt(index, vtx);
+        		} else {
+        			return false;
+        		}
 
-        if (index >= 0 && index < mazeVertex.size()) {
-            if (index == 0) {
-                vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
-            } else if (index == 1) {
-                vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(index - 1), direction);
-            } else {
-                vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index - 2), mazeVertex.get(index - 1), direction);
-            }
-            if (vtx != null) {
-                totalDistanceValid = false;
-                return this.setVertexAt(index, vtx);
-            } else {
-                return false;
-            }
-
-        } else {
-            return false;
+        	} else {
+        		return false;
+        	}
         }
+        return false;
     }
 
     @Override
@@ -156,24 +162,27 @@ public class MazeSolutionVertex extends MazeSolution {
             System.out.println("Solution is full of vertex!");
             return false;
         } else {
-            if (index >= 0 && index < mazeVertex.size()) {
-                if (index == 0) {
-                    vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
-                } else if (index == 1) {
-                    vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(index - 1), direction);
-                } else {
-                    vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index - 2), mazeVertex.get(index - 1), direction);
-                }
+        	if(direction == Directions.RIGHT || direction == Directions.LEFT || direction == Directions.FORWARD || direction == Directions.BACKWARD ){
+        		if (index >= 0 && index < mazeVertex.size()) {
+        			if (index == 0) {
+        				vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), maze.getStartVert(), direction);
+        			} else if (index == 1) {
+        				vtx = MazeUtils.GetDestiny(maze, maze.getStartVert(), mazeVertex.get(index - 1), direction);
+        			} else {
+        				vtx = MazeUtils.GetDestiny(maze, mazeVertex.get(index - 2), mazeVertex.get(index - 1), direction);
+        			}
 
-                if (vtx != null) {
-                    totalDistanceValid = false;
-                    return this.addVertexAt(index, vtx);
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+        			if (vtx != null) {
+        				totalDistanceValid = false;
+        				return this.addVertexAt(index, vtx);
+        			} else {
+        				return false;
+        			}
+        		} else {
+        			return false;
+        		}
+        	}
+        	return false;
         }
     }
 
@@ -184,7 +193,7 @@ public class MazeSolutionVertex extends MazeSolution {
             System.out.println("MazeSolutionVertex.addVertexRange: ERROR: Null Parameter.");
             return false;
         } else {
-            if (mazeVertex.size() > solutionLimitSize + vertices.size()) {
+            if (mazeVertex.size() + vertices.size() > solutionLimitSize ) {
                 System.out.println("Solution is full of vertex!");
                 return false;
             } else {
@@ -298,61 +307,44 @@ public class MazeSolutionVertex extends MazeSolution {
     @Override
     public List<MazeVertex> getVertexRange(int indexStart, int indexEnd) {
 
-        List<MazeVertex> list;
+    	if (indexEnd >= 0 && indexEnd < mazeVertex.size() && indexStart >= 0 && indexStart < mazeVertex.size()) {
+    		if (indexEnd > indexStart) {
+    			ArrayList<MazeVertex> result = new ArrayList<>();
+    			for (int c = indexStart; c <= indexEnd; c++) {
+    				result.add(mazeVertex.get(c));
+    			}
+    			return result;
+    		} else {
+    			ArrayList<MazeVertex> result = new ArrayList<>();
+    			for (int c = indexStart; c <= indexEnd; c++) {
+    				result.add(mazeVertex.get(c));
+    			}
 
-        if (indexEnd > indexStart) {
-            if (indexStart >= 0 && indexEnd < mazeVertex.size()) {
-
-                ArrayList<MazeVertex> result = new ArrayList<>();
-                for (int c = indexStart; c <= indexEnd; c++) {
-                    result.add(mazeVertex.get(c));
-                }
-
-                return result;
-            } else {
-                return null;
-            }
-
-        } else {
-            if (indexEnd >= 0 && indexStart < mazeVertex.size()) {
-
-                ArrayList<MazeVertex> result = new ArrayList<>();
-                for (int c = indexStart; c <= indexEnd; c++) {
-                    result.add(mazeVertex.get(c));
-                }
-
-                Collections.reverse(result);
-
-                return result;
-            } else {
-                return null;
-            }
-        }
+    			Collections.reverse(result);
+    			return result;
+    		}
+    	}
+    	return null;
     }
 
     @Override
     public List<Directions> getDirectionsRange(int indexStart, int indexEnd) {
         List<Directions> directions = new ArrayList<Directions>();
 
-        if (indexStart < indexEnd) {
-            if (indexStart >= 0 && indexEnd < mazeVertex.size()) {
-                for (int i = indexStart; i < indexEnd + 1; i++) {
-                    directions.add(this.getDirectionAt(i));
-                }
-                return directions;
-            } else {
-                return null;
-            }
-        } else {
-            if (indexEnd >= 0 && indexStart < mazeVertex.size()) {
-                for (int i = indexStart; i > indexEnd - 1; i--) {
-                    directions.add(this.getDirectionAt(i));
-                }
-                return directions;
-            } else {
-                return null;
-            }
+        if (indexEnd >= 0 && indexEnd < mazeVertex.size() && indexStart >= 0 && indexStart < mazeVertex.size()) {
+        	if (indexStart < indexEnd) {
+        		for (int i = indexStart; i < indexEnd + 1; i++) {
+        			directions.add(this.getDirectionAt(i));
+        		}
+        		return directions;
+        	} else {
+        		for (int i = indexStart; i > indexEnd - 1; i--) {
+        			directions.add(this.getDirectionAt(i));
+        		}
+        		return directions;
+        	}
         }
+        return null;
     }
 
     @Override
