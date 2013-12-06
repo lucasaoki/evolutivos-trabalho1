@@ -238,7 +238,7 @@ public class MazeSolutionVertex extends MazeSolution {
                 return true;
             } else {
 
-                for (int i = indexEnd; i < indexStart; i++) {
+                for (int i = indexEnd; i < indexStart + 1; i++) {
                     mazeVertex.remove(indexEnd);
                 }
                 totalDistanceValid = false;

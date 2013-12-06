@@ -57,17 +57,17 @@ public class iMutationShortcut extends aMutation {
                 Integer index = indexes.get(0);
                 indexes.remove(indexes.get(0));
 
-                MazeVertex vex = maze.getVertexFromIndex(index);
+                MazeVertex vex =  mazeSol.getVertexAt(index);
                 List<MazeVertex> connectedVertices = maze.getConnectedVertices(vex);
 
                 if (index == 0) {
                     connectedVertices.remove(maze.getStartVert());
                 } else {
-                    connectedVertices.remove(maze.getVertexFromIndex(index - 1));
+                    connectedVertices.remove(mazeSol.getVertexAt(index - 1));
                 }
 
                 if (index != mazeSol.getSize() - 1) {
-                    connectedVertices.remove(maze.getVertexFromIndex(index + 1));
+                    connectedVertices.remove(mazeSol.getVertexAt(index + 1));
                 }
 
                 if (connectedVertices.isEmpty()) {
@@ -101,6 +101,74 @@ public class iMutationShortcut extends aMutation {
                 mazeSol.addVertexRangeAt(startIndex + 1, shortcut.getVertexRange(0, shortcut.getSize() -1));
                 break;
             }
+
+//            MazeSolutionVertex shortcut = new MazeSolutionVertex(maze, mazeSol.getSolutionLimitSize());
+//            ArrayList<Integer> indexes = new ArrayList<>();
+//            HashMap<MazeVertex, Integer> vertexHash = new HashMap<>();
+//            
+//            if (mazeSol.isSolutionFound()) {
+//
+//                for (int c = 0; c < mazeSol.getSize(); c++) {
+//                    indexes.add(c);
+//                    vertexHash.put(mazeSol.getVertexAt(c), c);
+//                }
+//                Collections.shuffle(indexes);
+//
+//            } else {
+//                indexes.add(mazeSol.getSize() - 1);
+//            }
+//
+//            int startIndex;
+//            int endIndex;
+//            while (indexes.size() > 0) {
+//
+//                Integer index = indexes.get(0);
+//                indexes.remove(indexes.get(0));
+//
+//                MazeVertex vex = maze.getVertexFromIndex(index);
+//                List<MazeVertex> connectedVertices = maze.getConnectedVertices(vex);
+//
+//                if (index == 0) {
+//                    connectedVertices.remove(maze.getStartVert());
+//                } else {
+//                    connectedVertices.remove(maze.getVertexFromIndex(index - 1));
+//                }
+//
+//                if (index != mazeSol.getSize() - 1) {
+//                    connectedVertices.remove(maze.getVertexFromIndex(index + 1));
+//                }
+//
+//                if (connectedVertices.isEmpty()) {
+//                    continue;
+//                }
+//                MazeVertex vnew = connectedVertices.get(mem.rmd.nextInt(connectedVertices.size()));
+//                startIndex = index;
+//                
+//                do
+//                {
+//                    shortcut.addVertex(vnew);
+//                    connectedVertices = maze.getConnectedVertices(vnew);
+//                    connectedVertices.remove(vnew);
+//                    
+//                    vex = vnew;
+//                    
+//                    if (connectedVertices.isEmpty())
+//                        break;
+//                    
+//                    vnew = connectedVertices.get(mem.rmd.nextInt(connectedVertices.size()));
+//                    
+//                }while (mazeSol.getSolutionLimitSize() - mazeSol.getSize() > shortcut.getSize() && vex.getIndex() != maze.getEndVert().getIndex() && !vertexHash.containsKey(vex));
+//                
+//                if (vertexHash.containsKey(vex))
+//                    endIndex = vertexHash.get(vex);
+//                else
+//                    endIndex = mazeSol.getSize() -1;
+//                
+//                mazeSol.removeRange(startIndex + 1, endIndex);
+//                
+//                mazeSol.addVertexRangeAt(startIndex + 1, shortcut.getVertexRange(0, shortcut.getSize() -1));
+//                break;
+//            }
 
         } else {
         	

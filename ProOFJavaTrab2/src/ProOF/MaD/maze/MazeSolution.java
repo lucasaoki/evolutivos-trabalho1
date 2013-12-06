@@ -53,7 +53,7 @@ public abstract class MazeSolution{
     
     public boolean isSolutionFound()
     {
-        return getVertexAt(getSize() - 1).getIndex() != maze.getEndVert().getIndex();
+        return getVertexAt(getSize() - 1).getIndex() == maze.getEndVert().getIndex();
     }
     
     public abstract int getSize();
