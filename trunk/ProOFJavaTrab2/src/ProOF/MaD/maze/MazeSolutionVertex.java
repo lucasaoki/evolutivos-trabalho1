@@ -257,7 +257,7 @@ public class MazeSolutionVertex extends MazeSolution {
             System.out.println("Solution is full of vertex!");
             return false;
         } else {
-            if (indexStart >= 0 && indexStart <= mazeVertex.size()) {
+            if (indexStart >= 0 && indexStart < mazeVertex.size()) {
                 for (int c = vertices.size() - 1;  c >= 0; c--) {
                     mazeVertex.add(indexStart, vertices.get(c));
                 }
