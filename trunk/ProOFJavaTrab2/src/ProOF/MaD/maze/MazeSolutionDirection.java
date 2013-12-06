@@ -43,9 +43,9 @@ public class MazeSolutionDirection extends MazeSolution{
     				if(mazeDirections.size() == 0){
     					dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), vertex.getLocation());
     				} else if (mazeDirections.size() == 1) {
-    					dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertex.getLocation());
+    					dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertex.getLocation());
     				} else {
-    					dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertex.getLocation());
+    					dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-2).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertex.getLocation());
     				}
     				
     				if(dir != null ){
@@ -64,12 +64,12 @@ public class MazeSolutionDirection extends MazeSolution{
     @Override
     public boolean addDirection(Directions direction) {
     	if(direction != null){
-    		if(mazeDirections.size() >= solutionLimitSize ){
+    		if( mazeDirections.size() >= solutionLimitSize ){
     			System.out.println("Solution is full of direction!");
                 return false;
     		} else{
     			mazeDirections.add(direction);
-    			totalDistanceValid=false;
+    			totalDistanceValid = false;
     			return true;
     		}
     	} else
@@ -93,13 +93,13 @@ public class MazeSolutionDirection extends MazeSolution{
     public boolean setVertexAt(int index, MazeVertex vertex) {
     	Directions dir;
     	
-    	if( index >= 0 && index < mazeDirections.size() ){
+    	if( index >= 0 && index < mazeDirections.size() && vertex != null){
     		if(mazeDirections.size() == 0){
     			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), vertex.getLocation());
     		} else if (mazeDirections.size() == 1) {
-    			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertex.getLocation());
+    			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertex.getLocation());
     		} else {
-    			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertex.getLocation());
+    			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-2).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertex.getLocation());
     		}
     		
     		if( dir != null){
@@ -125,44 +125,48 @@ public class MazeSolutionDirection extends MazeSolution{
     	} else
     		return false;
     }
-
+    
     @Override
     public boolean addVertexAt(int index, MazeVertex vertex) {
     	Directions dir;
-    	
-    	if( index >= 0 && index < mazeDirections.size() ){
-    		if(mazeDirections.size() == 0){
-    			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), vertex.getLocation());
-    		} else if (mazeDirections.size() == 1) {
-    			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertex.getLocation());
-    		} else {
-    			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertex.getLocation());
+    	if(mazeDirections.size() >= solutionLimitSize ){
+    		System.out.println("Solution is full of direction!");
+            return false;
+    	} else {
+    		if( index >= 0 && index < mazeDirections.size() && vertex != null ){
+    			if(mazeDirections.size() == 0){
+    				dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), vertex.getLocation());
+    			} else if (mazeDirections.size() == 1) {
+    				dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertex.getLocation());
+    			} else {
+    				dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-2).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertex.getLocation());
+    			}
+
+    			if( dir != null){
+    				mazeDirections.add(index, dir);
+    				totalDistanceValid = false;
+    				return true;
+    			} else
+    				return false;
     		}
-    		
-    		if( dir != null){
-    			mazeDirections.add(index, dir);
-    			totalDistanceValid = false;
-    			return true;
-    		} else
-    			return false;
+    		return false;
     	}
-    	return false;
     }
 
     @Override
     public boolean addDirectionAt(int index, Directions direction) {
     	if(direction != null){
     		if(mazeDirections.size() >= solutionLimitSize){
+    			System.out.println("Solution is full of direction!");
+    			return false;
+    		} else {
     			if(index >= 0 && index < mazeDirections.size()){
-    				System.out.println("Solution is full of direction!");
-                    return false;
-    			} else {
     				mazeDirections.add(index, direction);
     				totalDistanceValid = false;
     				return true;
-    			}
-    		} else
-    			return false;
+    			} else
+    				return false;
+    		}
     	} else
     		return false;
     }
@@ -181,9 +185,9 @@ public class MazeSolutionDirection extends MazeSolution{
         			if(mazeDirections.size() == 0){
             			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), vertices.get(i).getLocation());
             		} else if (mazeDirections.size() == 1) {
-            			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertices.get(i).getLocation());
+            			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertices.get(i).getLocation());
             		} else {
-            			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertices.get(i).getLocation());
+            			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-2).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertices.get(i).getLocation());
             		}
         			
         			if(dir != null){
@@ -228,30 +232,24 @@ public class MazeSolutionDirection extends MazeSolution{
 
     @Override
     public boolean removeRange(int indexStart, int indexEnd) {
-    	
-    	if(indexEnd > indexStart){
-    		if( indexStart >= 0 && indexEnd < mazeDirections.size() )
-    		{
+    	if( indexEnd >= 0 && indexEnd < mazeDirections.size() && indexStart >=0 && indexStart < mazeDirections.size() )
+    	{
+    		if(indexEnd > indexStart){
     			for (int i = indexStart; i < indexEnd+1; i++) {
     				mazeDirections.remove(indexStart);
     			}
     			totalDistanceValid = false;
     			return true;
-    		}
-    		else
-    			return false;
-    	} else {
-    		if( indexEnd >= 0 && indexStart < mazeDirections.size() )
-    		{
-    			for (int i = indexEnd; i < indexStart; i++) {
+
+    		} else {
+    			for (int i = indexEnd; i < indexStart+1; i++) {
     				mazeDirections.remove(indexEnd);
-				}
+    			}
     			totalDistanceValid = false;
     			return true;
     		}
-    		else
-    			return false;
     	}
+    	return false;
     }
 
 	@Override
@@ -263,14 +261,14 @@ public class MazeSolutionDirection extends MazeSolution{
 			System.out.println("Solution is full of direction!");
 			return false;
 		} else {
-			if (indexStart >= 0 && indexStart <= mazeDirections.size()){
+			if (indexStart >= 0 && indexStart < mazeDirections.size()){
 				for (int i = indexStart; i < vertices.size(); i++) {
 					if(mazeDirections.size() == 0){
             			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), maze.getStartVert().getLocation(), vertices.get(index++).getLocation());
             		} else if (mazeDirections.size() == 1) {
-            			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertices.get(index++).getLocation());
+            			dir = MazeUtils.GetDirections(maze.getStartVert().getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertices.get(index++).getLocation());
             		} else {
-            			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()).getLocation(), vertices.get(index++).getLocation());
+            			dir = MazeUtils.GetDirections(MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-2).getLocation(), MazeUtils.getVertex(maze, mazeDirections, mazeDirections.size()-1).getLocation(), vertices.get(index++).getLocation());
             		}
         			
         			if(dir != null){
@@ -309,57 +307,49 @@ public class MazeSolutionDirection extends MazeSolution{
 	public List<MazeVertex> getVertexRange(int indexStart, int indexEnd) {
 		List<MazeVertex> list = new ArrayList<MazeVertex>();
 		MazeVertex vtx;
-		
-		
-		if( indexEnd > indexStart){
-			if( indexStart >= 0 && indexEnd < mazeDirections.size() ){
+
+		if( indexEnd >= 0 && indexEnd < mazeDirections.size() && indexStart >= 0 && indexStart < mazeDirections.size() ){
+			if( indexEnd > indexStart){
 				for (int i = indexStart; i < indexEnd; i++) {
 					vtx = MazeUtils.getVertex(maze, mazeDirections, i);
 					list.add(vtx);
 				}
-				
 				return list;
-			} 
-			else
-				return null;
 
-		} else {
-			if( indexEnd >=0 && indexStart < mazeDirections.size() ){
+			} else {
 				for (int i = indexEnd; i < indexStart; i++) {
 					vtx = MazeUtils.getVertex(maze, mazeDirections, i);
 					list.add(vtx);
 				}
-				
 				Collections.reverse(list);
 				return list;
 			}
-			else
-				return null;
 		}
+		return null;
 	}
 
 	@Override
-	public List<Directions> getDirectionsRange(int indexStart, int indexEnd) {
-		List<Directions> list;
+	public ArrayList<Directions> getDirectionsRange(int indexStart, int indexEnd) {
+		ArrayList<Directions> list = new ArrayList<Directions>();
 
-		if( indexEnd > indexStart){
-			if( indexStart >= 0 && indexEnd < mazeDirections.size() ){
-
-				return mazeDirections.subList(indexStart, indexEnd);
-			} 
-			else
-				return null;
-
-		} else {
-			if( indexEnd >=0 && indexStart < mazeDirections.size() ){
-				list = mazeDirections.subList(indexEnd, indexStart);
-				Collections.reverse(list);
-
+		if( indexEnd >= 0 && indexEnd < mazeDirections.size() && indexStart >= 0 && indexStart < mazeDirections.size() ){
+			if( indexEnd > indexStart){
+				
+				for (int i = indexStart; i < indexEnd; i++) {
+					list.add(mazeDirections.get(i));
+				}
 				return list;
+
+			} else {
+				for (int i = indexEnd; i < indexStart; i++) {
+					list.add(mazeDirections.get(i));
+				}
+				Collections.reverse(list);
+				return list;
+
 			}
-			else
-				return null;
 		}
+		return null;
 	}
 
     @Override
