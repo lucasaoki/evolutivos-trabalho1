@@ -26,10 +26,10 @@ public class iMutationProviderDefault extends aMutationProvider {
 		if (Math.random() <= mutationRate) {
                     int index = rnd.nextInt(mutationList.length);
                     
-                    for (int c = 0; c < 10; c++)
-                    mutationList[0].mutation(problemNode, s1.codif());
+//                    for (int c = 0; c < 10; c++)
+//                    mutationList[0].mutation(problemNode, s1.codif());
                     
-                    index = 1;
+                    index = 0;
 		    mutationList[index].mutation(problemNode, s1.codif());
 		}
 	    } else {

@@ -9,6 +9,7 @@ import ProOF.MaD.maze.MazeSolution;
 import ProOF.MaD.maze.components.MazeEdge;
 import ProOF.MaD.maze.components.MazeVertex;
 import ProOF.apl.problems.iCodification;
+import ProOF.utils.GlobalConstants;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public final class iMaze1 extends aMaze {
 
     public iMaze1() {
         super();
-        maze = new Maze("../../../media/Graph.txt");
+        maze = new Maze(GlobalConstants.mapadirData);
 
     }
 

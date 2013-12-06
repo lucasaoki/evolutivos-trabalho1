@@ -5,7 +5,13 @@
 package ProOF.apl.methods.GA.algorithm;
 
 import PrintImage.Windows;
+import ProOF.apl.problems.iCodification;
+import ProOF.apl.problems.iObjective;
+import ProOF.apl.problems.iProblem;
 import ProOF.com.LinkerResults;
+import ProOF.opt.abst.problem.meta.Solution;
+import ProOF.utils.GlobalConstants;
+import java.util.List;
 
 /**
  *
@@ -37,10 +43,10 @@ public class iGADefault extends aGA {
         int size = 400;
 
         for (int c = 0; c < w.length - 1; c++) {
-            w[c] = new Windows("ind " + Integer.toString(c), size, size, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
+            w[c] = new Windows("ind " + Integer.toString(c), size, size, populationList.get(0).codif().getMaze().getMaze() ,GlobalConstants.mapadir);
         }
 
-        w[w.length - 1] = new Windows("crossover ", size, size, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
+        w[w.length - 1] = new Windows("crossover ", size, size, populationList.get(0).codif().getMaze().getMaze(), GlobalConstants.mapadir);
         System.out.printf("INITIALIZATED\n");
     }
 
@@ -53,15 +59,15 @@ public class iGADefault extends aGA {
             return;
         }
         
-//         List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
-//
-//
-//        populationList.clear();
-//
-//        populationList.addAll(lold);
-//        
-//        int popToCross =  population_size - populationList.size();
-//        
+         List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
+
+
+        populationList.clear();
+
+        populationList.addAll(lold);
+        
+        int popToCross =  population_size - populationList.size();
+        
 //        for (int c = 0; c < popToCross; c++) {
 //            Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c), populationList.get(c+1));
 //
@@ -69,11 +75,11 @@ public class iGADefault extends aGA {
 //                populationList.add(child);
 //            }
 //        }
-//        
-        Thread.sleep(1000);
+        
+//        Thread.sleep(1000);
         for (int c = 0; c < populationList.size(); c++) {
             mutation.runMutation(populationList.get(c));
-          w[c].setSolution(populationList.get(c).codif().getMazeSol());
+//          w[c].setSolution(populationList.get(c).codif().getMazeSol());
         }
     }
 

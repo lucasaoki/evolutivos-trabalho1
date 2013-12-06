@@ -12,6 +12,7 @@ package PrintImage;
 
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
+import ProOF.utils.GlobalConstants;
 import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 
@@ -76,15 +77,15 @@ public class Windows extends JFrame {
         Windows a;  
         Windows b;
         if (args.length >= 1 && args[0].equals("lap")) {
-            a = new Windows("a",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-            b = new Windows("b",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+            a = new Windows("a",664, 504,new Maze(GlobalConstants.mapadirData), "media/mapa.png");
+            b = new Windows("b",664, 504,new Maze(GlobalConstants.mapadirData), "media/mapa.png");
             
         } else if (args.length >= 1 && args[0].equals("mini")) {
-             a = new Windows("a",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-             b = new Windows("b",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+             a = new Windows("a",664, 504,new Maze(GlobalConstants.mapadirData), "media/mapa.png");
+             b = new Windows("b",664, 504,new Maze(GlobalConstants.mapadirData), "media/mapa.png");
         } else {
-             a = new Windows("a",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
-             b = new Windows("b",664, 504,new Maze("media/Graph.txt"), "media/mapa.png");
+             a = new Windows("a",664, 504,new Maze(GlobalConstants.mapadirData), "media/mapa.png");
+             b = new Windows("b",664, 504,new Maze(GlobalConstants.mapadirData), "media/mapa.png");
         } 
     }
 }

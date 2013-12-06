@@ -33,7 +33,7 @@ public class TesteDjikstra {
             double finalTime = 0;
             double totalTime = 0;
             double value = 0;
-            String file = "media/maze" + i + "_out.png_graph.txt";
+            String file = "../../../media/maze" + i + "_out.png_graph.txt";
             System.out.println(file);
 
             Maze maze = new Maze(file);

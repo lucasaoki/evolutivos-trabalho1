@@ -35,11 +35,11 @@ public class iIteration extends NodeSingle {
     public void iterationWithoutVary(double value) {
 	if (Math.abs(value - bestResultRef) <= GlobalConstants.max_IterWOVaryGAP) {
 	    iterationsWithoutVary++;
-	    System.out.format("akiii add value: %f  best value:%f  %n", value, bestResultRef);
+//	    System.out.format("akiii add value: %f  best value:%f  %n", value, bestResultRef);
 	} else {
 	    resetIterationWithoutVary();
 	    setBestResultRef(value);
-	    System.out.format("akiii ressssssest add value: %f  best value:%f  %n", value, bestResultRef);
+//	    System.out.format("akiii ressssssest add value: %f  best value:%f  %n", value, bestResultRef);
 	}
     }
 
