@@ -68,18 +68,19 @@ public class TesteDjikstra {
             finalTime = System.currentTimeMillis();
             totalTime = finalTime - startTime;
 
-            try {
-                FileWriter fstream = new FileWriter("media/times.txt", true);
-                BufferedWriter bw = new BufferedWriter(fstream);
-
-                bw.write(i + "x" + i + "\t" + totalTime);
-                bw.newLine();
-                bw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(TesteDjikstra.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            System.out.println("Index of start vert: " + start.getIndex());
+            System.out.println("Index of final vert: " + dest.getIndex());
+//            try {
+//                FileWriter fstream = new FileWriter("media/times.txt", true);
+//                BufferedWriter bw = new BufferedWriter(fstream);
+//
+//                bw.write(i + "x" + i + "\t" + totalTime);
+//                bw.newLine();
+//                bw.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(TesteDjikstra.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
 
     }
-
 }
