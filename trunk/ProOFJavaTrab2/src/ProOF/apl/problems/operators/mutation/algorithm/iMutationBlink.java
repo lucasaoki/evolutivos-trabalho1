@@ -8,6 +8,7 @@ package ProOF.apl.problems.operators.mutation.algorithm;
 
 import java.util.ArrayList;
 
+import ProOF.MaD.maze.Directions;
 import ProOF.MaD.maze.Maze;
 import ProOF.MaD.maze.MazeSolution;
 import ProOF.apl.problems.iCodification;
@@ -82,7 +83,37 @@ public class iMutationBlink extends aMutation{
 			}
 		
 		} else {
-			//TODO Blink Mutation Directions
+			int changeChance = 6;
+        	int excludeChance = 3;
+        	
+        	
+        	for (int i = 0; i < mazeSol.getSize(); i++) {
+				index1 = mem.rmd.nextInt(10);
+				if( index1 < excludeChance ){
+					mazeSol.removeAt(i);
+				} else {
+					index1 = mem.rmd.nextInt(10);
+					if(index1 < changeChance ){
+						index1 = mem.rmd.nextInt(4);
+						switch (index1) {
+						case 0:
+							mazeSol.setDirectionAt(i, Directions.RIGHT);
+							break;
+						case 1:
+							mazeSol.setDirectionAt(i, Directions.LEFT);
+							break;
+						case 2:
+							mazeSol.setDirectionAt(i, Directions.FORWARD);
+							break;
+						case 3:
+							mazeSol.setDirectionAt(i, Directions.BACKWARD);
+							break;
+						default:
+							break;
+						}
+					}
+				}
+			}
 		}
     }
 
