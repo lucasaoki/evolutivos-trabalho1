@@ -24,7 +24,7 @@ public class GlobalConstants {
 
     //aGA
     public final static int population_size = 2;
-    public final static double selectionRate = 0.4f;
+    public final static double selectionRate = 0.8f;
     public final static double newPopForCrossover = 0.1;
     //aCrossoverProvider
     public final static double crossoverRate = 1;

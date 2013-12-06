@@ -370,7 +370,6 @@ public class MazeSolutionDirection extends MazeSolution{
             
             this.totalDistance = m.totalDistance;
             this.totalDistanceValid = m.totalDistanceValid;
-            this.solutionFound = m.solutionFound;
             this.mazeDirections.clear();
             
             for(int c = 0 ;c < m.mazeDirections.size(); c++)

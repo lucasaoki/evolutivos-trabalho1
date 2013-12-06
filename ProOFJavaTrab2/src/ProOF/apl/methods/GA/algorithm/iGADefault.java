@@ -36,10 +36,10 @@ public class iGADefault extends aGA {
         populationList.addAll(generate(population_size));
 
         resetcount = 0;
-
+//
         w = new Windows[population_size + 1];
         
-        int size = 400;
+        int size = 900;
 
         for (int c = 0; c < w.length - 1; c++) {
             w[c] = new Windows("ind " + Integer.toString(c), size, size, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");
@@ -57,76 +57,29 @@ public class iGADefault extends aGA {
         if (stopNode.end()) {
             return;
         }
-
-        resetcount++;
-        if (resetcount > 15) {
-            populationList.clear();
-            populationList.addAll(generate(population_size));
-
-            for (int c = 0; c < populationList.size(); c++) {
-                w[c].setSolution(populationList.get(c).codif().getMazeSol());
-            }
-            resetcount = 0;
-        }
+        
+//         List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
+//
+//
+//        populationList.clear();
+//
+//        populationList.addAll(lold);
 //        
-//        Thread.sleep(2000);
-//         if (true)
-//            return;
-
-        System.out.println("running mutation: ");
+//        int popToCross =  population_size - populationList.size();
+//        
+//        for (int c = 0; c < popToCross; c++) {
+//            Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c), populationList.get(c+1));
+//
+//            if (child != null) {
+//                populationList.add(child);
+//            }
+//        }
+//        
+        Thread.sleep(1000);
         for (int c = 0; c < populationList.size(); c++) {
             mutation.runMutation(populationList.get(c));
-            w[c].setSolution(populationList.get(c).codif().getMazeSol());
+          w[c].setSolution(populationList.get(c).codif().getMazeSol());
         }
-
-//          if (true)
-//            return;
-        System.out.println("running crossover: ");
-        Solution<iProblem, iObjective, iCodification, Solution> runCross = cross.runCross(populationList.get(0), populationList.get(1));
-
-        w[w.length - 1].setSolution(runCross.codif().getMazeSol());
-
-        if (runCross != populationList.get(0) && runCross != populationList.get(1)) {
-            if (resetcount > 5  ){
-            Thread.sleep(2000);
-            Thread.sleep(200);
-            }
-        }
-
-        if (true) {
-            return;
-        }
-
-        List lold = sublistClone(populationList, 0, (int) Math.round(population_size * selectionRate));
-//	List lnew = generate((int) Math.round(population_size * newPopForCrossover));
-
-        populationList.clear();
-
-        populationList.addAll(lold);
-
-        System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
-
-//	populationList.addAll(lnew);
-        double limitCount = populationList.size() / 2f;
-
-        for (int c = 0; c < limitCount; c++) {
-            Solution<iProblem, iObjective, iCodification, Solution> child = cross.runCross(populationList.get(c * 2), populationList.get(c * 2 + 1));
-
-            if (child != null) {
-                populationList.add(child);
-            }
-
-//	    System.out.print(Integer.toString(c) + " ");
-        }
-        System.out.println("AfterCrossover  Pop size: " + Integer.toString(populationList.size()));
-
-        for (int c = 0; c < populationList.size(); c++) {
-            mutation.runMutation(populationList.get(c));
-        }
-
-	//selection();
-        populationList.addAll(generate(population_size - populationList.size()));
-
     }
 
     @Override

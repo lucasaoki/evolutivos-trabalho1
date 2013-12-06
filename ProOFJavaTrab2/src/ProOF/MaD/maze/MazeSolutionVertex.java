@@ -228,27 +228,25 @@ public class MazeSolutionVertex extends MazeSolution {
 
     @Override
     public boolean removeRange(int indexStart, int indexEnd) {
+        if (indexStart >= 0 && indexStart < mazeVertex.size() && indexEnd >= 0 && indexEnd < mazeVertex.size()) {
+            if (indexEnd > indexStart) {
 
-        if (indexEnd > indexStart) {
-            if (indexStart >= 0 && indexEnd < mazeVertex.size()) {
                 for (int i = indexStart; i < indexEnd + 1; i++) {
                     mazeVertex.remove(indexStart);
                 }
                 totalDistanceValid = false;
                 return true;
             } else {
-                return false;
-            }
-        } else {
-            if (indexEnd >= 0 && indexStart < mazeVertex.size()) {
+
                 for (int i = indexEnd; i < indexStart; i++) {
                     mazeVertex.remove(indexEnd);
                 }
                 totalDistanceValid = false;
                 return true;
-            } else {
-                return false;
+
             }
+        } else {
+            return false;
         }
     }
 
@@ -318,12 +316,12 @@ public class MazeSolutionVertex extends MazeSolution {
 
         } else {
             if (indexEnd >= 0 && indexStart < mazeVertex.size()) {
-                
-                 ArrayList<MazeVertex> result = new ArrayList<>();
+
+                ArrayList<MazeVertex> result = new ArrayList<>();
                 for (int c = indexStart; c <= indexEnd; c++) {
                     result.add(mazeVertex.get(c));
                 }
-               
+
                 Collections.reverse(result);
 
                 return result;
@@ -365,7 +363,6 @@ public class MazeSolutionVertex extends MazeSolution {
 
             this.totalDistance = m.totalDistance;
             this.totalDistanceValid = m.totalDistanceValid;
-            this.solutionFound = m.solutionFound;
             this.mazeVertex.clear();
 
             for (int c = 0; c < m.mazeVertex.size(); c++) {

@@ -21,13 +21,11 @@ public abstract class MazeSolution{
     protected boolean totalDistanceValid;
     
     protected int solutionLimitSize;
-    protected boolean solutionFound;
     
     protected Maze maze;
 
     public MazeSolution(Maze maze, int solutionLimitSize) {
         this.solutionLimitSize = solutionLimitSize;
-        solutionFound = false;
         totalDistanceValid =false;
         this.maze = maze;
     }
@@ -45,19 +43,7 @@ public abstract class MazeSolution{
         totalDistanceValid = true;
     }
     
-    
-
-    public boolean isSolutionFound() {
-        return solutionFound;
-    }
-
-    public void setSolutionFound(boolean solutionFound) {
-        this.solutionFound = solutionFound;
-    }
-    
-    
-
-    public int getSolutionLimitSize() {
+   public int getSolutionLimitSize() {
         return solutionLimitSize;
     }
 
@@ -65,6 +51,10 @@ public abstract class MazeSolution{
         this.solutionLimitSize = solutionLimitSize;
     }
     
+    public boolean isSolutionFound()
+    {
+        return getVertexAt(getSize() - 1).getIndex() != maze.getEndVert().getIndex();
+    }
     
     public abstract int getSize();
     

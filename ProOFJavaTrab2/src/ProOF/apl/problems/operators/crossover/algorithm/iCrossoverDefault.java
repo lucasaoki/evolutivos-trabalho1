@@ -74,10 +74,10 @@ public class iCrossoverDefault extends aCrossover {
                         n2 = tmp;
                     }
                     
-                    int v1n1 = vind1Index.get(n1);
-                    int v1n2 = vind1Index.get(n2);
-                    int v2n1 = vind2Index.get(n1);
-                    int v2n2 = vind2Index.get(n2);
+//                    int v1n1 = vind1Index.get(n1);
+//                    int v1n2 = vind1Index.get(n2);
+//                    int v2n1 = vind2Index.get(n1);
+//                    int v2n2 = vind2Index.get(n2);
 
                     if (newMazeSol.addVertexRange(mazeSol2.getVertexRange(0, vind2Index.get(n1)-1))) {
                         System.out.println("index ind2 corte " + Integer.toString( vind2Index.get(n1) - 1));
