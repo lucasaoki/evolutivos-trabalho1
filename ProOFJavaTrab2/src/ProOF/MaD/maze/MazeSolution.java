@@ -19,7 +19,7 @@ public abstract class MazeSolution{
     
     protected double totalDistance;
     protected boolean totalDistanceValid;
-    
+    protected boolean flag = true;
     protected int solutionLimitSize;
     
     protected Maze maze;
@@ -92,5 +92,8 @@ public abstract class MazeSolution{
     
     public abstract void Copy(MazeSolution mazesol);
     
+    public abstract MazeVertex repair(MazeVertex current, MazeVertex last);
+    
+    public abstract boolean validate(MazeSolution mazeS);
 
 }

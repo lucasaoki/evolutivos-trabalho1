@@ -40,6 +40,7 @@ public class Screen extends JPanel {
     private BufferedImage img;
     private Maze maze;
     private MazeSolution mazeS;
+    Graphics2D g2d;
 
     public Screen(int width, int height, Maze maze, String imageFail) {
         try {
@@ -57,23 +58,24 @@ public class Screen extends JPanel {
     }
 
     public void Draw(Graphics2D g) {
-        Graphics2D g2d = (Graphics2D) g;
+        g2d = (Graphics2D) g;
         double max_x, max_y;
         g2d.setColor(Color.red);
         ArrayList<MazeVertex> vertices = maze.getVertices();
         Set<MazeEdge> edges = maze.edgeSet();
-        
+
+        float[] hsb;
         max_x = img.getWidth();
         max_y = img.getHeight();
 
-        g2d.setFont(new Font("TimesRoman", Font.BOLD, 10)); 
+        g2d.setFont(new Font("TimesRoman", Font.BOLD, 10));
         g2d.setStroke(new BasicStroke(1));
-        
+
         BufferedImage tmpImage = getGraphicsConfiguration().createCompatibleImage(screen_width, screen_height, Transparency.TRANSLUCENT);
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.drawImage(img, 0, 0, screen_width, screen_height, null);
+        //g2d.drawImage(img, 0, 0, screen_width, screen_height, null);
 
         for (MazeEdge edge : edges) {
             MazeVertex vertex = maze.getEdgeSource(edge);
@@ -117,10 +119,15 @@ public class Screen extends JPanel {
             g2d.setColor(Color.blue);
             g2d.fillOval(initial_x - 4, initial_y - 4, 10, 10);
 
-            g2d.setColor(Color.yellow);
+            //yellow
+            g2d.setStroke(new BasicStroke(3));
+            setColor(0, 255, 255);
             g2d.fillOval(end_x - 4, end_y - 4, 10, 10);
 
-            g2d.setColor(Color.green);
+            
+            //Green
+            g2d.setStroke(new BasicStroke(3));
+            setColor(107,142,35);
             g2d.drawLine(initial_x, initial_y, aux_x, aux_y);
 
             for (int c = 0; c < mazeS.getSize() - 1; c++) {
@@ -138,26 +145,31 @@ public class Screen extends JPanel {
                 }
                 //Green
                 g2d.setStroke(new BasicStroke(3));
-                float[] hsb = Color.RGBtoHSB(0, 100, 0, null);
-                g2d.setColor(Color.getHSBColor(hsb[0],hsb[1],hsb[2]));
+                setColor(107, 142, 35);
                 g2d.drawLine(pos_x, pos_y, pos_x1, pos_y1);
                 g2d.setStroke(new BasicStroke(1));
 
                 double pos_angle_cos = 10 * Math.cos(Math.toRadians(contador[vertex.getIndex()] * angle));
-                double pos_angle_sin = 10 * Math.sin(Math.toRadians(contador[vertex.getIndex()] * angle));
+                double pos_angle_sin = -10 * Math.sin(Math.toRadians(contador[vertex.getIndex()] * angle));
 
-                g2d.drawString("" + c + "", (int) ((pos_x - 4) + pos_angle_cos), (int) ((pos_y - 10) + pos_angle_sin));
+                setColor(213, 100, 0);
+                g2d.drawLine(pos_x, pos_y, pos_x1, pos_y1);g2d.drawString("" + c + "", (int) ((pos_x) + pos_angle_sin), (int) ((pos_y) + pos_angle_cos));
                 contador[vertex.getIndex()]++;
             }
         }
     }
-
+    private void setColor(int r, int g, int b){
+        
+        float[] hsb = Color.RGBtoHSB(  r, g, b, null);
+        g2d.setColor(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+        
+    } 
     @Override
     public void paint(Graphics screen) {
         super.paint(screen);
 
         Draw((Graphics2D) screen);
-        this.getGraphics().dispose();
+        g2d.dispose();
     }
 
     public void callback(String[][] m) {

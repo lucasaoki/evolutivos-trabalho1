@@ -11,6 +11,7 @@ import ProOF.MaD.maze.utils.MazeUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -367,6 +368,63 @@ public class MazeSolutionVertex extends MazeSolution {
                 this.mazeVertex.add(m.mazeVertex.get(c));
             }
 
+        }
+    }
+
+    @Override
+    public boolean validate(MazeSolution mazeS){
+        MazeVertex current = maze.getStartVert();
+        MazeVertex last = current;
+        MazeVertex new_vertex;
+        if (!flag) {
+            while (maze.getEdge(current, mazeS.getVertexAt(0)) == null) {
+                new_vertex = repair(current, last);
+                if (new_vertex == null) {
+                    mazeS.removeRange(0, mazeS.getSize() - 1);
+                    return false;
+                }
+                mazeS.setVertexAt(0, new_vertex);
+            }
+            for (int c = 0; c < mazeS.getSize() - 1; c++) {
+                current = mazeS.getVertexAt(c);
+                while (maze.getEdge(current, mazeS.getVertexAt(c + 1)) == null) {
+                    new_vertex = repair(current, last);
+                    if (new_vertex == null) {
+                        mazeS.removeRange(c + 1, mazeS.getSize() - 1);
+                        return true;
+                    }
+                    mazeS.setVertexAt(c + 1, new_vertex);
+                }
+                last = current;
+            }
+            return true;
+        } else {
+            if (maze.getEdge(current, mazeS.getVertexAt(0)) == null) {
+                mazeS.removeRange(0, mazeS.getSize() - 1);
+                return false;
+            }
+            for (int c = 0; c < mazeS.getSize() - 1; c++) {
+                current = mazeS.getVertexAt(c);
+                if (maze.getEdge(current, mazeS.getVertexAt(c+1)) == null) {
+                    mazeS.removeRange(c+1, mazeS.getSize() - 1);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public MazeVertex repair(MazeVertex current, MazeVertex last){
+        List<MazeVertex> vertex_list = maze.getConnectedVertices(current);
+        Random rand_ = new Random(System.currentTimeMillis());
+        if (last != current) {
+            vertex_list.remove(vertex_list.indexOf(last));
+        }
+        if (vertex_list.size() < 1) {
+            return null;
+        } else {
+            return vertex_list.get(rand_.nextInt(vertex_list.size()));
         }
     }
 }
