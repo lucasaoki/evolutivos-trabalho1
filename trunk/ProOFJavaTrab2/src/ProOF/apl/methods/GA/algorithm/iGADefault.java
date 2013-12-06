@@ -5,12 +5,7 @@
 package ProOF.apl.methods.GA.algorithm;
 
 import PrintImage.Windows;
-import ProOF.apl.problems.iCodification;
-import ProOF.apl.problems.iObjective;
-import ProOF.apl.problems.iProblem;
 import ProOF.com.LinkerResults;
-import ProOF.opt.abst.problem.meta.Solution;
-import java.util.List;
 
 /**
  *
@@ -39,7 +34,7 @@ public class iGADefault extends aGA {
 //
         w = new Windows[population_size + 1];
         
-        int size = 900;
+        int size = 400;
 
         for (int c = 0; c < w.length - 1; c++) {
             w[c] = new Windows("ind " + Integer.toString(c), size, size, populationList.get(0).codif().getMaze().getMaze(), "../../../media/mapa.png");

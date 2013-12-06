@@ -63,7 +63,7 @@ public abstract class aMaze extends Node {
             sum += maze.getEdgeWeight(maze.getEdge(sol.getVertexAt(c), sol.getVertexAt(c + 1)));
         }
 
-        if (sol.isSolutionFound()) {
+        if (!sol.isSolutionFound()) {
             sum += 999000;  //FIXME: parametrizar esse 1000
         }
 
