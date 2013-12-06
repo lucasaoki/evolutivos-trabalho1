@@ -372,12 +372,11 @@ public class MazeSolutionDirection extends MazeSolution{
     }
 
     @Override
-    public MazeVertex repair(MazeVertex current, MazeVertex last) {
+    public boolean validate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public boolean validate(MazeSolution mazeS) {
+    
+    public MazeVertex repair(MazeVertex current, MazeVertex last) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -372,41 +372,41 @@ public class MazeSolutionVertex extends MazeSolution {
     }
 
     @Override
-    public boolean validate(MazeSolution mazeS){
+    public boolean validate(){
         MazeVertex current = maze.getStartVert();
         MazeVertex last = current;
         MazeVertex new_vertex;
         if (!flag) {
-            while (maze.getEdge(current, mazeS.getVertexAt(0)) == null) {
+            while (maze.getEdge(current, this.getVertexAt(0)) == null) {
                 new_vertex = repair(current, last);
                 if (new_vertex == null) {
-                    mazeS.removeRange(0, mazeS.getSize() - 1);
+                    this.removeRange(0, this.getSize() - 1);
                     return false;
                 }
-                mazeS.setVertexAt(0, new_vertex);
+                this.setVertexAt(0, new_vertex);
             }
-            for (int c = 0; c < mazeS.getSize() - 1; c++) {
-                current = mazeS.getVertexAt(c);
-                while (maze.getEdge(current, mazeS.getVertexAt(c + 1)) == null) {
+            for (int c = 0; c < this.getSize() - 1; c++) {
+                current = this.getVertexAt(c);
+                while (maze.getEdge(current, this.getVertexAt(c + 1)) == null) {
                     new_vertex = repair(current, last);
                     if (new_vertex == null) {
-                        mazeS.removeRange(c + 1, mazeS.getSize() - 1);
+                        this.removeRange(c + 1, this.getSize() - 1);
                         return true;
                     }
-                    mazeS.setVertexAt(c + 1, new_vertex);
+                    this.setVertexAt(c + 1, new_vertex);
                 }
                 last = current;
             }
             return true;
         } else {
-            if (maze.getEdge(current, mazeS.getVertexAt(0)) == null) {
-                mazeS.removeRange(0, mazeS.getSize() - 1);
+            if (maze.getEdge(current, this.getVertexAt(0)) == null) {
+                this.removeRange(0, this.getSize() - 1);
                 return false;
             }
-            for (int c = 0; c < mazeS.getSize() - 1; c++) {
-                current = mazeS.getVertexAt(c);
-                if (maze.getEdge(current, mazeS.getVertexAt(c+1)) == null) {
-                    mazeS.removeRange(c+1, mazeS.getSize() - 1);
+            for (int c = 0; c < this.getSize() - 1; c++) {
+                current = this.getVertexAt(c);
+                if (maze.getEdge(current, this.getVertexAt(c+1)) == null) {
+                    this.removeRange(c+1, this.getSize() - 1);
                     return false;
                 }
             }
@@ -414,7 +414,6 @@ public class MazeSolutionVertex extends MazeSolution {
         return true;
     }
 
-    @Override
     public MazeVertex repair(MazeVertex current, MazeVertex last){
         List<MazeVertex> vertex_list = maze.getConnectedVertices(current);
         Random rand_ = new Random(System.currentTimeMillis());

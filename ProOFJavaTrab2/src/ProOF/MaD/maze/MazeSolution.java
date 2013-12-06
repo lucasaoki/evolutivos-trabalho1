@@ -92,8 +92,6 @@ public abstract class MazeSolution{
     
     public abstract void Copy(MazeSolution mazesol);
     
-    public abstract MazeVertex repair(MazeVertex current, MazeVertex last);
-    
-    public abstract boolean validate(MazeSolution mazeS);
+    public abstract boolean validate();
 
 }
