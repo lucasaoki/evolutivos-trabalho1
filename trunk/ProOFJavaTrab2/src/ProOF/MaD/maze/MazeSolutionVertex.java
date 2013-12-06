@@ -252,15 +252,13 @@ public class MazeSolutionVertex extends MazeSolution {
 
     @Override
     public boolean addVertexRangeAt(int indexStart, List<MazeVertex> vertices) {
-        int index = 0;
-
         if (mazeVertex.size() + vertices.size() > solutionLimitSize) {
             System.out.println("Solution is full of vertex!");
             return false;
         } else {
             if (indexStart >= 0 && indexStart <= mazeVertex.size()) {
-                for (int i = indexStart; i < vertices.size(); i++) {
-                    mazeVertex.add(i, vertices.get(index++));
+                for (int c = vertices.size() - 1;  c >= 0; c--) {
+                    mazeVertex.add(indexStart, vertices.get(c));
                 }
                 totalDistanceValid = false;
                 return true;
