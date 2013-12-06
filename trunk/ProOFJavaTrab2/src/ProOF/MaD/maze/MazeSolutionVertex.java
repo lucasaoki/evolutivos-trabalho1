@@ -373,7 +373,7 @@ public class MazeSolutionVertex extends MazeSolution {
                 new_vertex = repair(current, last);
                 if (new_vertex == null) {
                     this.removeRange(0, this.getSize() - 1);
-                    return false;
+                    return true;
                 }
                 this.setVertexAt(0, new_vertex);
             }
@@ -393,13 +393,13 @@ public class MazeSolutionVertex extends MazeSolution {
         } else {
             if (maze.getEdge(current, this.getVertexAt(0)) == null) {
                 this.removeRange(0, this.getSize() - 1);
-                return false;
+                return true;
             }
             for (int c = 0; c < this.getSize() - 1; c++) {
                 current = this.getVertexAt(c);
                 if (maze.getEdge(current, this.getVertexAt(c+1)) == null) {
                     this.removeRange(c+1, this.getSize() - 1);
-                    return false;
+                    return true;
                 }
             }
         }
