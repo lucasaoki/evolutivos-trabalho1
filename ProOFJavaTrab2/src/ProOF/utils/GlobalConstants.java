@@ -18,6 +18,9 @@ public class GlobalConstants {
     public final static int vertexDefaultStartIndex = 25;
     public final static int vertexDefaultEndIndex = 75;
     
+    
+    public final static String mapadir = "media/maze15.png";
+    public final static String mapadirData = "media/maze15_out.png_graph.txt";
 
     
     

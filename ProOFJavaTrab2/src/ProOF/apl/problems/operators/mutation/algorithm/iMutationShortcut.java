@@ -37,7 +37,7 @@ public class iMutationShortcut extends aMutation {
             MazeSolutionVertex shortcut = new MazeSolutionVertex(maze, mazeSol.getSolutionLimitSize());
             ArrayList<Integer> indexes = new ArrayList<>();
             HashMap<MazeVertex, Integer> vertexHash = new HashMap<>();
-            
+
             if (mazeSol.isSolutionFound()) {
 
                 for (int c = 0; c < mazeSol.getSize(); c++) {
@@ -57,7 +57,7 @@ public class iMutationShortcut extends aMutation {
                 Integer index = indexes.get(0);
                 indexes.remove(indexes.get(0));
 
-                MazeVertex vex =  mazeSol.getVertexAt(index);
+                MazeVertex vex = mazeSol.getVertexAt(index);
                 List<MazeVertex> connectedVertices = maze.getConnectedVertices(vex);
 
                 if (index == 0) {
@@ -75,30 +75,48 @@ public class iMutationShortcut extends aMutation {
                 }
                 MazeVertex vnew = connectedVertices.get(mem.rmd.nextInt(connectedVertices.size()));
                 startIndex = index;
-                
-                do
-                {
+
+                do {
                     shortcut.addVertex(vnew);
                     connectedVertices = maze.getConnectedVertices(vnew);
                     connectedVertices.remove(vnew);
-                    
+
                     vex = vnew;
-                    
-                    if (connectedVertices.isEmpty())
+
+                    if (connectedVertices.isEmpty()) {
                         break;
-                    
+                    }
+
                     vnew = connectedVertices.get(mem.rmd.nextInt(connectedVertices.size()));
-                    
-                }while (mazeSol.getSolutionLimitSize() - mazeSol.getSize() > shortcut.getSize() && vex.getIndex() != maze.getEndVert().getIndex() && !vertexHash.containsKey(vex));
-                
-                if (vertexHash.containsKey(vex))
+
+                } while (mazeSol.getSolutionLimitSize() - mazeSol.getSize() > shortcut.getSize() && vex.getIndex() != maze.getEndVert().getIndex() && !vertexHash.containsKey(vex));
+
+                if (vertexHash.containsKey(vex)) {
                     endIndex = vertexHash.get(vex);
-                else
-                    endIndex = mazeSol.getSize() -1;
-                
-                mazeSol.removeRange(startIndex + 1, endIndex);
-                
-                mazeSol.addVertexRangeAt(startIndex + 1, shortcut.getVertexRange(0, shortcut.getSize() -1));
+                } else {
+                    endIndex = mazeSol.getSize() - 1;
+                }
+
+                if (startIndex <= endIndex) {
+                    break;
+                }
+
+                startIndex++;
+
+                if (startIndex >= mazeSol.getSize()) {
+                    mazeSol.addVertexRange(shortcut.getVertexRange(0, shortcut.getSize() - 1));
+                } else {
+                     if (!mazeSol.addVertexRangeAt(startIndex, shortcut.getVertexRange(0, shortcut.getSize() - 1))) {
+                        System.out.println("erro ao adicionar range");
+                    }
+                     else
+                     {
+                         mazeSol.removeRange(startIndex+shortcut.getSize(), endIndex+shortcut.getSize());
+                     }
+                    
+                   
+                }
+
                 break;
             }
 
@@ -169,56 +187,54 @@ public class iMutationShortcut extends aMutation {
 //                mazeSol.addVertexRangeAt(startIndex + 1, shortcut.getVertexRange(0, shortcut.getSize() -1));
 //                break;
 //            }
-
         } else {
-        	
-        	int changeChance = 6;
-        	int includeChance = 3;
-        	int index;
-        	
-        	
-        	for (int i = 0; i < mazeSol.getSize(); i++) {
-				index = mem.rmd.nextInt(10);
-				if( index < changeChance ){
-					index = mem.rmd.nextInt(4);
-					switch (index) {
-					case 0:
-						mazeSol.setDirectionAt(i, Directions.RIGHT);
-						break;
-					case 1:
-						mazeSol.setDirectionAt(i, Directions.LEFT);
-						break;
-					case 2:
-						mazeSol.setDirectionAt(i, Directions.FORWARD);
-						break;
-					case 3:
-						mazeSol.setDirectionAt(i, Directions.BACKWARD);
-						break;
-					default:
-						break;
-					}
-				}
-				index = mem.rmd.nextInt(10);
-				if( index < includeChance ){
-					index = mem.rmd.nextInt(4);
-					switch (index) {
-					case 0:
-						mazeSol.addDirectionAt(i, Directions.RIGHT);
-						break;
-					case 1:
-						mazeSol.addDirectionAt(i, Directions.LEFT);
-						break;
-					case 2:
-						mazeSol.addDirectionAt(i, Directions.FORWARD);
-						break;
-					case 3:
-						mazeSol.addDirectionAt(i, Directions.BACKWARD);
-						break;
-					default:
-						break;
-					}
-				}
-			}
+
+            int changeChance = 6;
+            int includeChance = 3;
+            int index;
+
+            for (int i = 0; i < mazeSol.getSize(); i++) {
+                index = mem.rmd.nextInt(10);
+                if (index < changeChance) {
+                    index = mem.rmd.nextInt(4);
+                    switch (index) {
+                        case 0:
+                            mazeSol.setDirectionAt(i, Directions.RIGHT);
+                            break;
+                        case 1:
+                            mazeSol.setDirectionAt(i, Directions.LEFT);
+                            break;
+                        case 2:
+                            mazeSol.setDirectionAt(i, Directions.FORWARD);
+                            break;
+                        case 3:
+                            mazeSol.setDirectionAt(i, Directions.BACKWARD);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                index = mem.rmd.nextInt(10);
+                if (index < includeChance) {
+                    index = mem.rmd.nextInt(4);
+                    switch (index) {
+                        case 0:
+                            mazeSol.addDirectionAt(i, Directions.RIGHT);
+                            break;
+                        case 1:
+                            mazeSol.addDirectionAt(i, Directions.LEFT);
+                            break;
+                        case 2:
+                            mazeSol.addDirectionAt(i, Directions.FORWARD);
+                            break;
+                        case 3:
+                            mazeSol.addDirectionAt(i, Directions.BACKWARD);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 
