@@ -57,7 +57,7 @@ public class Windows extends JFrame {
         Resize(width, height);
         add(graph);
         pack();
-        setLocationRelativeTo( null );
+        setLocationRelativeTo( this);
         //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
